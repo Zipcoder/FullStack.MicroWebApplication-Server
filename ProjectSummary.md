@@ -20,14 +20,14 @@
 1) User account created.
 2) User login Authenticated and Authorized to perform Section A activites.
 
-# WhatTheTek Future Enhancements:
+### WhatTheTek Future Enhancements:
 ## User Stories:
 1) As a client, I would like the ability to post that can consist videos.
 2) 
 
 <hr>
 
-# Data Model/UML Specifications:
+### Data Model/UML Specifications:
 ## UI:
 
 ## Middleware:
