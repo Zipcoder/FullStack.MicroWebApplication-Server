@@ -16,9 +16,15 @@
 2) As a client, I would like to view the list of all blog posts.
 3) As a client, I would like to view blog posts filtered by "blog-tag".
 4) As a client, I would like to view new blog posts upon refreshing the DOM.
-# Section A: Logged In
+# Section B: Logged In
 1) User account created.
 2) User login Authenticated and Authorized to perform Section A activites.
+
+## WhatTheTek Future Enhancements:
+# User Stories:
+1) As a client, I would like the ability to post that can consist videos.
+2) 
+
 <hr>
 
 ## Data Model:
