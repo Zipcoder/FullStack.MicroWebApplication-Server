@@ -8,7 +8,7 @@
 * **Cloud** - Heroku
 <hr><hr>
 
-# WhatTheTek MVP Features:
+### WhatTheTek MVP Features:
 ## User Stories:
 ## Section A: Not Logged In
 1) As a client, I would like to create new blog posts.
