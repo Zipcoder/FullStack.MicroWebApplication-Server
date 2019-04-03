@@ -9,8 +9,8 @@
 <hr><hr>
 
 ### WhatTheTek MVP Features:
-## User Stories:
-## Section A: Not Logged In
+### User Stories:
+### Section A: Not Logged In
 1) As a client, I would like to create new blog posts.
    a) A blog post can consist of images and text.
 2) As a client, I would like to view the list of all blog posts.
