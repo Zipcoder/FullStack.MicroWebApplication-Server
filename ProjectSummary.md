@@ -8,29 +8,30 @@
 * **Cloud** - Heroku
 <hr><hr>
 
-## WhatTheTek MVP Features:
-# User Stories:
-# Section A: Not Logged In
+# WhatTheTek MVP Features:
+## User Stories:
+## Section A: Not Logged In
 1) As a client, I would like to create new blog posts.
    a) A blog post can consist of images and text.
 2) As a client, I would like to view the list of all blog posts.
 3) As a client, I would like to view blog posts filtered by "blog-tag".
 4) As a client, I would like to view new blog posts upon refreshing the DOM.
-# Section B: Logged In
+## Section B: Logged In
 1) User account created.
 2) User login Authenticated and Authorized to perform Section A activites.
 
-## WhatTheTek Future Enhancements:
+# WhatTheTek Future Enhancements:
 # User Stories:
 1) As a client, I would like the ability to post that can consist videos.
 2) 
 
 <hr>
 
-## Data Model:
-# UI:
+# Data Model/UML Specifications:
 
-# Middleware:
+## UI:
+
+## Middleware:
 A) Entities:
    1) User
    2) Posts
@@ -46,6 +47,6 @@ C) Repositories:
 E) Configurations:
    1)
    
-# Data Layer:  
+## Data Layer:  
    1) 
 
