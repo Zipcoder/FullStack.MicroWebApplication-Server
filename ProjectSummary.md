@@ -1,4 +1,4 @@
-### Blog Web Application:
+### WhatTheTek - Web Blog Application:
 * **Objective** - WhatTheTek is a Blog application where multiple users can posts articles and usefull information helping the programmers community to stay abreast with latest technologies best coding practices.
 
 ### Tech Stack Used:
