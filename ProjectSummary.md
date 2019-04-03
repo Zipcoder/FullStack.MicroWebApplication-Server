@@ -38,14 +38,18 @@ A) Entities:
    4) Comments
    
 B) Services:
+   
    1) 
    
 C) Repositories:
+   
    1) 
 
 E) Configurations:
+   
    1)
    
 ### Data Layer:  
+   
    1) 
 
