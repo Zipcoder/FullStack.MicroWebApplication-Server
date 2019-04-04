@@ -1,4 +1,4 @@
-package com.example.demo.Controllers;
+package com.example.PhoenixVideoLibrary.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
