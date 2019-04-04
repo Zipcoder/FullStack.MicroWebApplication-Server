@@ -1,83 +1,64 @@
-# Micro Web Application - Server
-* **Objective** - to create an implementation of a small web service
-* **Purpose** - to demonstrate the construction of a full-stacked web-application
+### WhatTheTek - Web Blog Application:
+* **Objective** - WhatTheTek is a Blog application where multiple users can posts articles and usefull information helping the programmers community to stay abreast with latest technologies best coding practices and News Links.
 
-## Developmental Notes
-### Minimum Tech Stack
-* **Frontend** - Angular
-* **Business Logic** - Java
-* **Data Layer** - MySQL
+### Tech Stack Used:
+* **Frontend** - React, NodeJs
+* **Business Logic** - Java, Springboot
+* **Data Layer** - MySQL/h2/SQLite
 * **Cloud** - Heroku
-
-### Installation
-* Install [NodeJs](https://nodejs.org/en/). From terminal execute
-    * `brew install node`
-* Install [Angular](http://angular.io/). From terminal execute
-    * `brew install angular-cli`
-* Install [AngularCli](). From terminal execute
-    * `npm install -g @angular/cli`
-* Install [Heroku](). From terminal execute
-	* `brew tap heroku/brew && brew install heroku`
-
 <hr><hr>
 
+### WhatTheTek MVP Features:
+### User Stories:
+### Section A: Not Logged In (MVP)
+1) As a client, I would like to create new blog posts.
+   a) A blog post can consist of images and text.
+2) As a client, I would like to view the list of all blog posts.
+3) As a client, I would like to view blog posts filtered by "blog-tag".
+4) As a client, I would like to view new blog posts upon refreshing the DOM.
+### Section B: Logged In
+1) User account created.
+2) User login Authenticated and Authorized to perform Section A activites.
 
-
-
-
-
-
-
-## Project Topics
-
-### TCP Application
-
-#### User Stories to Fulfill  
-* As a client, (not logged in) I
-    * can send messages to a _peer_.
-	* can view default channels
-	* can view all accessible channels
-	* can view messages live as they are received
-
-<hr>
-
-
-
-
-
-### Blog Application
-
-#### User Stories to Fulfill  
-* As a client, (not logged in) I
-    * can create new blog posts
-        * A blog post can consist of images and text
-	* can view list of all blog posts
-    * can view blog posts filtered by blog-tag
-	* can view new blog posts upon refreshing the DOM
+### WhatTheTek Future Enhancements:
+## User Stories:
+1) As a client, I would like the ability to post that can consist videos.
+2) 
 
 <hr>
 
+### Data Model/UML Specifications:
+### UI:
 
+### Middleware:
+A) Entities:
+   1) User
+   2) Posts
+   3) Tags
+   4) Comments
+   
+B) Services:
+   
+   1) UserServices
+   2) PostsServices
+   3) TagsServices
+   4) CommentsServices
+   
+C) Repositories:
+   
+   1) UserRepository
+   2) PostsRepository
+   3) TagsRepository
+   4) CommentsRepository
 
+E) Controllers:
+   
+   1) UserController
+   2) PostsController
+   3) TagsController
+   4) CommentsController
+   
+### Data Layer:  
+   
+   1) 
 
-
-### Video Library Application
-
-#### User Stories to Fulfill  
-* As a client, (not logged in) I
-    * can upload new videos
-	* can view list of all videos
-	* can post simple text-comments on a video
-
-
-
-
-
-### Money Management Application
-
-#### User Stories to Fulfill  
-* As a client, (not logged in) I
-	* can create new accounts
-	* deposit money to each account
-	* withdrawl money from each account
-	* transfer money to and from any 2 accounts
