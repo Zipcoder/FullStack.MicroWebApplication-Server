@@ -34,31 +34,32 @@ public class Post {
   @NotNull
   private Date createdDate = new Date();
 
-  @OneToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY,
-    mappedBy = "post")
-  private Set<Comments> comments = new HashSet<>();
+//  @OneToMany(cascade = CascadeType.ALL,
+//    fetch = FetchType.LAZY,
+//    mappedBy = "post")
+//  private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL,
-  fetch = FetchType.LAZY)
-  @JoinTable(name = "post_tag",
-      joinColumns = @JoinColumn(name = "post_id"),
-      inverseJoinColumns = @JoinColumn(name = "tag_id" ))
-  private List<Tags> tagsList;
+//  @ManyToMany(cascade = CascadeType.ALL,
+//  fetch = FetchType.LAZY)
+//  @JoinTable(name = "post_tag",
+//      joinColumns = @JoinColumn(name = "post_id"),
+//      inverseJoinColumns = @JoinColumn(name = "tag_id" ))
+//  private List<Tags> tagsList;
 
-  @ManyToOne(cascade = CascadeType.ALL,
-  fetch = FetchType.LAZY)
-  @JoinTable(name = "user_post",
-    joinColumns = @JoinColumn(name = "post_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+//  @ManyToOne(cascade = CascadeType.ALL,
+//  fetch = FetchType.LAZY)
+//  @JoinTable(name = "user_post",
+//    joinColumns = @JoinColumn(name = "post_id"),
+//    inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Long userID;
 
-  public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent, Set<Comments> comments, List<Tags> tagsList, Long userID) {
+  public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
+              List<Comments> comments, List<Tags> tagsList, Long userID) {
     this.postTitle = postTitle;
     this.postDescription = postDescription;
     this.postContent = postContent;
-    this.comments = comments;
-    this.tagsList = tagsList;
+   // this.comments = comments;
+   // this.tagsList = tagsList;
     this.userID = userID;
   }
 
@@ -97,21 +98,21 @@ public class Post {
     this.postContent = postContent;
   }
 
-  public Set<Comments> getComments() {
-    return comments;
-  }
+//  public Set<Comments> getComments() {
+//    return comments;
+//  }
+//
+//  public void setComments(Set<Comments> comments) {
+//    this.comments = comments;
+//  }
 
-  public void setComments(Set<Comments> comments) {
-    this.comments = comments;
-  }
-
-  public List<Tags> getTagsList() {
-    return tagsList;
-  }
-
-  public void setTagsList(List<Tags> tagsList) {
-    this.tagsList = tagsList;
-  }
+//  public List<Tags> getTagsList() {
+//    return tagsList;
+//  }
+//
+//  public void setTagsList(List<Tags> tagsList) {
+//    this.tagsList = tagsList;
+//  }
 
   public Long getUserID() {
     return userID;
