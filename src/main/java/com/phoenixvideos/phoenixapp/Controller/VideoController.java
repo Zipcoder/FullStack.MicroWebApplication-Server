@@ -1,7 +1,6 @@
-package com.videos.PhoenixVideoLibrary.Controllers;
+package com.phoenixvideos.phoenixapp.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.List;
 
 @RestController
 public class VideoController {
+
     List<String> returnList = new ArrayList<>();
 
     @GetMapping("/videos/")
@@ -22,11 +22,4 @@ public class VideoController {
 
         return returnList;
     }
-
-//    @GetMapping("/videos/{id}")
-//    public String getVideoList(@PathVariable String id){
-//
-//
-//        return returnList.get(id);
-//    }
 }
