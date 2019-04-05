@@ -1,4 +1,6 @@
 package com.phoenixvideos.phoenixapp.repository;
 
-public class CommentRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface CommentRepository extends CrudRepository<CommentRepository, Long> {
 }

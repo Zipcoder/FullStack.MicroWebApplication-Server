@@ -13,30 +13,19 @@ import java.util.Set;
 @RestController
 public class CommentController {
 
-
-    @PostMapping("/video/comments/{id}")
-    public ResponseEntity<Comment> create(@RequestBody User user) {
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
-    }
-
-    @GetMapping("/video/comments/all")
-    public ResponseEntity<Comment> show() {
-        return new ResponseEntity<>(null, HttpStatus.OK);
-    }
-
-    @GetMapping("/video/{id}")
+    @GetMapping("/comment/{id}")
     public ResponseEntity<Set<Comment>> show(@PathVariable Long id) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    @PutMapping("/video/{id}")
-    public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody User user) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @PutMapping("/comment/{id}")
+    public ResponseEntity<Video> updateComment(@PathVariable Long id, @RequestBody Comment comment) {
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    @DeleteMapping("/video/{id}")
+    @DeleteMapping("/comment/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void DeleteEmployee(@PathVariable Long id) {
+    public void DeleteComment(@PathVariable Long id) {
 
     }
 }

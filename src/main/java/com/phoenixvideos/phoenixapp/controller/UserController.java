@@ -14,25 +14,27 @@ import java.io.File;
 public class UserController {
 
     @PostMapping("/user/")
-    public ResponseEntity<User> create(@RequestBody Long id) {
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    public ResponseEntity<User> createUser(@RequestBody Long id) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> show() {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<User> getUser() {
+        return new ResponseEntity<>( HttpStatus.OK);
     }
 
     @PostMapping("/user/video/{id}")
     public ResponseEntity<Video> createVideo(@PathVariable int id, @RequestBody Video video) {
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
-    @PutMapping("/user/video/upload/{id}/{video_id}")
-    public ResponseEntity<Video> uploadVideo(@PathVariable int id, @PathVariable int video_id,
+    @PutMapping("/user/video/upload/{userId}/{videoId}")
+    public ResponseEntity<String> uploadVideo(@PathVariable Long userId, @PathVariable int videoId,
                                              @RequestBody File video) {
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>("A response message is returned", HttpStatus.CREATED);
     }
-
-
+    @PostMapping("/user/comment/{id}")
+    public ResponseEntity<Comment> create(@PathVariable Long id, @RequestBody Comment comment) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

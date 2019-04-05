@@ -1,4 +1,7 @@
 package com.phoenixvideos.phoenixapp.repository;
 
-public class UserRepository {
+import com.phoenixvideos.phoenixapp.model.User;
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserRepository extends CrudRepository<User, Long> {
 }

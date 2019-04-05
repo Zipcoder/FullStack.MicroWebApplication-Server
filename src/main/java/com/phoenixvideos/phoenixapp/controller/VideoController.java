@@ -1,5 +1,6 @@
 package com.phoenixvideos.phoenixapp.controller;
 
+import com.phoenixvideos.phoenixapp.model.Comment;
 import com.phoenixvideos.phoenixapp.model.User;
 import com.phoenixvideos.phoenixapp.model.Video;
 import org.springframework.http.HttpStatus;
@@ -18,10 +19,7 @@ public class VideoController {
 
     Set<Video> returnList = new HashSet<>();
 
-
-
-
-    @GetMapping("/videos/all")
+    @GetMapping("/video/all")
     public ResponseEntity<Set<Video>> getAllVideos() {
 
 //        returnList.add(new Video("Video1");
@@ -32,14 +30,18 @@ public class VideoController {
         return new ResponseEntity<>(returnList, HttpStatus.OK);
     }
 
-    @GetMapping("/videos/{id}")
+    @GetMapping("/video/{id}")
     public ResponseEntity<Video> getVideo(@PathVariable Long id) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(new Video(), HttpStatus.OK);
+    }
+    @GetMapping("/video/download/{id}")
+    public ResponseEntity<File> downloadVideo(@PathVariable Long id) {
+        return new ResponseEntity<>(new File("path"), HttpStatus.OK);
     }
     
-    @PutMapping("/videos/{id}")
+    @PutMapping("/video/{id}")
     public ResponseEntity<Video> updateVideo(@PathVariable Long id, @RequestBody Video video) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(new Video(), HttpStatus.OK);
     }
 
     @DeleteMapping("/video/{id}")
@@ -47,6 +49,12 @@ public class VideoController {
     public void deleteVideo(@PathVariable Long id) {
 
     }
+
+    @GetMapping("/video/comments/all")
+    public ResponseEntity<Comment> show() {
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
 
 
 
