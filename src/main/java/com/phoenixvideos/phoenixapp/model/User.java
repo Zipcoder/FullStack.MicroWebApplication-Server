@@ -1,6 +1,7 @@
 package com.phoenixvideos.phoenixapp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 public class User {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
