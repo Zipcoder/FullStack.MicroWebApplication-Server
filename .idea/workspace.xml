@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc4149e6-be49-4ade-ab7a-c28720fe3b73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/CommentsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/PostsControllers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Comments.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Posts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/CommentsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/PostsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/CommentsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/PostsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/UserService.java" afterDir="false" />
+    <list default="true" id="532ee8a1-bff5-445f-9582-456d5bf0ca48" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_4_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_3_7_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_23_1_GA.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_5_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_1_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_1_3_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_1_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_1_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_1_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_1_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_1_5_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_1_5_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WhatTheTek-Blog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WhatTheTek-Blog.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,31 +44,46 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/TagNames.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+            <state relative-caret-position="90">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/CommentsService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/PostsService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+            <state relative-caret-position="111">
+              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+              <folding>
+                <element signature="e#650#651#0" expanded="true" />
+                <element signature="e#675#676#0" expanded="true" />
+                <element signature="e#877#878#0" expanded="true" />
+                <element signature="e#907#908#0" expanded="true" />
+                <element signature="e#953#954#0" expanded="true" />
+                <element signature="e#991#992#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,35 +91,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+            <state relative-caret-position="-48">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#475#476#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/UserService.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/CommentsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/PostsControllers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="165">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -95,59 +114,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="334">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#370#371#0" expanded="true" />
+                <element signature="e#416#417#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="uml://JAVA/com.example.WhatTheTekBlog">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
+        <entry file="file://$PROJECT_DIR$/src/test/java/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state>
-              <ID>JAVA</ID>
-              <OriginalElement>com.example.WhatTheTekBlog</OriginalElement>
-              <nodes>
-                <node x="0.0" y="244.0">com.example.WhatTheTekBlog.repositories.TagsRepository</node>
-                <node x="399.0" y="170.0">com.example.WhatTheTekBlog.repositories.PostsRepository</node>
-                <node x="453.0" y="392.0">com.example.WhatTheTekBlog.entities.Tags</node>
-                <node x="189.0" y="244.0">com.example.WhatTheTekBlog.repositories.UserRepository</node>
-                <node x="0.0" y="96.0">com.example.WhatTheTekBlog.repositories.CommentsRepository</node>
-                <node x="0.0" y="170.0">com.example.WhatTheTekBlog.services.CommentsService</node>
-                <node x="183.0" y="318.0">com.example.WhatTheTekBlog.services.PostsService</node>
-                <node x="166.0" y="392.0">com.example.WhatTheTekBlog.entities.Comments</node>
-                <node x="0.0" y="392.0">com.example.WhatTheTekBlog.services.UserService</node>
-                <node x="325.0" y="392.0">com.example.WhatTheTekBlog.entities.Posts</node>
-                <node x="0.0" y="466.0">com.example.WhatTheTekBlog.entities.User</node>
-                <node x="0.0" y="0.0">com.example.WhatTheTekBlog.WhatTheTekBlogApplicationTests</node>
-                <node x="203.0" y="170.0">com.example.WhatTheTekBlog.controllers.PostsControllers</node>
-                <node x="355.0" y="318.0">com.example.WhatTheTekBlog.services.TagsService</node>
-                <node x="225.0" y="96.0">com.example.WhatTheTekBlog.controllers.CommentsController</node>
-                <node x="0.0" y="318.0">com.example.WhatTheTekBlog.controllers.UserController</node>
-                <node x="377.0" y="244.0">com.example.WhatTheTekBlog.controllers.TagsController</node>
-                <node x="302.0" y="0.0">com.example.WhatTheTekBlog.WhatTheTekBlogApplication</node>
-              </nodes>
-              <notes />
-              <edges />
-              <settings layout="Hierarchic Group" zoom="1.0" x="168.0" y="202.5" />
-              <SelectedNodes />
-              <Categories>
-                <Category>Properties</Category>
-                <Category>Methods</Category>
-                <Category>Constructors</Category>
-                <Category>Fields</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -157,7 +148,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -165,20 +155,34 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/TagNames.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/TagTest/TagTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplicationTests.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
-    <option name="width" value="1228" />
-    <option name="height" value="741" />
+    <option name="y" value="26" />
+    <option name="width" value="1423" />
+    <option name="height" value="799" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -216,6 +220,49 @@
               <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
               <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WhatTheTekBlog" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WhatTheTekBlog" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WhatTheTekBlog" type="462c0819:PsiDirectoryNode" />
+              <item name="repositories" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WhatTheTekBlog" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -225,26 +272,28 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="WhatTheTek-Blog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FullStack.MicroWebApplication-Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="WhatTheTekBlog" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554404152624" />
-    <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -258,7 +307,54 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="WhatTheTek-Blog" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in WhatTheTek-Blog" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WhatTheTek-Blog" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TagTest.CreateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WhatTheTek-Blog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.WhatTheTekBlog.TagTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.WhatTheTekBlog.TagTest" />
+      <option name="MAIN_CLASS_NAME" value="com.example.WhatTheTekBlog.TagTest.TagTest" />
+      <option name="METHOD_NAME" value="CreateTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WhatTheTekBlogApplicationTests.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WhatTheTek-Blog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.WhatTheTekBlog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.WhatTheTekBlog" />
+      <option name="MAIN_CLASS_NAME" value="com.example.WhatTheTekBlog.WhatTheTekBlogApplicationTests" />
+      <option name="METHOD_NAME" value="main" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="WhatTheTekBlogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="WhatTheTek-Blog" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.WhatTheTekBlog.WhatTheTekBlogApplication" />
@@ -266,26 +362,57 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.All in WhatTheTek-Blog" />
+        <item itemvalue="JUnit.WhatTheTekBlogApplicationTests.main" />
+        <item itemvalue="JUnit.TagTest.CreateTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="dc4149e6-be49-4ade-ab7a-c28720fe3b73" name="Default Changelist" comment="" />
-      <created>1554402694107</created>
+      <changelist id="532ee8a1-bff5-445f-9582-456d5bf0ca48" name="Default Changelist" comment="" />
+      <created>1554475343819</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1554402694107</updated>
-      <workItem from="1554402698391" duration="1381000" />
+      <updated>1554475343819</updated>
+      <workItem from="1554475346620" duration="13553000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="TagTest_CreateTest - 2019.04.05 at 18h 36m 43s.xml">
+      <configuration name="TagTest.CreateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TagTest_CreateTest - 2019.04.05 at 20h 09m 23s.xml">
+      <configuration name="TagTest.CreateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TagTest_CreateTest - 2019.04.05 at 20h 14m 51s.xml">
+      <configuration name="TagTest.CreateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TagTest_CreateTest - 2019.04.05 at 20h 16m 50s.xml">
+      <configuration name="TagTest.CreateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TagTest_CreateTest - 2019.04.05 at 20h 17m 09s.xml">
+      <configuration name="TagTest.CreateTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="WhatTheTekBlogApplicationTests_main - 2019.04.05 at 20h 28m 23s.xml">
+      <configuration name="WhatTheTekBlogApplicationTests.main" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_WhatTheTek-Blog - 2019.04.05 at 20h 29m 08s.xml">
+      <configuration name="All in WhatTheTek-Blog" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1381000" />
+    <option name="totallyTimeSpent" value="13553000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="741" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="816" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" />
@@ -294,18 +421,19 @@
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Web" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25686592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24320458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32872927" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -326,252 +454,113 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplicationTests.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/2.1.3.RELEASE/spring-boot-devtools-2.1.3.RELEASE.jar!/org/springframework/boot/devtools/autoconfigure/DevToolsDataSourceAutoConfiguration.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="153">
+          <caret line="13" column="132" selection-start-line="13" selection-start-column="132" selection-end-line="13" selection-end-column="132" />
         </state>
       </provider>
     </entry>
-    <entry file="uml://JAVA/">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/TagTest/TagTest.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state>
-          <ID>JAVA</ID>
-          <OriginalElement />
-          <nodes>
-            <node x="" y="">com</node>
-            <node x="" y="">netscape</node>
-            <node x="" y="">junit</node>
-            <node x="" y="">static</node>
-            <node x="" y="">oracle</node>
-            <node x="" y="">org</node>
-            <node x="" y="">ch</node>
-            <node x="" y="">templates</node>
-            <node x="" y="">resources</node>
-            <node x="" y="">toolbarButtonGraphics</node>
-            <node x="" y="">sun</node>
-            <node x="" y="">META-INF</node>
-            <node x="" y="">jdk</node>
-            <node x="" y="">apple</node>
-            <node x="" y="">groovyjarjarasm</node>
-            <node x="" y="">java</node>
-            <node x="" y="">groovy</node>
-            <node x="" y="">javax</node>
-            <node x="" y="">groovyjarjarcommonscli</node>
-            <node x="" y="">javafx</node>
-            <node x="" y="">net</node>
-            <node x="" y="">groovyjarjarantlr</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="267.0" y="273.5" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
+          <caret selection-end-line="27" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/User.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/TagNames.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Comments.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Posts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        <state relative-caret-position="285">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/entities/Tags.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="111">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding>
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+            <element signature="e#907#908#0" expanded="true" />
+            <element signature="e#953#954#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/UserRepository.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/CommentsRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/PostsRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        <state relative-caret-position="647">
+          <caret line="60" column="10" selection-start-line="60" selection-start-column="10" selection-end-line="60" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/repositories/TagsRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+        <state relative-caret-position="90">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/CommentsService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/PostsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        <state>
+          <caret column="54" selection-start-column="54" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        <state relative-caret-position="-48">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#475#476#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/services/UserService.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplicationTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        <state relative-caret-position="165">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/CommentsController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/PostsControllers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        <state relative-caret-position="75">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        <state relative-caret-position="334">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#416#417#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/WhatTheTekBlog/controllers/UserController.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/com.example.WhatTheTekBlog">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
-          <ID>JAVA</ID>
-          <OriginalElement>com.example.WhatTheTekBlog</OriginalElement>
-          <nodes>
-            <node x="0.0" y="244.0">com.example.WhatTheTekBlog.repositories.TagsRepository</node>
-            <node x="399.0" y="170.0">com.example.WhatTheTekBlog.repositories.PostsRepository</node>
-            <node x="453.0" y="392.0">com.example.WhatTheTekBlog.entities.Tags</node>
-            <node x="189.0" y="244.0">com.example.WhatTheTekBlog.repositories.UserRepository</node>
-            <node x="0.0" y="96.0">com.example.WhatTheTekBlog.repositories.CommentsRepository</node>
-            <node x="0.0" y="170.0">com.example.WhatTheTekBlog.services.CommentsService</node>
-            <node x="183.0" y="318.0">com.example.WhatTheTekBlog.services.PostsService</node>
-            <node x="166.0" y="392.0">com.example.WhatTheTekBlog.entities.Comments</node>
-            <node x="0.0" y="392.0">com.example.WhatTheTekBlog.services.UserService</node>
-            <node x="325.0" y="392.0">com.example.WhatTheTekBlog.entities.Posts</node>
-            <node x="0.0" y="466.0">com.example.WhatTheTekBlog.entities.User</node>
-            <node x="0.0" y="0.0">com.example.WhatTheTekBlog.WhatTheTekBlogApplicationTests</node>
-            <node x="203.0" y="170.0">com.example.WhatTheTekBlog.controllers.PostsControllers</node>
-            <node x="355.0" y="318.0">com.example.WhatTheTekBlog.services.TagsService</node>
-            <node x="225.0" y="96.0">com.example.WhatTheTekBlog.controllers.CommentsController</node>
-            <node x="0.0" y="318.0">com.example.WhatTheTekBlog.controllers.UserController</node>
-            <node x="377.0" y="244.0">com.example.WhatTheTekBlog.controllers.TagsController</node>
-            <node x="302.0" y="0.0">com.example.WhatTheTekBlog.WhatTheTekBlogApplication</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="168.0" y="202.5" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Properties</Category>
-            <Category>Methods</Category>
-            <Category>Constructors</Category>
-            <Category>Fields</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
