@@ -1,7 +1,4 @@
 package com.example.WhatTheTekBlog.entities;
-
-import com.sun.javafx.beans.IDProperty;
-
 import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
