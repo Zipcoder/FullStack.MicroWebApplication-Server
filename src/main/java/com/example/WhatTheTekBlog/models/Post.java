@@ -1,8 +1,7 @@
-package com.example.WhatTheTekBlog.entities;
+package com.example.WhatTheTekBlog.models;
 
-import com.sun.javafx.beans.IDProperty;
+import org.hibernate.annotations.Type;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,15 +19,18 @@ public class Post {
 
   @NotNull
   @Size(max = 100)
-  @Column(unique = true)
+  @Column(nullable = false)
   private String postTitle;
 
   @NotNull
   @Size(max = 250)
-  private String postDescription;
+  @Column(nullable = false)
+  @Type(type = "text")
+  private String postSummary;
 
   @NotNull
   @Lob
+  @Column(nullable = false)
   private String postContent;
 
   @NotNull
@@ -39,28 +41,27 @@ public class Post {
 //    mappedBy = "post")
 //  private Set<Comments> comments = new HashSet<>();
 
-//  @ManyToMany(cascade = CascadeType.ALL,
-//  fetch = FetchType.LAZY)
-//  @JoinTable(name = "post_tag",
-//      joinColumns = @JoinColumn(name = "post_id"),
-//      inverseJoinColumns = @JoinColumn(name = "tag_id" ))
-//  private List<Tags> tagsList;
+//  @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//  @JoinTable(name = "post_tags",
+//      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
+//      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
+//  private Set<Tags> tagsSet = new HashSet<>();
 
 //  @ManyToOne(cascade = CascadeType.ALL,
 //  fetch = FetchType.LAZY)
 //  @JoinTable(name = "user_post",
 //    joinColumns = @JoinColumn(name = "post_id"),
 //    inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private Long userID;
+  private User creater;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-              List<Comments> comments, List<Tags> tagsList, Long userID) {
+              List<Comments> comments, List<Tags> tagsList, User author) {
     this.postTitle = postTitle;
-    this.postDescription = postDescription;
+    this.postSummary = postDescription;
     this.postContent = postContent;
    // this.comments = comments;
    // this.tagsList = tagsList;
-    this.userID = userID;
+    this.creater = author;
   }
 
   public Post() {
@@ -82,12 +83,12 @@ public class Post {
     this.postTitle = postTitle;
   }
 
-  public String getPostDescription() {
-    return postDescription;
+  public String getPostSummary() {
+    return postSummary;
   }
 
-  public void setPostDescription(String postDescription) {
-    this.postDescription = postDescription;
+  public void setPostSummary(String postSummary) {
+    this.postSummary = postSummary;
   }
 
   public String getPostContent() {
@@ -114,12 +115,12 @@ public class Post {
 //    this.tagsList = tagsList;
 //  }
 
-  public Long getUserID() {
-    return userID;
+  public User getUserID() {
+    return creater;
   }
 
-  public void setUserID(Long userID) {
-    this.userID = userID;
+  public void setUserID(User author) {
+    this.creater = author;
   }
 
   public Date getCreatedDate() {
