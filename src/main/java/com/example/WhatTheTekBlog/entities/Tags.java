@@ -12,11 +12,11 @@ import java.util.Set;
 @Entity
 public class Tags {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true)
     private String tagName;
-    private Set<Posts> listOfPosts = new HashSet<>();
+    @ManyToMany
+    private Set<Post> listOfPosts = new HashSet<>();
 
 
     public Tags() {
@@ -38,12 +38,11 @@ public class Tags {
         this.tagName = tagName;
     }
 
-    public Set<Posts> getListOfPosts() {
+    public Set<Post> getListOfPosts() {
         return listOfPosts;
     }
 
-
-    public void setListOfPosts(Set<Posts> listOfPosts) {
+    public void setListOfPosts(Set<Post> listOfPosts) {
         this.listOfPosts = listOfPosts;
     }
 
