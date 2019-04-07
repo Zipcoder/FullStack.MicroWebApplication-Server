@@ -1,7 +1,12 @@
+<<<<<<< HEAD:src/main/java/com/example/WhatTheTekBlog/models/Post.java
 package com.example.WhatTheTekBlog.models;
 
 import org.hibernate.annotations.Type;
 
+=======
+package com.example.WhatTheTekBlog.entities;
+import javax.annotation.Generated;
+>>>>>>> 94a964260d841678f46010bd42b0375caf0c0330:src/main/java/com/example/WhatTheTekBlog/entities/Post.java
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

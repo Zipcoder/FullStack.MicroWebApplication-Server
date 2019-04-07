@@ -10,7 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94a964260d841678f46010bd42b0375caf0c0330
 import java.util.Optional;
 
 @RestController
