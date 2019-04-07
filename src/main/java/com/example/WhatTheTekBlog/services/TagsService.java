@@ -1,13 +1,11 @@
 package com.example.WhatTheTekBlog.services;
 
-import com.example.WhatTheTekBlog.TagNames;
-import com.example.WhatTheTekBlog.entities.Post;
-import com.example.WhatTheTekBlog.entities.Tags;
+import com.example.WhatTheTekBlog.models.Post;
+import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.*;
 
 @Service

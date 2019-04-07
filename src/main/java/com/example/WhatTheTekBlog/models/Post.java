@@ -1,19 +1,13 @@
-<<<<<<< HEAD:src/main/java/com/example/WhatTheTekBlog/models/Post.java
+
 package com.example.WhatTheTekBlog.models;
 
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.annotations.Type;
-
-=======
-package com.example.WhatTheTekBlog.entities;
 import javax.annotation.Generated;
->>>>>>> 94a964260d841678f46010bd42b0375caf0c0330:src/main/java/com/example/WhatTheTekBlog/entities/Post.java
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Post {
@@ -41,32 +35,36 @@ public class Post {
   @NotNull
   private Date createdDate = new Date();
 
+  @Transient
+  Calendar calendar = Calendar.getInstance();
+
 //  @OneToMany(cascade = CascadeType.ALL,
 //    fetch = FetchType.LAZY,
 //    mappedBy = "post")
 //  private Set<Comments> comments = new HashSet<>();
 
-//  @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//  @JoinTable(name = "post_tags",
-//      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
-//      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
-//  private Set<Tags> tagsSet = new HashSet<>();
+  @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+  @JoinTable(name = "post_tags",
+      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
+      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
+  private Set<Tags> tagsSet = new HashSet<>();
 
 //  @ManyToOne(cascade = CascadeType.ALL,
 //  fetch = FetchType.LAZY)
 //  @JoinTable(name = "user_post",
 //    joinColumns = @JoinColumn(name = "post_id"),
 //    inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private User creater;
+//  private User creater;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-              List<Comments> comments, List<Tags> tagsList, User author) {
+             List<Comments> comments, List<Tags> tagsList, User author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
+    this.createdDate = calendar.getTime();
    // this.comments = comments;
    // this.tagsList = tagsList;
-    this.creater = author;
+    //this.creater = author;
   }
 
   public Post() {
@@ -120,13 +118,13 @@ public class Post {
 //    this.tagsList = tagsList;
 //  }
 
-  public User getUserID() {
-    return creater;
-  }
-
-  public void setUserID(User author) {
-    this.creater = author;
-  }
+//  public User getUserID() {
+//    return creater;
+//  }
+//
+//  public void setUserID(User author) {
+//    this.creater = author;
+//  }
 
   public Date getCreatedDate() {
     return createdDate;
