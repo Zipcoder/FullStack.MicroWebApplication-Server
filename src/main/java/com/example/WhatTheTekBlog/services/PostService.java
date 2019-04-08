@@ -1,14 +1,14 @@
 package com.example.WhatTheTekBlog.services;
 
-import com.example.WhatTheTekBlog.entities.Post;
+import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
+import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +16,12 @@ public class PostService {
 
   @Autowired
   private PostRepository postRepository;
+
+//  @Autowired
+//  private TagsService tagsService;
+//
+//  @Autowired
+//  private UserService userService;
 
   public PostService(PostRepository repository) {
     this.postRepository = repository;
@@ -30,11 +36,11 @@ public class PostService {
     return this.postRepository.findAll();
   }
 
-  public Page<Post> findAllByPage(Pageable pageable) {
-    return this.postRepository.findAll(pageable);
+  public Page<Post> findAllByPages(Pageable page) {
+   return postRepository.findAll(page);
   }
 
-  public List<Post> findAllByDate(Pageable pageable){
+  public Iterable<Post> findAllByDate(Pageable pageable){
     return postRepository.findAll(new Sort(Sort.Direction.DESC,"createdDate"));
   }
 
@@ -45,7 +51,7 @@ public class PostService {
   public Post updatePost(Long postId, Post post){
     Post originalPost = this.postRepository.getOne(postId);
     originalPost.setPostTitle(post.getPostTitle());
-    originalPost.setPostDescription(post.getPostDescription());
+    originalPost.setPostSummary(post.getPostSummary());
     originalPost.setPostContent(post.getPostContent());
 
     return this.postRepository.save(originalPost);

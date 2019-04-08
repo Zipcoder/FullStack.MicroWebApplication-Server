@@ -1,4 +1,4 @@
-package com.example.WhatTheTekBlog.entities;
+package com.example.WhatTheTekBlog.models;
 
 import com.example.WhatTheTekBlog.TagNames;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
