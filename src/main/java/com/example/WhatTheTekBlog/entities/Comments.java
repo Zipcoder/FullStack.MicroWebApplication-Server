@@ -7,7 +7,7 @@ import java.util.List;
 public class Comments {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     Long comment_id;
 
     String comments;
