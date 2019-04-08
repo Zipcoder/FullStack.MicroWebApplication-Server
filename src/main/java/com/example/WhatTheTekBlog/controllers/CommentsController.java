@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog.controllers;
 
-import com.example.WhatTheTekBlog.entities.Comments;
+import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
