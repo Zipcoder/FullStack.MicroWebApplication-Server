@@ -1,6 +1,7 @@
 
 package com.example.WhatTheTekBlog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.annotations.Type;
 import javax.annotation.Generated;
@@ -15,6 +16,7 @@ public class Post {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long postID;
+
 
   @NotNull
   @Size(max = 100)
@@ -49,12 +51,12 @@ public class Post {
       inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
   private Set<Tags> tagsSet = new HashSet<>();
 
-//  @ManyToOne(cascade = CascadeType.ALL,
-//  fetch = FetchType.LAZY)
-//  @JoinTable(name = "user_post",
-//    joinColumns = @JoinColumn(name = "post_id"),
-//    inverseJoinColumns = @JoinColumn(name = "user_id"))
-//  private User creater;
+  @ManyToOne(cascade = CascadeType.ALL,
+  fetch = FetchType.LAZY)
+  @JoinTable(name = "user_post",
+    joinColumns = @JoinColumn(name = "post_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+  private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
              List<Comments> comments, List<Tags> tagsList, User author) {
@@ -118,13 +120,14 @@ public class Post {
 //    this.tagsList = tagsList;
 //  }
 
-//  public User getUserID() {
-//    return creater;
-//  }
-//
-//  public void setUserID(User author) {
-//    this.creater = author;
-//  }
+
+  public User getCreator() {
+    return creator;
+  }
+
+  public void setCreator(User creator) {
+    this.creator = creator;
+  }
 
   public Date getCreatedDate() {
     return createdDate;
