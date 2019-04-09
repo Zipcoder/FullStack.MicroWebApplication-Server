@@ -22,6 +22,12 @@ public class VideoController {
     @GetMapping("/video/all")
     public ResponseEntity<Set<Video>> getAllVideos() {
 
+        returnList.add(new Video("Video Object 1"));
+        returnList.add(new Video("Video Object 2"));
+        returnList.add(new Video("Video Object 3"));
+        returnList.add(new Video("Video Object 4"));
+        returnList.add(new Video("Video Object 5"));
+
 //        returnList.add(new Video("Video1");
 //        returnList.add("Video2");
 //        returnList.add("Video3");

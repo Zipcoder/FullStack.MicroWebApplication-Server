@@ -20,6 +20,13 @@ public class Video {
     @OneToMany(mappedBy = "video")
     private Set<Comment> comments;
 
+    public Video(){
+
+    }
+    public Video(String name){
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
