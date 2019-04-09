@@ -40,7 +40,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getCommentsByUser(userId), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<User> create(@RequestBody User user) {
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }

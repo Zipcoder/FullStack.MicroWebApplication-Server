@@ -51,8 +51,7 @@ public class Post {
       inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne(cascade = CascadeType.ALL,
-  fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinTable(name = "user_post",
     joinColumns = @JoinColumn(name = "post_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
