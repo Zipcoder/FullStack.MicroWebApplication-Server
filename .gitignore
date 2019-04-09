@@ -1,8 +1,4 @@
 .idea
 *.iml
-<<<<<<< HEAD
-
 *.properties
-=======
 .DS_Store
->>>>>>> 201a07a422e12569778507910f58109a4ceb9c10
