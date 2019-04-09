@@ -1,10 +1,8 @@
 
 package com.example.WhatTheTekBlog.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.annotations.Type;
-import javax.annotation.Generated;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
