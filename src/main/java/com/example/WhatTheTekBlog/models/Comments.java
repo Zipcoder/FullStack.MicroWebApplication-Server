@@ -21,16 +21,18 @@ public class Comments {
 
     @ManyToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @JoinTable(name = "user_comment",
-            joinColumns = @JoinColumn(name = "comment_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinColumn(name = "user_id")
+//    @JoinTable(name = "user_comment",
+//            joinColumns = @JoinColumn(name = "comment_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
 
     @ManyToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @JoinTable(name = "post_forComment",
-            joinColumns = @JoinColumn(name = "comment_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    @JoinColumn(name = "post_id")
+//    @JoinTable(name = "post_forComment",
+//            joinColumns = @JoinColumn(name = "comment_id"),
+//            inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Post post;
 
 
@@ -39,6 +41,11 @@ public class Comments {
 
     @Transient
     Calendar calendar = Calendar.getInstance();
+
+    public Comments(Long comment_id){
+        this.comment_id = comment_id;
+
+    }
 
 
     public Long getComment_id() {
@@ -71,5 +78,21 @@ public class Comments {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 }
