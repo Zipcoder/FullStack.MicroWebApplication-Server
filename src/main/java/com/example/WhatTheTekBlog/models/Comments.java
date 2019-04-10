@@ -3,13 +3,16 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Comments {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long comment_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long comment_id;
 
   private String comments;
   @ManyToOne(cascade = CascadeType.ALL)
@@ -18,6 +21,10 @@ public class Comments {
   @ManyToOne(cascade = CascadeType.ALL)
   @JsonIgnore
   private Post post;
+
+  @Transient
+  private Calendar calendar = Calendar.getInstance();
+
 
   public Long getComment_id() {
     return comment_id;
