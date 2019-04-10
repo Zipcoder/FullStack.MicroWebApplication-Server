@@ -1,23 +1,20 @@
 
 package com.example.WhatTheTekBlog.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.annotations.Type;
-import javax.annotation.Generated;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 
-@Data
 @Entity
 public class Post {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  Long postID;
+  private Long postID;
+
 
   @NotNull
   @Size(max = 100)
@@ -41,27 +38,24 @@ public class Post {
   @Transient
   Calendar calendar = Calendar.getInstance();
 
-  @OneToMany(cascade = CascadeType.ALL,
-    fetch = FetchType.LAZY,
-    mappedBy = "post")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
   private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+  @ManyToMany(cascade = CascadeType.ALL, mappedBy = "listOfPosts")
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne(cascade = CascadeType.ALL,
-  fetch = FetchType.LAZY)
+  @ManyToOne(cascade = CascadeType.ALL)
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             Set<Comments> comments, Set<Tags> tagsList, User author) {
+             List<Comments> comments, List<Tags> tagsList, User author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
     this.createdDate = calendar.getTime();
-    this.comments = comments;
-    this.tagsSet = tagsList;
-    this.creator = author;
+   // this.comments = comments;
+   // this.tagsList = tagsList;
+    //this.creater = author;
   }
 
   public Post() {
@@ -99,6 +93,14 @@ public class Post {
     this.postContent = postContent;
   }
 
+  public Calendar getCalendar() {
+    return calendar;
+  }
+
+  public void setCalendar(Calendar calendar) {
+    this.calendar = calendar;
+  }
+
   public Set<Comments> getComments() {
     return comments;
   }
@@ -107,14 +109,13 @@ public class Post {
     this.comments = comments;
   }
 
-  public Set<Tags> getTagsList() {
+  public Set<Tags> getTagsSet() {
     return tagsSet;
   }
 
-  public void setTagsList(Set<Tags> tagsList) {
-    this.tagsSet = tagsList;
+  public void setTagsSet(Set<Tags> tagsSet) {
+    this.tagsSet = tagsSet;
   }
-
 
   public User getCreator() {
     return creator;
@@ -131,6 +132,8 @@ public class Post {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
+
+
 
 
 }
