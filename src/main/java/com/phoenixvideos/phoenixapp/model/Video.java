@@ -1,6 +1,8 @@
 package com.phoenixvideos.phoenixapp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import java.util.Set;
 public class Video {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String format;
@@ -17,6 +20,7 @@ public class Video {
     @JoinColumn
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "video")
     private Set<Comment> comments;
 
