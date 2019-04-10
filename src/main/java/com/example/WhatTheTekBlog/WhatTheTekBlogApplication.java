@@ -2,12 +2,21 @@ package com.example.WhatTheTekBlog;
 
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
+import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
+import com.example.WhatTheTekBlog.repositories.TagsRepository;
+import com.example.WhatTheTekBlog.services.TagsService;
 import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class WhatTheTekBlogApplication {
@@ -31,6 +40,16 @@ public class WhatTheTekBlogApplication {
 				post.setPostTitle(String.format("Title %d%d", i, j));
 				post.setPostContent(String.format("Coooooonnnnnnnttttteeeeennnnnttttt"));
 				post.setPostSummary("trialPost");
+				Tags tags = new Tags();
+				tags.setTagName("ThisIsAboutStuff" + i+j);
+				Set<Post> postList = new HashSet<>();
+				Set<Tags> tags1 = new HashSet<>();
+				tags1.add(tags);
+				postList.add(post);
+				tags.setListOfPosts(postList);
+				post.setTagsSet(tags1);
+
+
 				Comments comments = new Comments();
 				comments.setComments(String.format("Comment %d from user %d", j, i));
 				comments.setUser(user);

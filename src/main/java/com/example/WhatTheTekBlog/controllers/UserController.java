@@ -30,12 +30,12 @@ public class UserController {
         return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}/posts")
+    @GetMapping("/posts/{userId}")
     public ResponseEntity<Iterable<Post>> getPostsByUser(@PathVariable int userId) {
         return new ResponseEntity<>(userService.getPostsByUser(userId), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}/comments")
+    @GetMapping("/comments/{userId}")
     public ResponseEntity<Iterable<Comments>> getCommentsByUser(@PathVariable int userId) {
         return new ResponseEntity<>(userService.getCommentsByUser(userId), HttpStatus.OK);
     }

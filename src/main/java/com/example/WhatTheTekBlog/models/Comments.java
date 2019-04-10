@@ -6,20 +6,18 @@ import javax.persistence.*;
 
 @Entity
 public class Comments {
-    @ManyToOne
-    private User commenter;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  Long comment_id;
+  private Long comment_id;
 
-  String comments;
+  private String comments;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private User user;
 
   @ManyToOne(cascade = CascadeType.ALL)
-  User user;
-
-  @ManyToOne(cascade = CascadeType.ALL)
-  Post post;
+  @JsonIgnore
+  private Post post;
 
   public Long getComment_id() {
     return comment_id;

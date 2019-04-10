@@ -13,7 +13,7 @@ public class Post {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  Long postID;
+  private Long postID;
 
 
   @NotNull
@@ -38,21 +38,13 @@ public class Post {
   @Transient
   Calendar calendar = Calendar.getInstance();
 
-//  @OneToMany(cascade = CascadeType.ALL,
-//    fetch = FetchType.LAZY,
-//    mappedBy = "post")
-//  private Set<Comments> comments = new HashSet<>();
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+  private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-  @JoinTable(name = "post_tags",
-      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
-      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
+  @ManyToMany(cascade = CascadeType.ALL, mappedBy = "listOfPosts")
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinTable(name = "user_post",
-    joinColumns = @JoinColumn(name = "post_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @ManyToOne(cascade = CascadeType.ALL)
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
@@ -101,22 +93,29 @@ public class Post {
     this.postContent = postContent;
   }
 
-//  public Set<Comments> getComments() {
-//    return comments;
-//  }
-//
-//  public void setComments(Set<Comments> comments) {
-//    this.comments = comments;
-//  }
+  public Calendar getCalendar() {
+    return calendar;
+  }
 
-//  public List<Tags> getTagsList() {
-//    return tagsList;
-//  }
-//
-//  public void setTagsList(List<Tags> tagsList) {
-//    this.tagsList = tagsList;
-//  }
+  public void setCalendar(Calendar calendar) {
+    this.calendar = calendar;
+  }
 
+  public Set<Comments> getComments() {
+    return comments;
+  }
+
+  public void setComments(Set<Comments> comments) {
+    this.comments = comments;
+  }
+
+  public Set<Tags> getTagsSet() {
+    return tagsSet;
+  }
+
+  public void setTagsSet(Set<Tags> tagsSet) {
+    this.tagsSet = tagsSet;
+  }
 
   public User getCreator() {
     return creator;

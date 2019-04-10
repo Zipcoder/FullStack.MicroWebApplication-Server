@@ -17,7 +17,7 @@ public class User {
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Post> posts = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "commenter", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Comments> comments = new LinkedHashSet<>();
 
