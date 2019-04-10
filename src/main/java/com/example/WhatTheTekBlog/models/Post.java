@@ -47,17 +47,10 @@ public class Post {
   private Set<Comments> comments = new HashSet<>();
 
   @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
- // mappedBy =
-//  @JoinTable(name = "post_tags",
-//      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
-//      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
   private Set<Tags> tagsSet = new HashSet<>();
 
   @ManyToOne(cascade = CascadeType.ALL,
   fetch = FetchType.LAZY)
-//  @JoinTable(name = "user_post",
-//    joinColumns = @JoinColumn(name = "post_id"),
-//    inverseJoinColumns = @JoinColumn(name = "user_id"))
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
