@@ -3,52 +3,73 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Comments {
-    @ManyToOne
-    private User commenter;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  Long comment_id;
+//    @ManyToOne
+//    private User commenter;
 
-  String comments;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long comment_id;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  User user;
+    String comments;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  Post post;
+    @ManyToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "user_comment",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private User user;
 
-  public Long getComment_id() {
-    return comment_id;
-  }
+    @ManyToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinTable(name = "post_forComment",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private Post post;
 
-  public void setComment_id(Long comment_id) {
-    this.comment_id = comment_id;
-  }
-  public String getComments() {
-    return comments;
-  }
 
-  public void setComments(String comments) {
-    this.comments = comments;
-  }
+    @NotNull
+    private Date createdDate = new Date();
 
-  public User getUser() {
-    return user;
-  }
+    @Transient
+    Calendar calendar = Calendar.getInstance();
 
-  public void setUser(User user) {
-    this.user = user;
-  }
 
-  public Post getPost() {
-    return post;
-  }
+    public Long getComment_id() {
+        return comment_id;
+    }
 
-  public void setPost(Post post) {
-    this.post = post;
-  }
+    public void setComment_id(Long comment_id) {
+        this.comment_id = comment_id;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }
