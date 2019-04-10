@@ -54,10 +54,10 @@ public class TagsController {
 //        return new ResponseEntity<>(tagsService.delete(id), HttpStatus.OK);
 //    }
 
-    @DeleteMapping("/tags/{tagName}")
-    public ResponseEntity<Boolean> delete(@PathVariable String tagName) {
-        return new ResponseEntity<>(this.tagsService.delete(tagName), HttpStatus.OK);
-    }
+//    @DeleteMapping("/tags/{tagName}")
+//    public ResponseEntity<Boolean> delete(@PathVariable String tagName) {
+//        return new ResponseEntity<>(this.tagsService.delete(tagName), HttpStatus.OK);
+//    }
 
 
 }
