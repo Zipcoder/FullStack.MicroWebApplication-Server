@@ -6,6 +6,8 @@ import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
@@ -27,28 +29,28 @@ public class PostService {
     this.postRepository = repository;
   }
 
-  public Post createPost(Post post)  {
-   // PageRequest request = new PageRequest(page, 1,Sort.Direction.DESC, "createdDate");
+  public Post createPost(Post post) {
+    // PageRequest request = new PageRequest(page, 1,Sort.Direction.DESC, "createdDate");
     return this.postRepository.save(post);
   }
 
-  public Iterable<Post> findAll(){
+  public Iterable<Post> findAll() {
     return this.postRepository.findAll();
   }
 
   public Page<Post> findAllByPages(Pageable page) {
-   return postRepository.findAll(page);
+    return postRepository.findAll(page);
   }
 
-  public Iterable<Post> findAllByDate(Pageable pageable){
-    return postRepository.findAll(new Sort(Sort.Direction.DESC,"createdDate"));
+  public Iterable<Post> findAllByDate(Pageable pageable) {
+    return postRepository.findAll(new Sort(Sort.Direction.DESC, "createdDate"));
   }
 
   public Optional<Post> findByPostId(Long postId) {
     return this.postRepository.findById(postId);
   }
 
-  public Post updatePost(Long postId, Post post){
+  public Post updatePost(Long postId, Post post) {
     Post originalPost = this.postRepository.getOne(postId);
     originalPost.setPostTitle(post.getPostTitle());
     originalPost.setPostSummary(post.getPostSummary());

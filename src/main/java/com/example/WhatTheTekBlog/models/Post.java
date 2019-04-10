@@ -2,6 +2,7 @@
 package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.annotations.Type;
 import javax.annotation.Generated;
@@ -10,13 +11,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 
+@Data
 @Entity
 public class Post {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long postID;
-
 
   @NotNull
   @Size(max = 100)
@@ -40,33 +41,34 @@ public class Post {
   @Transient
   Calendar calendar = Calendar.getInstance();
 
-//  @OneToMany(cascade = CascadeType.ALL,
-//    fetch = FetchType.LAZY,
-//    mappedBy = "post")
-//  private Set<Comments> comments = new HashSet<>();
+  @OneToMany(cascade = CascadeType.ALL,
+    fetch = FetchType.LAZY,
+    mappedBy = "post")
+  private Set<Comments> comments = new HashSet<>();
 
   @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-  @JoinTable(name = "post_tags",
-      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
-      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
+ // mappedBy =
+//  @JoinTable(name = "post_tags",
+//      joinColumns = {@JoinColumn(name = "post_id", nullable = false ,updatable = false)},
+//      inverseJoinColumns = {@JoinColumn(name = "tag_id",nullable = false, updatable = false)})
   private Set<Tags> tagsSet = new HashSet<>();
 
   @ManyToOne(cascade = CascadeType.ALL,
   fetch = FetchType.LAZY)
-  @JoinTable(name = "user_post",
-    joinColumns = @JoinColumn(name = "post_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+//  @JoinTable(name = "user_post",
+//    joinColumns = @JoinColumn(name = "post_id"),
+//    inverseJoinColumns = @JoinColumn(name = "user_id"))
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             List<Comments> comments, List<Tags> tagsList, User author) {
+             Set<Comments> comments, Set<Tags> tagsList, User author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
     this.createdDate = calendar.getTime();
-   // this.comments = comments;
-   // this.tagsList = tagsList;
-    //this.creater = author;
+    this.comments = comments;
+    this.tagsSet = tagsList;
+    this.creator = author;
   }
 
   public Post() {
@@ -104,21 +106,21 @@ public class Post {
     this.postContent = postContent;
   }
 
-//  public Set<Comments> getComments() {
-//    return comments;
-//  }
-//
-//  public void setComments(Set<Comments> comments) {
-//    this.comments = comments;
-//  }
+  public Set<Comments> getComments() {
+    return comments;
+  }
 
-//  public List<Tags> getTagsList() {
-//    return tagsList;
-//  }
-//
-//  public void setTagsList(List<Tags> tagsList) {
-//    this.tagsList = tagsList;
-//  }
+  public void setComments(Set<Comments> comments) {
+    this.comments = comments;
+  }
+
+  public Set<Tags> getTagsList() {
+    return tagsSet;
+  }
+
+  public void setTagsList(Set<Tags> tagsList) {
+    this.tagsSet = tagsList;
+  }
 
 
   public User getCreator() {
@@ -136,8 +138,6 @@ public class Post {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
-
-
 
 
 }
