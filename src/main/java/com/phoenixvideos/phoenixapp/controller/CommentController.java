@@ -2,10 +2,8 @@ package com.phoenixvideos.phoenixapp.controller;
 
 import com.phoenixvideos.phoenixapp.model.Comment;
 
-import com.phoenixvideos.phoenixapp.model.User;
 import com.phoenixvideos.phoenixapp.model.Video;
 import com.phoenixvideos.phoenixapp.service.CommentService;
-import com.phoenixvideos.phoenixapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

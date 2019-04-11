@@ -1,5 +1,8 @@
 package com.phoenixvideos.phoenixapp.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +21,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Video> videos;
 
