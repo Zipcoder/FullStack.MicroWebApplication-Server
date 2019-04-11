@@ -57,12 +57,12 @@ public class UserController {
         return new ResponseEntity<>("A response message is returned", HttpStatus.CREATED);
     }
 
-    @PostMapping("/users/video/comment/{userId}")
-    public ResponseEntity<Comment> createComments(@PathVariable Long userId, @RequestBody Comment comment) {
-        User user = userService.show(userId);
-        comment.setUser(user);
-        return new ResponseEntity<>(commentService.create(comment),HttpStatus.OK);
-    }
+//    @PostMapping("/users/video/comment/{userId}")
+//    public ResponseEntity<Comment> createComments(@PathVariable Long userId, @RequestBody Comment comment) {
+//        User user = userService.show(userId);
+//        comment.setUser(user);
+//        return new ResponseEntity<>(commentService.create(comment),HttpStatus.OK);
+//    }
 
 //    @PutMapping(“/user/comment/{id}“)
 //    ResponseEntity<User> putComment(@PathVariable Long id,

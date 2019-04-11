@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.Set;
 
 @RestController
@@ -23,12 +24,13 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-//    @PostMapping("/videos/comment/")
-//    public ResponseEntity<Comment> createComment(@PathVariable Long id, @RequestBody Comment comment) {
-////step 1
-//
-//        return new ResponseEntity<>(commentService.create(comment),HttpStatus.CREATED);
-//    }
+    @PostMapping("/videos/comment/{user_id}/{video_id}")
+    public ResponseEntity<Comment> createComment(@PathVariable("user_id") Long user_id, @PathVariable("video_id") Long video_id, @RequestBody Comment comment) {
+
+        Comment returnComment = commentService.create(user_id,video_id,comment);
+        return (returnComment == null) ? (new ResponseEntity<>(HttpStatus.BAD_REQUEST))
+                : new ResponseEntity<>(returnComment,HttpStatus.CREATED);
+    }
 
     @GetMapping("videos/comment/{id}")
     public ResponseEntity<Set<Comment>> show(@PathVariable Long id) {

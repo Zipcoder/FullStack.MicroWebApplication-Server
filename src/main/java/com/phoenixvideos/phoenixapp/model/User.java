@@ -18,6 +18,7 @@ public class User {
     private String userName;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
 

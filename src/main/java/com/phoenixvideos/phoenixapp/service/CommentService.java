@@ -2,22 +2,43 @@ package com.phoenixvideos.phoenixapp.service;
 
 import com.phoenixvideos.phoenixapp.model.Comment;
 import com.phoenixvideos.phoenixapp.model.User;
+import com.phoenixvideos.phoenixapp.model.Video;
 import com.phoenixvideos.phoenixapp.repository.CommentRepository;
 import com.phoenixvideos.phoenixapp.repository.UserRepository;
+import com.phoenixvideos.phoenixapp.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CommentService {
+
     private CommentRepository commentRepository;
+
     @Autowired
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository =commentRepository;
     }
 
-    public Comment create(Comment comment) {
-        System.out.println(comment);
-        return commentRepository.save(comment);
+    @Autowired
+    public VideoRepository videoRepository;
+
+    @Autowired
+    public UserRepository userRepository;
+
+    public Comment create(Long user_id, Long video_id, Comment comment) {
+
+        Video videoResult = null;
+        User userResult = null;
+        Comment commentResult = null;
+        User user = userRepository.findById(user_id).orElseGet(null);
+        Video video = videoRepository.findById(video_id).orElseGet(null);
+        if(user != null && video!= null) {
+            comment.setUser(user);
+            comment.setVideo(video);
+
+            commentResult = commentRepository.save(comment);
+        }
+        return commentResult;
     }
 
     public Iterable<Comment> index() {
