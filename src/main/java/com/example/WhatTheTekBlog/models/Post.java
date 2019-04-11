@@ -48,13 +48,13 @@ public class Post {
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             List<Comments> comments, List<Tags> tagsList, User author) {
+              List<Comments> comments, List<Tags> tagsList, User author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
     this.createdDate = calendar.getTime();
-   // this.comments = comments;
-   // this.tagsList = tagsList;
+    // this.comments = comments;
+    // this.tagsList = tagsList;
     //this.creater = author;
   }
 

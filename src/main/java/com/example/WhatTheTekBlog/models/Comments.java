@@ -10,9 +10,9 @@ import java.util.Date;
 @Entity
 public class Comments {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long comment_id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long comment_id;
 
   private String comments;
   @ManyToOne(cascade = CascadeType.ALL)

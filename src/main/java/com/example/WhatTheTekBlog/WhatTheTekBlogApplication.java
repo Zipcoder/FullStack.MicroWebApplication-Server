@@ -4,6 +4,8 @@ import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
+import com.example.WhatTheTekBlog.repositories.TagsRepository;
+import com.example.WhatTheTekBlog.services.TagsService;
 import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -24,7 +28,7 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	UserService userService;
 
-	@EventListener
+	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		for (int i = 1; i <= 10; i++) {
 			User user = new User();
