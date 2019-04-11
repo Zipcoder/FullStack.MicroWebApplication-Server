@@ -2,7 +2,6 @@ package com.example.WhatTheTekBlog.services;
 
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
-import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;

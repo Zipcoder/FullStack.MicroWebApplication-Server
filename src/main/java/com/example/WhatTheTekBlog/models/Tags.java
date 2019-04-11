@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog.models;
 
-import com.example.WhatTheTekBlog.TagNames;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
@@ -16,8 +16,8 @@ public class Tags {
     private Integer id;
     private String tagName;
     @ManyToMany
+    @JsonIgnore
     private Set<Post> listOfPosts = new HashSet<>();
-
 
     public Tags() {
     }
