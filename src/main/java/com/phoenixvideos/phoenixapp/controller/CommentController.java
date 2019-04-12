@@ -24,7 +24,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/videos/comment/{user_id}/{video_id}")
+    @PostMapping("/videos/comment/{user_id}/{video_id}")//videos/comment/1/2
     public ResponseEntity<Comment> createComment(@PathVariable("user_id") Long user_id, @PathVariable("video_id") Long video_id, @RequestBody Comment comment) {
 
         Comment returnComment = commentService.create(user_id,video_id,comment);
