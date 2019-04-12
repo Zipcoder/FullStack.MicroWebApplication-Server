@@ -2,10 +2,9 @@ package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -15,15 +14,14 @@ public class User {
     private Integer id;
     private String name;
     private String email;
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Post> posts;
-    @OneToMany(mappedBy = "commenter")
+    private Set<Post> posts = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Comments> comments;
+    private Set<Comments> comments = new LinkedHashSet<>();
 
-    public User() {
-    }
+    public User() { }
 
     public Integer getId() {
         return id;
@@ -59,6 +57,16 @@ public class User {
 
     public Set<Comments> getComments() {
         return comments;
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
+        post.setCreator(this);
+    }
+
+    public void addComment(Comments comment) {
+        comments.add(comment);
+        comment.setUser(this);
     }
 
     public void setComments(Set<Comments> comments) {

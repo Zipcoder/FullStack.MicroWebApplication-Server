@@ -17,23 +17,13 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long comment_id;
 
-    String comments;
+  private String comments;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-//    @JoinTable(name = "user_comment",
-//            joinColumns = @JoinColumn(name = "comment_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user;
-
-    @ManyToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-//    @JoinTable(name = "post_forComment",
-//            joinColumns = @JoinColumn(name = "comment_id"),
-//            inverseJoinColumns = @JoinColumn(name = "post_id"))
-    private Post post;
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JsonIgnore
+  private Post post;
 
 
     @NotNull
@@ -41,11 +31,6 @@ public class Comments {
 
     @Transient
     Calendar calendar = Calendar.getInstance();
-
-    public Comments(Long comment_id){
-        this.comment_id = comment_id;
-
-    }
 
 
     public Long getComment_id() {
@@ -76,9 +61,9 @@ public class Comments {
         return post;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
+  public void setPost(Post post) {
+    this.post = post;
+  }
 
     public Date getCreatedDate() {
         return createdDate;
