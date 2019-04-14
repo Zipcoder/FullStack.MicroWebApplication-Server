@@ -54,7 +54,7 @@ public class PostController {
     return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
   }
 
-  @PutMapping("/post/{postId}")
+  @PutMapping("/users/updatePost/{postId}")
   public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post post) {
     Optional<Post> currentPost = this.postService.findByPostId(postId);
 
@@ -66,7 +66,7 @@ public class PostController {
     return new ResponseEntity<>(this.postService.updatePost(postId,post), HttpStatus.OK);
   }
 
-  @DeleteMapping("/post/{postId}")
+  @DeleteMapping("/users/deletePost/{postId}")
   public ResponseEntity<Boolean> deletePost(@PathVariable Long postId, @RequestBody Post post){
     LOG.info("Deleting Post: {}", post);
     return new ResponseEntity<>(this.postService.delete(postId),HttpStatus.OK);

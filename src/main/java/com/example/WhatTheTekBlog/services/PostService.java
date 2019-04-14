@@ -41,10 +41,6 @@ public class PostService {
         return postRepository.findAll(page);
     }
 
-    public Iterable<Post> findAllByDate(Pageable pageable) {
-        return postRepository.findAll(new Sort(Sort.Direction.DESC, "createdDate"));
-    }
-
     public Optional<Post> findByPostId(Long postId) {
         return this.postRepository.findById(postId);
     }
