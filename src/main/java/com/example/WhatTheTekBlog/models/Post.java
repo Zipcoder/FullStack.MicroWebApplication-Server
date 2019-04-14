@@ -40,10 +40,6 @@ public class Post {
   @JsonFormat(pattern="yyyy-MM-dd")
   private Date createdDate = new Date();
 
-  @Transient
-  @JsonIgnore
-  Calendar calendar = Calendar.getInstance();
-
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
   private Set<Comments> comments = new HashSet<>();
 
@@ -97,14 +93,6 @@ public class Post {
 
   public void setPostContent(String postContent) {
     this.postContent = postContent;
-  }
-
-  public Calendar getCalendar() {
-    return calendar;
-  }
-
-  public void setCalendar(Calendar calendar) {
-    this.calendar = calendar;
   }
 
   public Set<Comments> getComments() {
