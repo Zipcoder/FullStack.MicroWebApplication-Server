@@ -64,7 +64,7 @@ public class CommentsService {
             List<Comments> listOfComments = (ArrayList<Comments>) this.commentsRepository.findAll();
 
             for (Comments c: listOfComments) {
-                if(c.getComment_id().equals(comment)) {
+                if(c.getComments().equals(comment)) {
                     commentsRepository.delete(c);
                 }
             }
@@ -72,7 +72,16 @@ public class CommentsService {
             return true;
         }
 
+    public List <Comments> findAllCommentByPost(Long post_id) {
+            List<Comments> comments = new ArrayList<>();
 
+            for(Comments c: commentsRepository.findAll()){
+                if(c.getPost().getPostID().equals(post_id)){
+                    comments.add(c);
+                }
+            }
+            return comments;
+    }
 
     }
 
