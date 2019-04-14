@@ -7,7 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue
     private Integer id;
@@ -21,7 +21,7 @@ public class User {
     @JsonIgnore
     private Set<Comments> comments = new LinkedHashSet<>();
 
-    public User() { }
+    public AppUser() { }
 
     public Integer getId() {
         return id;
@@ -66,7 +66,7 @@ public class User {
 
     public void addComment(Comments comment) {
         comments.add(comment);
-        comment.setUser(this);
+        comment.setAppUser(this);
     }
 
     public void setComments(Set<Comments> comments) {

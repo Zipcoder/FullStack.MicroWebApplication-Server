@@ -2,9 +2,9 @@ package com.example.WhatTheTekBlog.services;
 
 import com.example.WhatTheTekBlog.WhatTheTekBlogApplication;
 import com.example.WhatTheTekBlog.controllers.UserController;
+import com.example.WhatTheTekBlog.models.AppUser;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
-import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -26,7 +27,7 @@ import java.util.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = WhatTheTekBlogApplication.class)
-public class UserServiceTest {
+public class AppUserServiceTest {
 
         @MockBean
         private UserService service;
@@ -35,7 +36,7 @@ public class UserServiceTest {
 
         @Before
         public void setup(){
-            this.controller = new UserController(userService);
+            this.controller = new UserController(userService, new BCryptPasswordEncoder());
             mockRepo = Mockito.mock(UserRepository.class);
             userService = new UserService(mockRepo);
         }
@@ -44,14 +45,14 @@ public class UserServiceTest {
     @Test
     public void testDelete() {
         // Given
-        User user = new User();
-        user.setId(1);
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
 
         HttpStatus expected = HttpStatus.OK;
 
         BDDMockito
-                .given(service.create(user))
-                .willReturn(user);
+                .given(service.create(appUser))
+                .willReturn(appUser);
         BDDMockito.
                 given(service.delete(1))
                 .willReturn(true);
@@ -75,15 +76,15 @@ public class UserServiceTest {
     @Test
     public void testCreateService(){
         //Given
-        User user = new User();
-        user.setId(1);
-        User expected = new User();
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        AppUser expected = new AppUser();
         expected.setId(1);
         //When
-        Mockito.when(mockRepo.save(user)).thenReturn(expected);
+        Mockito.when(mockRepo.save(appUser)).thenReturn(expected);
 
         //Then
-        User actual = userService.create(user);
+        AppUser actual = userService.create(appUser);
 
         Assert.assertEquals(expected, actual);
     }
@@ -92,12 +93,12 @@ public class UserServiceTest {
     @Test
     public void testFindById(){
         //Given
-        User expected = new User();
+        AppUser expected = new AppUser();
         expected.setId(1);
         mockRepo.save(expected);
         //When
         Mockito.when(mockRepo.findById(1)).thenReturn(java.util.Optional.of(expected));
-        User actual = userService.findById(1);
+        AppUser actual = userService.findById(1);
         //Then
         Assert.assertEquals(expected, actual);
     }
@@ -106,13 +107,13 @@ public class UserServiceTest {
     public void testFindByName(){
         //Given
         String testName = "expected";
-        User expected = new User();
+        AppUser expected = new AppUser();
         expected.setId(1);
         expected.setName(testName);
         mockRepo.save(expected);
         //When
         Mockito.when(mockRepo.findByName(testName)).thenReturn(expected);
-        User actual = userService.findByName(testName);
+        AppUser actual = userService.findByName(testName);
         //Then
         Assert.assertEquals(expected, actual);
     }
@@ -120,11 +121,11 @@ public class UserServiceTest {
     @Test(expected = NoSuchElementException.class)
     public void testFindByIdError(){
         //Given
-        User expected = new User();
+        AppUser expected = new AppUser();
         expected.setId(1);
         mockRepo.save(expected);
         //When
-        User actual = userService.findById(1234567);
+        AppUser actual = userService.findById(1234567);
         //Then
         Assert.assertEquals(expected, actual);
     }
@@ -132,16 +133,16 @@ public class UserServiceTest {
     @Test
     public void testDeleteService(){
         //Given
-        User user = new User();
-        user.setId(1);
-        User user1 = new User();
-        user1.setId(2);
-        mockRepo.save(user);
-        mockRepo.save(user1);
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        AppUser appUser1 = new AppUser();
+        appUser1.setId(2);
+        mockRepo.save(appUser);
+        mockRepo.save(appUser1);
 
-        List<User> expected = new ArrayList<>();
-        expected.add(user);
-        expected.add(user1);
+        List<AppUser> expected = new ArrayList<>();
+        expected.add(appUser);
+        expected.add(appUser1);
 
         Mockito.when(mockRepo.findAll()).thenReturn(expected);
 
@@ -154,19 +155,19 @@ public class UserServiceTest {
     @Test
     public void testFindAllService(){
         //Given
-        User user = new User();
-        user.setId(1);
-        User user1 = new User();
-        user1.setId(2);
-        mockRepo.save(user);
-        mockRepo.save(user1);
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        AppUser appUser1 = new AppUser();
+        appUser1.setId(2);
+        mockRepo.save(appUser);
+        mockRepo.save(appUser1);
 
-        List<User> expected = new ArrayList<>();
-        expected.add(user);
-        expected.add(user1);
+        List<AppUser> expected = new ArrayList<>();
+        expected.add(appUser);
+        expected.add(appUser1);
         //When
         Mockito.when(mockRepo.findAll()).thenReturn(expected);
-        List<User> actual = (List<User>) userService.findAllUsers();
+        List<AppUser> actual = (List<AppUser>) userService.findAllUsers();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -179,14 +180,14 @@ public class UserServiceTest {
         Set<Post> expected = new HashSet<>();
         expected.add(new Post());
         expected.add(new Post());
-        User user = new User();
-        user.setId(1);
-        user.setPosts(expected);
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setPosts(expected);
 
-        mockRepo.save(user);
+        mockRepo.save(appUser);
 
         //When
-        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(appUser));
         Set<Post> actual = (Set<Post>) userService.getPostsByUser(1);
 
         //Then
@@ -199,14 +200,14 @@ public class UserServiceTest {
         Set<Comments> expected = new HashSet<>();
         expected.add(new Comments());
         expected.add(new Comments());
-        User user = new User();
-        user.setId(1);
-        user.setComments(expected);
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setComments(expected);
 
-        mockRepo.save(user);
+        mockRepo.save(appUser);
 
         //When
-        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(appUser));
         Set<Comments> actual = (Set<Comments>) userService.getCommentsByUser(1);
 
         //Then
@@ -216,16 +217,16 @@ public class UserServiceTest {
     @Test
     public void testUpdateService(){
         //Given
-        User user = new User();
-        user.setId(1);
-        user.setName("testing");
-        User expected = new User();
+        AppUser appUser = new AppUser();
+        appUser.setId(1);
+        appUser.setName("testing");
+        AppUser expected = new AppUser();
         expected.setId(2);
         expected.setName("expected");
-        mockRepo.save(user);
+        mockRepo.save(appUser);
 
         //When
-        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(appUser));
         userService.update(1, expected);
         String actual = userService.findById(1).getName();
 

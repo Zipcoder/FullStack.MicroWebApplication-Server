@@ -45,10 +45,10 @@ public class Post {
   private Set<Tags> tagsSet = new HashSet<>();
 
   @ManyToOne(cascade = CascadeType.ALL)
-  private User creator;
+  private AppUser creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             List<Comments> comments, List<Tags> tagsList, User author) {
+             List<Comments> comments, List<Tags> tagsList, AppUser author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
@@ -117,11 +117,11 @@ public class Post {
     this.tagsSet = tagsSet;
   }
 
-  public User getCreator() {
+  public AppUser getCreator() {
     return creator;
   }
 
-  public void setCreator(User creator) {
+  public void setCreator(AppUser creator) {
     this.creator = creator;
   }
 
