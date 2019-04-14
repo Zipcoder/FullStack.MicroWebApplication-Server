@@ -62,11 +62,9 @@ public class PostController {
   }
 
   @PostMapping("/post/")
-  public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) throws URISyntaxException {
+  public ResponseEntity<Post> createPost(@RequestBody Post post){
     LOG.info("Creating a new Post: {}", post);
-    Post result = postService.createPost(post);
-    return ResponseEntity.created(new URI("/wtt/post" + result.getPostID())).body(result);
-   // return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
+    return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
   }
 
   @PutMapping("/post/{postId}")

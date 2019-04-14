@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -38,11 +39,11 @@ public class PostControllerTest {
 
     @Test
     public void testFindAll() throws Exception {
-        Long givenId = 200L;
-        List<Comments> commentsList = new ArrayList<>();
+        Long givenId = 1L;
+     //   Set<Comments> commentsList = new HashSet<>();
         Set<Tags> tagsSet = new HashSet<>();
         User author1 = new User();
-        author1.setId(200);
+        author1.setId(1);
         author1.setName("author1");
 
         Post post = new Post();
@@ -52,8 +53,8 @@ public class PostControllerTest {
         post.setPostSummary("Post1Summary");
         post.setCreator(author1);
         post.setCreatedDate(new Date());
-      //  post.setComments(commentsList);
-       // post.setTagsSet(tagsSet);
+    //    post.setComments(commentsList);
+        post.setTagsSet(tagsSet);
 
         BDDMockito
                 .given(repository.findById(1L))
@@ -70,7 +71,39 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testGetPost() {
+    public void testGetPost() throws Exception {
+        Long givenId = 1L;
+        Set<Comments> commentsList = new HashSet<>();
+        Set<Tags> tagsSet = new HashSet<>();
+        User author1 = new User();
+        author1.setId(1);
+        author1.setName("author1");
+
+        Post post = new Post();
+        post.setPostID(givenId);
+        post.setPostContent("Post1Content");
+        post.setPostTitle("Post1Title");
+        post.setPostSummary("Post1Summary");
+        post.setCreator(author1);
+        post.setCreatedDate(new Date());
+        post.setComments(commentsList);
+        post.setTagsSet(tagsSet);
+
+        BDDMockito
+                .given(repository.save(post))
+                .willReturn(post);
+
+        String expectedContent = "{\"postID\":null,\"postTitle\":\"Post1Title\"," +
+                "\"postSummary\":Post1Summary,\"postContent\":Post1Content," +
+                "\"comments\":null,\"tagsList\":null,\"user\":\"author1\"}";
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .post("/post/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(expectedContent))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
     @Test
