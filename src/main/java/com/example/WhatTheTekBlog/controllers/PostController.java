@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/wtt")
+@RequestMapping
 public class PostController {
 
   private final Logger LOG = LoggerFactory.getLogger(PostController.class);
@@ -27,11 +27,6 @@ public class PostController {
 
   public PostController(PostService service) {
     this.postService = service;
-  }
-
-  @RequestMapping(value = "/")
-  public String index(){
-    return "index";
   }
 
   @GetMapping("/post/")
@@ -51,17 +46,9 @@ public class PostController {
     Optional<Post> post = postService.findByPostId(postId);
     return post.map(response -> ResponseEntity.ok().body(response))
       .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
-//    if (postService.findByPostId(postId) != null) {
-//      return new ResponseEntity<>(postService.findByPostId(postId), HttpStatus.OK);
-//    } else {
-//      LOG.info("Post not found with ID: {}", postId);
-//      return new ResponseEntity<>(postService.findByPostId(postId), HttpStatus.NOT_FOUND);
-//    }
-
   }
 
-  @PostMapping("/post/")
+  @PostMapping("/users/createPost/")
   public ResponseEntity<Post> createPost(@RequestBody Post post){
     LOG.info("Creating a new Post: {}", post);
     return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);

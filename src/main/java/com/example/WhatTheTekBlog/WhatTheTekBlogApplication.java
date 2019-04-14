@@ -28,7 +28,7 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	UserService userService;
 
-	//@EventListener
+//	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		for (int i = 1; i <= 10; i++) {
 			User user = new User();
