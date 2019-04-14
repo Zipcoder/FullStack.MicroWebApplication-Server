@@ -21,24 +21,15 @@ public class UserService {
     }
 
     public User findById(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get();
-        }
-        return null;
+        return userRepository.findById(userId).get();
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get().getPosts();
-        }
-        return null;
+        return userRepository.findById(userId).get().getPosts();
     }
 
     public Iterable<Comments> getCommentsByUser(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get().getComments();
-        }
-        return null;
+        return userRepository.findById(userId).get().getComments();
     }
 
     public User create(User user) {
@@ -46,17 +37,18 @@ public class UserService {
     }
 
     public boolean delete(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
+        userRepository.deleteById(userId);
+        return true;
     }
 
     public User update(int userId, User updatedUser) {
-        updatedUser.setId(userId);
-        userRepository.deleteById(userId);
-        return userRepository.save(updatedUser);
+        User user = userRepository.findById(userId).get();
+        user.setName(updatedUser.getName());
+        user.setEmail(updatedUser.getEmail());
+        user.setEmail(updatedUser.getEmail());
+        user.setComments(updatedUser.getComments());
+        user.setPosts(updatedUser.getPosts());
+        return user;
     }
 
 }

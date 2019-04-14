@@ -129,4 +129,54 @@ public class UserTest {
         //Then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void setId() {
+        //Given
+        int expected = 1235678;
+        user.setId(expected);
+
+        //When
+        int actual = user.getId();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addPostTest() {
+        //Given
+        Set<Post> expected = new HashSet<>();
+        expected.add(new Post());
+        expected.add(new Post());
+
+        user.setPosts(expected);
+        Post newPost = new Post();
+
+        //When
+        user.addPost(newPost);
+        //Then
+        expected.add(newPost);
+        Set<Post> actual = user.getPosts();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addCommentTest() {
+        //Given
+        Set<Comments> expected = new HashSet<>();
+        expected.add(new Comments());
+        expected.add(new Comments());
+
+        user.setComments(expected);
+        Comments newComments = new Comments();
+
+        //When
+        user.addComment(newComments);
+        //Then
+        expected.add(newComments);
+        Set<Comments> actual = user.getComments();
+        Assert.assertEquals(expected, actual);
+    }
+
 }

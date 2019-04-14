@@ -5,11 +5,15 @@ import com.example.WhatTheTekBlog.controllers.UserController;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.User;
+import com.example.WhatTheTekBlog.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -31,135 +35,10 @@ public class UserServiceTest {
 
         @Before
         public void setup(){
-            this.controller = new UserController(service);
+            this.controller = new UserController(userService);
+            mockRepo = Mockito.mock(UserRepository.class);
+            userService = new UserService(mockRepo);
         }
-
-
-        @Test
-        public void testCreate() {
-            // Given
-            HttpStatus expected = HttpStatus.CREATED;
-            User expectedUser = new User();
-            BDDMockito
-                    .given(service.create(expectedUser))
-                    .willReturn(expectedUser);
-
-            // When
-            ResponseEntity<User> response = controller.create(expectedUser);
-            HttpStatus actual = response.getStatusCode();
-            User actualUser = response.getBody();
-
-            // Then
-            Assert.assertEquals(expected, actual);
-            Assert.assertEquals(expectedUser, actualUser);
-        }
-
-
-    @Test
-    public void testShow() {
-        // Given
-        HttpStatus expected = HttpStatus.OK;
-        User expectedUser = new User();
-        BDDMockito.
-                given(service.findById(1))
-                .willReturn(expectedUser);
-
-        // When
-        ResponseEntity<User> response = controller.findById(1);
-        HttpStatus actual = response.getStatusCode();
-        User actualUser = response.getBody();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedUser, actualUser);
-    }
-
-    @Test
-    public void testFindAll() {
-        // Given
-        List<User> expectedUsers = new ArrayList<>();
-        expectedUsers.add(new User());
-        expectedUsers.add(new User());
-        expectedUsers.add(new User());
-
-        HttpStatus expected = HttpStatus.OK;
-
-        BDDMockito.
-                given(service.findAllUsers())
-                .willReturn(expectedUsers);
-
-        // When
-        ResponseEntity<Iterable<User>> response = controller.findAllUsers();
-        HttpStatus actual = response.getStatusCode();
-        List<User> actualUsers = (List<User>) response.getBody();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedUsers, actualUsers);
-    }
-
-    @Test
-    public void testFindPostsByUser() {
-        // Given
-        Set<Post> expectedPost = new HashSet<>();
-        Post post1 = new Post();
-        post1.setPostContent("Ada is cute; like if you agree!");
-        post1.setPostTitle("Ada is cute.");
-        post1.setPostSummary("Post about Ada");
-        User user = new User();
-        user.setId(1);
-        user.setPosts(expectedPost);
-
-        HttpStatus expected = HttpStatus.OK;
-
-        BDDMockito
-                .given(service.create(user))
-                .willReturn(user);
-        BDDMockito.
-                given(service.getPostsByUser(1))
-                .willReturn(expectedPost);
-
-        // When
-        ResponseEntity<Iterable<Post>> response = controller.getPostsByUser(1);
-        HttpStatus actual = response.getStatusCode();
-        Set<Post> actualPost = (Set<Post>) response.getBody();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedPost, actualPost);
-    }
-
-
-    @Test
-    public void testFindCommentsByUser() {
-        // Given
-        Set<Comments> expectedComments = new HashSet<>();
-        Comments comments1 = new Comments();
-        comments1.setComments("I appreciate your post");
-        Comments comments2 = new Comments();
-        comments2.setComments("You're so right");
-        User user = new User();
-        user.setId(1);
-        user.setComments(expectedComments);
-
-        HttpStatus expected = HttpStatus.OK;
-
-        BDDMockito
-                .given(service.create(user))
-                .willReturn(user);
-        BDDMockito.
-                given(service.getCommentsByUser(1))
-                .willReturn(expectedComments);
-
-        // When
-        ResponseEntity<Iterable<Comments>> response = controller.getCommentsByUser(1);
-        HttpStatus actual = response.getStatusCode();
-        Set<Comments> actualComments = (Set<Comments>) response.getBody();
-
-        // Then
-        Assert.assertEquals(expected, actual);
-        Assert.assertEquals(expectedComments, actualComments);
-    }
 
 
     @Test
@@ -185,5 +64,157 @@ public class UserServiceTest {
         // Then
         Assert.assertEquals(expected, actual);
         Assert.assertTrue(actualDeleted);
+    }
+
+
+    @Mock
+    private UserRepository mockRepo;
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    public void testCreateService(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        User expected = new User();
+        expected.setId(1);
+        //When
+        Mockito.when(mockRepo.save(user)).thenReturn(expected);
+
+        //Then
+        User actual = userService.create(user);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testFindById(){
+        //Given
+        User expected = new User();
+        expected.setId(1);
+        mockRepo.save(expected);
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(java.util.Optional.of(expected));
+        User actual = userService.findById(1);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testFindByIdError(){
+        //Given
+        User expected = new User();
+        expected.setId(1);
+        mockRepo.save(expected);
+        //When
+        User actual = userService.findById(1234567);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDeleteService(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        User user1 = new User();
+        user1.setId(2);
+        mockRepo.save(user);
+        mockRepo.save(user1);
+
+        List<User> expected = new ArrayList<>();
+        expected.add(user);
+        expected.add(user1);
+
+        Mockito.when(mockRepo.findAll()).thenReturn(expected);
+
+        //When
+        userService.delete(1);
+        //Then
+        Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
+    }
+
+    @Test
+    public void testFindAllService(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        User user1 = new User();
+        user1.setId(2);
+        mockRepo.save(user);
+        mockRepo.save(user1);
+
+        List<User> expected = new ArrayList<>();
+        expected.add(user);
+        expected.add(user1);
+        //When
+        Mockito.when(mockRepo.findAll()).thenReturn(expected);
+        List<User> actual = (List<User>) userService.findAllUsers();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testgetPostsByUser(){
+        //Given
+        Set<Post> expected = new HashSet<>();
+        expected.add(new Post());
+        expected.add(new Post());
+        User user = new User();
+        user.setId(1);
+        user.setPosts(expected);
+
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Set<Post> actual = (Set<Post>) userService.getPostsByUser(1);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testgetCommentsByUser(){
+        //Given
+        Set<Comments> expected = new HashSet<>();
+        expected.add(new Comments());
+        expected.add(new Comments());
+        User user = new User();
+        user.setId(1);
+        user.setComments(expected);
+
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Set<Comments> actual = (Set<Comments>) userService.getCommentsByUser(1);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testUpdateService(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        user.setName("testing");
+        User expected = new User();
+        expected.setId(2);
+        expected.setName("expected");
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        userService.update(1, expected);
+        String actual = userService.findById(1).getName();
+
+        //Then
+        Assert.assertEquals("expected", actual);
     }
 }
