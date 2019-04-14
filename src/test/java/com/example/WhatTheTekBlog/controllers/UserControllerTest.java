@@ -38,7 +38,7 @@ public class UserControllerTest {
 
 
     @Test
-    @WithMockUser(username = "whatTheTekUser", password = "whatTheTekPassword")
+    @WithMockUser(username = "eleonorbart@gmail.com", password = "Whatthetek!")
     public void testFindById() throws Exception {
         Integer givenId = 1;
         User user = new User();
@@ -48,15 +48,16 @@ public class UserControllerTest {
                 .given(userService.findById(givenId))
                 .willReturn(user);
 
-        String expectedContent = "{\"id\":1,\"name\":\"New User!\",\"email\":null}";
+        String expectedContent = "{\"id\":1,\"name\":\"New User!\",\"email\":null,\"password\":null}";
         this.mvc.perform(MockMvcRequestBuilders
-                .get("/users/" + givenId))
+                .get("/users/id/" + givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
 
     @Test
+    @WithMockUser(username = "eleonorbart@gmail.com", password = "Whatthetek!")
     public void testFindAll() throws Exception {
         int givenId = 2;
         User user = new User();
@@ -104,7 +105,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testPostTransaction() throws Exception{
+    public void testPostUser() throws Exception{
         int givenId = 2;
         User user = new User();
         user.setId(givenId);
@@ -115,7 +116,7 @@ public class UserControllerTest {
 
         String expectedContent = "{\"id\":2,\"name\":\"testUser\",\"email\":null}";
         this.mvc.perform(MockMvcRequestBuilders
-                .post("/users/")
+                .post("/users/sign-up")
                 .content(expectedContent)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

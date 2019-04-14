@@ -3,7 +3,6 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,6 +13,7 @@ public class User {
     private Integer id;
     private String name;
     private String email;
+    private String password;
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Post> posts = new LinkedHashSet<>();
@@ -71,5 +71,13 @@ public class User {
 
     public void setComments(Set<Comments> comments) {
         this.comments = comments;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.WhatTheTekBlog.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         JwtWebSecurityConfigurer
                 .forRS256(apiAudience, issuer)
                 .configure(http)
@@ -27,6 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/post/").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/").hasAuthority("view:users")
                 .antMatchers(HttpMethod.GET, "/users/id/**").hasAuthority("view:user")
+                .antMatchers(HttpMethod.GET, "/users/posts/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/comments/**").permitAll()
                 .anyRequest().authenticated();
     }
+
 }

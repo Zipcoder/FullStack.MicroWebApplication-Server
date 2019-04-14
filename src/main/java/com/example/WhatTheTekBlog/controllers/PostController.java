@@ -26,7 +26,7 @@ public class PostController {
     this.postService = service;
   }
 
-  @GetMapping("/post/")
+  @GetMapping("/post")
   public ResponseEntity<Iterable<Post>> findAll() {
     return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
   }
@@ -49,7 +49,7 @@ public class PostController {
 
   }
 
-  @PostMapping("/post/")
+  @PostMapping("/post")
   public ResponseEntity<Post> create(@RequestBody Post post) {
     LOG.info("Creating a new Post: {}", post);
     return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);

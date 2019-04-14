@@ -102,6 +102,21 @@ public class UserServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testFindByName(){
+        //Given
+        String testName = "expected";
+        User expected = new User();
+        expected.setId(1);
+        expected.setName(testName);
+        mockRepo.save(expected);
+        //When
+        Mockito.when(mockRepo.findByName(testName)).thenReturn(expected);
+        User actual = userService.findByName(testName);
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void testFindByIdError(){
         //Given
