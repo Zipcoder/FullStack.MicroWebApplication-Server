@@ -48,19 +48,29 @@ public class WhatTheTekBlogApplication {
 				post.setPostSummary(RandomGenerator.generateSentence(1));
 				Tags tags = new Tags();
 				tags.setTagName(RandomGenerator.generateWord());
+				Tags tags2 = new Tags();
+				tags2.setTagName(RandomGenerator.generateWord());
+				Tags tags3 = new Tags();
+				tags3.setTagName(RandomGenerator.generateWord());
 				Set<Post> postList = new HashSet<>();
-				Set<Tags> tags1 = new HashSet<>();
-				tags1.add(tags);
+				Set<Tags> tagSet = new HashSet<>();
+				tagSet.add(tags);
+				tagSet.add(tags2);
+				tagSet.add(tags3);
 				postList.add(post);
 				tags.setListOfPosts(postList);
-				post.setTagsSet(tags1);
-
+				post.setTagsSet(tagSet);
 
 				Comments comments = new Comments();
-				comments.setComments(String.format("Comment %d from user %d", j, i));
+				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments.setUser(user);
 				comments.setPost(post);
 				user.addPost(post);
+				user.addComment(comments);
+				Comments comments1 = new Comments();
+				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
+				comments1.setUser(user);
+				comments1.setPost(post);
 				user.addComment(comments);
 			}
 			userService.create(user);
