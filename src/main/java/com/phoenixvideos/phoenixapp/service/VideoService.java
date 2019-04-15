@@ -43,5 +43,21 @@ public class VideoService {
     public void updatePath(Video video) {
         videoRepository.save(video);
     }
+
+    public Video getVideo(Long id) {
+        return videoRepository.findById(id).get();
+    }
+
+    public Video updateVideoDetails(Long id, Video video) {
+        Video originalVideo = videoRepository.findById(id).get();
+        originalVideo.setName(video.getName());
+        videoRepository.save(originalVideo);
+        return originalVideo;
+    }
+
+    public boolean delete(Long id) {
+        videoRepository.deleteById(id);
+        return true;
+    }
 }
 

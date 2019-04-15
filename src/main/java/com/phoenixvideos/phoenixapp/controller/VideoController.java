@@ -47,22 +47,21 @@ public class VideoController {
 
     @GetMapping("/videos/{id}")
     public ResponseEntity<Video> getVideo(@PathVariable Long id) {
-        return new ResponseEntity<>(new Video(), HttpStatus.OK);
-    }
-    @GetMapping("/videos/download/{id}")
-    public ResponseEntity<File> downloadVideo(@PathVariable Long id) {
-        return new ResponseEntity<>(new File("path"), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.getVideo(id), HttpStatus.OK);
     }
     
     @PutMapping("/videos/{id}")
     public ResponseEntity<Video> updateVideo(@PathVariable Long id, @RequestBody Video video) {
-        return new ResponseEntity<>(new Video(), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.updateVideoDetails(id, video), HttpStatus.OK);
     }
 
     @DeleteMapping("/videos/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteVideo(@PathVariable Long id) {
+    //@ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<Boolean> deleteVideo(@PathVariable Long id) {
+        Video video = videoService.getVideo(id);
+        amazonS3ClientService.deleteFileFromS3Bucket(video.getUniqueName());
 
+        return new ResponseEntity<>(videoService.delete(id), HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/videos/comments/all")
