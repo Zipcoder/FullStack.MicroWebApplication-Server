@@ -41,11 +41,6 @@ public class RandomGenerator {
         int z=(int)Math.ceil(Math.random()*16);
         return z;
     }
-    public static int radadvrb()
-    {
-        int j=(int)Math.ceil(Math.random()*6);
-        return j;
-    }
     public static int radobj()
     {
         int a=(int)Math.ceil(Math.random()*30);
