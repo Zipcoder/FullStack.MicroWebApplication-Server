@@ -6,6 +6,7 @@ import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import com.example.WhatTheTekBlog.services.CommentsService;
 import com.example.WhatTheTekBlog.services.TagsService;
+import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class CommentsController {
 //ResourceNotFoundExcepion
 
     private CommentsService commentsService;
+    private UserService userService;
 
 
     @Autowired
@@ -31,6 +33,7 @@ public class CommentsController {
 
     @PostMapping("/comment")
     public ResponseEntity<Comments> createComments(@RequestBody Comments comments) {
+        //comments.setAppUser(userService.findByName());
         return new ResponseEntity<>(commentsService.create(comments), HttpStatus.CREATED);
     }
 

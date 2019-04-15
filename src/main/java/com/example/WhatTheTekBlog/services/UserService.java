@@ -1,8 +1,8 @@
 package com.example.WhatTheTekBlog.services;
 
+import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
-import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,24 +21,19 @@ public class UserService {
     }
 
     public User findById(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get();
-        }
-        return null;
+        return userRepository.findById(userId).get();
+    }
+
+    public User findByName(String name) {
+        return userRepository.findByName(name).get();
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get().getPosts();
-        }
-        return null;
+        return userRepository.findById(userId).get().getPosts();
     }
 
     public Iterable<Comments> getCommentsByUser(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            return userRepository.findById(userId).get().getComments();
-        }
-        return null;
+        return userRepository.findById(userId).get().getComments();
     }
 
     public User create(User user) {
@@ -46,17 +41,19 @@ public class UserService {
     }
 
     public boolean delete(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
+        userRepository.deleteById(userId);
+        return true;
     }
 
     public User update(int userId, User updatedUser) {
-        updatedUser.setId(userId);
-        userRepository.deleteById(userId);
-        return userRepository.save(updatedUser);
+        User user = userRepository.findById(userId).get();
+        user.setName(updatedUser.getName());
+        user.setComments(updatedUser.getComments());
+        user.setPosts(updatedUser.getPosts());
+        return user;
     }
 
+    public boolean contains(String email) {
+        return userRepository.findByName(email).isPresent();
+    }
 }

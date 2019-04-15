@@ -75,10 +75,7 @@ public class PostControllerTest {
                 .given(repository.findById(1L))
                 .willReturn(Optional.of(post));
 
-        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\"," +
-                "\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\"," +
-                "\"createdDate\":\"2019-04-14\"," +
-                "\"comments\":[],\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\",\"email\":null}}";
+        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-15\",\"comments\":[],\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
 
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/post/"+givenId))
@@ -114,11 +111,7 @@ public class PostControllerTest {
                 .given(repository.findById(1L))
                 .willReturn(Optional.of(post));
 
-        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\"," +
-                "\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\"," +
-                "\"createdDate\":\"2019-04-14\"," +
-                "\"comments\":[],\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\",\"email\":null}}";
-
+        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-15\",\"comments\":[],\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/post/"+givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
