@@ -1,14 +1,16 @@
 package com.phoenixvideos.phoenixapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
@@ -16,9 +18,11 @@ public class User {
     private String userName;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Video> videos;
 
