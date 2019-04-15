@@ -58,6 +58,8 @@ public class PostController {
             LOG.info("Creating a new Post: {}", post);
             User user = userService.findByName(name);
             post.setCreator(user);
+            user.addPost(post);
+            userService.create(user);
             return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
