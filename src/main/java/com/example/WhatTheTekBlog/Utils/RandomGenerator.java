@@ -1,10 +1,16 @@
 package com.example.WhatTheTekBlog.Utils;
 
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
 //All credit to Ignatius on SoloLearn
 //https://code.sololearn.com/c5g1ONqa324P/#java
-public class Random {
-    public static void main(String[] args) {
+public class RandomGenerator {
+    public static String generateSentence(int times) {
 
         String[] greeting={"Hello","Hey","Good morning","Good evening","Welcome","Hi","Good day"};
         String[] pref={"you","they","i'm","I","he","she","it","we"};
@@ -14,8 +20,11 @@ public class Random {
 
         String[] ref={"some","a","the"};
         String[] adjtv={"beautiful","red","tall","big","small","awesome","huge","stupid","delicious","smart","sexy","great","masive","ugly","colorful","yellow","blue","cool","dumb","intilegent","crazy","tiny"};
-
-        System.out.println(greeting[radgrt()]+","+" "+pref[radpref()]+" "+verb[radverb()]+" "+ref[radref()]+" "+adjtv[radadjtv()]+" "+obj[radobj()]+" "+"and"+" "+pref[radpref()]+" "+verb[radverb()]+" "+ref[radref()]+" "+adjtv[radadjtv()]+" "+obj[radobj()]+","+" "+"because"+" "+pref[radpref()]+" "+verb[radverb()]+" "+ref[radref()]+" "+adjtv[radadjtv()]+" "+obj[radobj()]+".");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < times; i++) {
+            stringBuilder.append(greeting[radgrt()]).append(",").append(" ").append(pref[radpref()]).append(" ").append(verb[radverb()]).append(" ").append(ref[radref()]).append(" ").append(adjtv[radadjtv()]).append(" ").append(obj[radobj()]).append(" ").append("and").append(" ").append(pref[radpref()]).append(" ").append(verb[radverb()]).append(" ").append(ref[radref()]).append(" ").append(adjtv[radadjtv()]).append(" ").append(obj[radobj()]).append(",").append(" ").append("because").append(" ").append(pref[radpref()]).append(" ").append(verb[radverb()]).append(" ").append(ref[radref()]).append(" ").append(adjtv[radadjtv()]).append(" ").append(obj[radobj()]).append(".");
+        }
+        return stringBuilder.toString();
     }
     public static int radgrt()
     {
@@ -51,5 +60,20 @@ public class Random {
     {
         int l=(int)Math.ceil(Math.random()*2);
         return l;
+    }
+
+    public static String generateWord() {
+        List<String> words = new ArrayList<>();
+        File file = new File("src/RandomWords.txt");
+        try(Scanner scanner = new Scanner(file)){
+            while(scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                words.add(line);
+            }
+        } catch (IOException e) {
+            // handle exception
+        }
+        Random random = new Random();
+        return words.get(random.nextInt(words.size()));
     }
 }

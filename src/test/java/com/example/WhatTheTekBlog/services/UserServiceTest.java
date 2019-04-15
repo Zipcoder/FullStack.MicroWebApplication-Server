@@ -112,8 +112,8 @@ public class UserServiceTest {
         expected.setName(testName);
         mockRepo.save(expected);
         //When
-        Mockito.when(mockRepo.findByEmail(testName)).thenReturn(expected);
-        User actual = userService.findByEmail(testName);
+        Mockito.when(mockRepo.findByName(testName)).thenReturn(Optional.of(expected));
+        User actual = userService.findByName(testName);
         //Then
         Assert.assertEquals(expected, actual);
     }

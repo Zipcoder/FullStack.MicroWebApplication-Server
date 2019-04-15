@@ -24,8 +24,8 @@ public class UserService {
         return userRepository.findById(userId).get();
     }
 
-    public User findByEmail(String name) {
-        return userRepository.findByEmail(name).get();
+    public User findByName(String name) {
+        return userRepository.findByName(name).get();
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
@@ -54,6 +54,6 @@ public class UserService {
     }
 
     public boolean contains(String email) {
-        return userRepository.findByEmail(email).isPresent();
+        return userRepository.findByName(email).isPresent();
     }
 }
