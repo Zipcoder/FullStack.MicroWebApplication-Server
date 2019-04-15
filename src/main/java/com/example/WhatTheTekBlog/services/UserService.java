@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog.services;
 
-import com.example.WhatTheTekBlog.models.AppUser;
+import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.repositories.UserRepository;
@@ -16,16 +16,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Iterable<AppUser> findAllUsers() {
+    public Iterable<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public AppUser findById(int userId) {
+    public User findById(int userId) {
         return userRepository.findById(userId).get();
     }
 
-    public AppUser findByName(String name) {
-        return userRepository.findByName(name);
+    public User findByEmail(String name) {
+        return userRepository.findByEmail(name).get();
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
@@ -36,8 +36,8 @@ public class UserService {
         return userRepository.findById(userId).get().getComments();
     }
 
-    public AppUser create(AppUser appUser) {
-        return userRepository.save(appUser);
+    public User create(User user) {
+        return userRepository.save(user);
     }
 
     public boolean delete(int userId) {
@@ -45,14 +45,15 @@ public class UserService {
         return true;
     }
 
-    public AppUser update(int userId, AppUser updatedAppUser) {
-        AppUser appUser = userRepository.findById(userId).get();
-        appUser.setName(updatedAppUser.getName());
-        appUser.setEmail(updatedAppUser.getEmail());
-        appUser.setEmail(updatedAppUser.getEmail());
-        appUser.setComments(updatedAppUser.getComments());
-        appUser.setPosts(updatedAppUser.getPosts());
-        return appUser;
+    public User update(int userId, User updatedUser) {
+        User user = userRepository.findById(userId).get();
+        user.setName(updatedUser.getName());
+        user.setComments(updatedUser.getComments());
+        user.setPosts(updatedUser.getPosts());
+        return user;
     }
 
+    public boolean contains(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
 }

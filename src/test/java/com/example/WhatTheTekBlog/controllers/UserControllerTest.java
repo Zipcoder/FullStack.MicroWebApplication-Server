@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog.controllers;
 
-import com.example.WhatTheTekBlog.models.AppUser;
+import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class AppUserControllerTest {
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -38,14 +38,14 @@ public class AppUserControllerTest {
     @WithMockUser(username = "eleonorbart@gmail.com", password = "Whatthetek!")
     public void testFindById() throws Exception {
         Integer givenId = 1;
-        AppUser appUser = new AppUser();
-        appUser.setId(1);
-        appUser.setName("New AppUser!");
+        User user = new User();
+        user.setId(1);
+        user.setName("New User!");
         BDDMockito
                 .given(userService.findById(givenId))
-                .willReturn(appUser);
+                .willReturn(user);
 
-        String expectedContent = "{\"id\":1,\"name\":\"New AppUser!\",\"email\":null,\"password\":null}";
+        String expectedContent = "{\"id\":1,\"name\":\"New User!\",\"email\":null,\"password\":null}";
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/users/id/" + givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -57,25 +57,25 @@ public class AppUserControllerTest {
     @WithMockUser(username = "eleonorbart@gmail.com", password = "Whatthetek!")
     public void testFindAll() throws Exception {
         int givenId = 2;
-        AppUser appUser = new AppUser();
-        appUser.setId(givenId);
-        appUser.setName("testUser");
-        AppUser appUser1 = new AppUser();
-        appUser1.setId(3);
-        appUser1.setName("testUser2");
-        userService.create(appUser);
-        userService.create(appUser1);
-        List<AppUser> appUsers = new ArrayList<>();
-        appUsers.add(appUser);
-        appUsers.add(appUser1);
-        Iterable<AppUser> testUsers = appUsers;
+        User user = new User();
+        user.setId(givenId);
+        user.setName("testUser");
+        User user1 = new User();
+        user1.setId(3);
+        user1.setName("testUser2");
+        userService.create(user);
+        userService.create(user1);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        users.add(user1);
+        Iterable<User> testUsers = users;
         BDDMockito
                 .given(userService.findAllUsers())
                 .willReturn(testUsers);
 
         String expectedContent = "[{\"id\":2,\"name\":\"testUser\",\"email\":null},{\"id\":3,\"name\":\"testUser2\",\"email\":null}]";
         this.mvc.perform(MockMvcRequestBuilders
-                .get("/appUsers/"))
+                .get("/users/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
@@ -83,12 +83,12 @@ public class AppUserControllerTest {
     @Test
     public void testUpdate() throws Exception {
         int givenId = 2;
-        AppUser appUser = new AppUser();
-        appUser.setId(givenId);
-        appUser.setName("testUser");
+        User user = new User();
+        user.setId(givenId);
+        user.setName("testUser");
         BDDMockito.
-                given(userService.create(any(AppUser.class)))
-                .willReturn(appUser);
+                given(userService.create(any(User.class)))
+                .willReturn(user);
 
         String input = "{\"id\":123412,\"name\":\"other\",\"email\":\"a;sdlfjk.com\",\"posts\":[],\"comments\":[]}";
         this.mvc.perform(MockMvcRequestBuilders
@@ -104,12 +104,12 @@ public class AppUserControllerTest {
     @Test
     public void testPostUser() throws Exception{
         int givenId = 2;
-        AppUser appUser = new AppUser();
-        appUser.setId(givenId);
-        appUser.setName("testUser");
+        User user = new User();
+        user.setId(givenId);
+        user.setName("testUser");
         BDDMockito.
-                given(userService.create(any(AppUser.class)))
-                .willReturn(appUser);
+                given(userService.create(any(User.class)))
+                .willReturn(user);
 
         String expectedContent = "{\"id\":2,\"name\":\"testUser\",\"email\":null}";
         this.mvc.perform(MockMvcRequestBuilders

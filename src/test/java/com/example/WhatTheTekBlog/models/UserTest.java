@@ -7,22 +7,22 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AppUserTest {
+public class UserTest {
 
-    private AppUser appUser;
+    private User user;
     @Before
     public void setUp() {
-        appUser = new AppUser();
+        user = new User();
     }
 
     @Test
     public void getId() {
         //Given
         int expected = 1314;
-        appUser.setId(expected);
+        user.setId(expected);
 
         //When
-        int actual = appUser.getId();
+        int actual = user.getId();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -32,50 +32,23 @@ public class AppUserTest {
     public void getIdNull() {
         //Given
         Integer expected = null;
-        appUser.setId(expected);
+        user.setId(expected);
 
         //When
-        Integer actual = appUser.getId();
+        Integer actual = user.getId();
 
         //Then
         Assert.assertEquals(expected, actual);
     }
-
-    @Test
-    public void getName() {
-        //Given
-        String expected = "testName";
-        appUser.setName(expected);
-
-        //When
-        String actual = appUser.getName();
-
-        //Then
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getNameNull() {
-        //Given
-        String expected = null;
-        appUser.setName(expected);
-
-        //When
-        String actual = appUser.getName();
-
-        //Then
-        Assert.assertEquals(expected, actual);
-    }
-
 
     @Test
     public void getEmail() {
         //Given
         String expected = "testEmail@testing.gov";
-        appUser.setEmail(expected);
+        user.setName(expected);
 
         //When
-        String actual = appUser.getEmail();
+        String actual = user.getName();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -85,10 +58,10 @@ public class AppUserTest {
     public void getEmailNull() {
         //Given
         String expected = null;
-        appUser.setEmail(expected);
+        user.setName(expected);
 
         //When
-        String actual = appUser.getEmail();
+        String actual = user.getName();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -101,10 +74,10 @@ public class AppUserTest {
         expected.add(new Post());
         expected.add(new Post());
 
-        appUser.setPosts(expected);
+        user.setPosts(expected);
 
         //When
-        Set<Post> actual = appUser.getPosts();
+        Set<Post> actual = user.getPosts();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -117,10 +90,10 @@ public class AppUserTest {
         expected.add(new Comments());
         expected.add(new Comments());
 
-        appUser.setComments(expected);
+        user.setComments(expected);
 
         //When
-        Set<Comments> actual = appUser.getComments();
+        Set<Comments> actual = user.getComments();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -130,10 +103,10 @@ public class AppUserTest {
     public void setId() {
         //Given
         int expected = 1235678;
-        appUser.setId(expected);
+        user.setId(expected);
 
         //When
-        int actual = appUser.getId();
+        int actual = user.getId();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -146,14 +119,14 @@ public class AppUserTest {
         expected.add(new Post());
         expected.add(new Post());
 
-        appUser.setPosts(expected);
+        user.setPosts(expected);
         Post newPost = new Post();
 
         //When
-        appUser.addPost(newPost);
+        user.addPost(newPost);
         //Then
         expected.add(newPost);
-        Set<Post> actual = appUser.getPosts();
+        Set<Post> actual = user.getPosts();
         Assert.assertEquals(expected, actual);
     }
 
@@ -164,14 +137,14 @@ public class AppUserTest {
         expected.add(new Comments());
         expected.add(new Comments());
 
-        appUser.setComments(expected);
+        user.setComments(expected);
         Comments newComments = new Comments();
 
         //When
-        appUser.addComment(newComments);
+        user.addComment(newComments);
         //Then
         expected.add(newComments);
-        Set<Comments> actual = appUser.getComments();
+        Set<Comments> actual = user.getComments();
         Assert.assertEquals(expected, actual);
     }
 

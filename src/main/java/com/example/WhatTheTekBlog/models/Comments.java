@@ -14,7 +14,7 @@ public class Comments {
 
     private String comments;
     @ManyToOne(cascade = CascadeType.ALL)
-    private AppUser user;
+    private User user;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
@@ -39,12 +39,12 @@ public class Comments {
       this.comments = comments;
     }
 
-    public AppUser getAppUser() {
+    public User getAppUser() {
       return user;
     }
 
-    public void setAppUser(AppUser appUser) {
-      this.user = appUser;
+    public void setAppUser(User user) {
+      this.user = user;
     }
 
     public Post getPost() {

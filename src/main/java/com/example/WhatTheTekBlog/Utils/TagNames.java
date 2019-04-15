@@ -1,4 +1,4 @@
-package com.example.WhatTheTekBlog;
+package com.example.WhatTheTekBlog.Utils;
 
 public enum TagNames {
 

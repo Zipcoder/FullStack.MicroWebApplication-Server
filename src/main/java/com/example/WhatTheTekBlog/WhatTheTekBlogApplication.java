@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog;
 
-import com.example.WhatTheTekBlog.models.AppUser;
+import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
@@ -34,12 +34,12 @@ public class WhatTheTekBlogApplication {
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		for (int i = 1; i <= 10; i++) {
-			AppUser appUser = new AppUser();
-			appUser.setId(i);
-			appUser.setName("appUser" + i);
+			User user = new User();
+			user.setId(i);
+			user.setName("user" + i);
 			for (int j = 0; j < 5; j++) {
 				Post post = new Post();
-				post.setCreator(appUser);
+				post.setCreator(user);
 				post.setPostTitle(String.format("Title %d%d", i, j));
 				post.setPostContent(String.format("Coooooonnnnnnnttttteeeeennnnnttttt"));
 				post.setPostSummary("trialPost");
@@ -54,13 +54,13 @@ public class WhatTheTekBlogApplication {
 
 
 				Comments comments = new Comments();
-				comments.setComments(String.format("Comment %d from appUser %d", j, i));
-				comments.setAppUser(appUser);
+				comments.setComments(String.format("Comment %d from user %d", j, i));
+				comments.setAppUser(user);
 				comments.setPost(post);
-				appUser.addPost(post);
-				appUser.addComment(comments);
+				user.addPost(post);
+				user.addComment(comments);
 			}
-			userService.create(appUser);
+			userService.create(user);
 		}
 	}
 
