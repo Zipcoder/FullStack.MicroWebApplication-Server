@@ -1,6 +1,6 @@
 package com.example.WhatTheTekBlog;
 
-import com.example.WhatTheTekBlog.Utils.RandomGenerator;
+//import com.example.WhatTheTekBlog.Utils.RandomGenerator;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
@@ -33,39 +33,39 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	UserService userService;
 
-	@EventListener
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Random random = new Random();
-		for (int i = 1; i <= 10; i++) {
-			User user = new User();
-			user.setId(i);
-			user.setName(RandomGenerator.generateWord() + i);
-			for (int j = 0; j < 5; j++) {
-				Post post = new Post();
-				post.setCreator(user);
-				post.setPostTitle(RandomGenerator.generateWord());
-				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
-				post.setPostSummary(RandomGenerator.generateSentence(1));
-				Tags tags = new Tags();
-				tags.setTagName(RandomGenerator.generateWord());
-				Set<Post> postList = new HashSet<>();
-				Set<Tags> tags1 = new HashSet<>();
-				tags1.add(tags);
-				postList.add(post);
-				tags.setListOfPosts(postList);
-				post.setTagsSet(tags1);
-
-
-				Comments comments = new Comments();
-				comments.setComments(String.format("Comment %d from user %d", j, i));
-				comments.setAppUser(user);
-				comments.setPost(post);
-				user.addPost(post);
-				user.addComment(comments);
-			}
-			userService.create(user);
-		}
-	}
+	//@EventListener
+//	public void onApplicationEvent(ContextRefreshedEvent event) {
+//		Random random = new Random();
+//		for (int i = 1; i <= 10; i++) {
+//			User user = new User();
+//			user.setId(i);
+//			user.setName(RandomGenerator.generateWord() + i);
+//			for (int j = 0; j < 5; j++) {
+//				Post post = new Post();
+//				post.setCreator(user);
+//				post.setPostTitle(RandomGenerator.generateWord());
+//				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
+//				post.setPostSummary(RandomGenerator.generateSentence(1));
+//				Tags tags = new Tags();
+//				tags.setTagName(RandomGenerator.generateWord());
+//				Set<Post> postList = new HashSet<>();
+//				Set<Tags> tags1 = new HashSet<>();
+//				tags1.add(tags);
+//				postList.add(post);
+//				tags.setListOfPosts(postList);
+//				post.setTagsSet(tags1);
+//
+//
+//				Comments comments = new Comments();
+//				comments.setComments(String.format("Comment %d from user %d", j, i));
+//				comments.setUser(user);
+//				comments.setPost(post);
+//				user.addPost(post);
+//				user.addComment(comments);
+//			}
+//			userService.create(user);
+//		}
+//	}
 
 
 }

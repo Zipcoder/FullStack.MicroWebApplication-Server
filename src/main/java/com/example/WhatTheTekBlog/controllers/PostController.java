@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -19,14 +22,14 @@ public class PostController {
 
   private final Logger LOG = LoggerFactory.getLogger(PostController.class);
 
+  @Autowired
   private PostService postService;
 
-  @Autowired
   public PostController(PostService service) {
     this.postService = service;
   }
 
-  @GetMapping("/post")
+  @GetMapping("/post/")
   public ResponseEntity<Iterable<Post>> findAll() {
     return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
   }
@@ -39,24 +42,20 @@ public class PostController {
 
 
   @GetMapping("/post/{postId}")
-  public ResponseEntity<Optional<Post>> findByPostId(@PathVariable Long postId) {
-    if (postService.findByPostId(postId) != null) {
-      return new ResponseEntity<>(postService.findByPostId(postId), HttpStatus.OK);
-    } else {
-      LOG.info("Post not found with ID: {}", postId);
-      return new ResponseEntity<>(postService.findByPostId(postId), HttpStatus.NOT_FOUND);
-    }
-
+  public ResponseEntity<?> getPost(@PathVariable Long postId) {
+    Optional<Post> post = postService.findByPostId(postId);
+    return post.map(response -> ResponseEntity.ok().body(response))
+      .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
-  @PostMapping("/post")
-  public ResponseEntity<Post> create(@RequestBody Post post) {
+  @PostMapping("/users/createPost/")
+  public ResponseEntity<Post> createPost(@RequestBody Post post){
     LOG.info("Creating a new Post: {}", post);
     return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
   }
 
-  @PutMapping("/post/{postId}")
-  public ResponseEntity<Post> update(@PathVariable Long postId, @RequestBody Post post) {
+  @PutMapping("/users/updatePost/{postId}")
+  public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post post) {
     Optional<Post> currentPost = this.postService.findByPostId(postId);
 
     if(currentPost == null){
@@ -67,8 +66,8 @@ public class PostController {
     return new ResponseEntity<>(this.postService.updatePost(postId,post), HttpStatus.OK);
   }
 
-  @DeleteMapping("/post/{postId}")
-  public ResponseEntity<Boolean> delete(@PathVariable Long postId, @RequestBody Post post){
+  @DeleteMapping("/users/deletePost/{postId}")
+  public ResponseEntity<Boolean> deletePost(@PathVariable Long postId, @RequestBody Post post){
     LOG.info("Deleting Post: {}", post);
     return new ResponseEntity<>(this.postService.delete(postId),HttpStatus.OK);
   }

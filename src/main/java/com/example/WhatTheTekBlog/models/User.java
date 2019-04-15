@@ -60,7 +60,7 @@ public class User {
 
     public void addComment(Comments comment) {
         comments.add(comment);
-        comment.setAppUser(this);
+        comment.setUser(this);
     }
 
     public void setComments(Set<Comments> comments) {
