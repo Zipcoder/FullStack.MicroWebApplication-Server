@@ -3,12 +3,14 @@ package com.phoenixvideos.phoenixapp.controller;
 import com.phoenixvideos.phoenixapp.model.Comment;
 import com.phoenixvideos.phoenixapp.model.User;
 import com.phoenixvideos.phoenixapp.model.Video;
+import com.phoenixvideos.phoenixapp.service.AmazonS3ClientService;
 import com.phoenixvideos.phoenixapp.service.UserService;
 import com.phoenixvideos.phoenixapp.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.*;
@@ -16,38 +18,31 @@ import java.util.*;
 
 @RestController
 public class VideoController {
-    @Autowired
-    private VideoService videoService;
+    private final VideoService videoService;
+    private final UserService userService;
+    private final AmazonS3ClientService amazonS3ClientService;
 
     @Autowired
-    private UserService userService;
-
-    Set<Video> returnList = new HashSet<>();
+    public VideoController(VideoService videoService, UserService userService, AmazonS3ClientService amazonS3ClientService) {
+        this.videoService = videoService;
+        this.userService = userService;
+        this.amazonS3ClientService = amazonS3ClientService;
+    }
 
     @PostMapping("/videos/{user_id}")//pass the id of the user uploading
-    public ResponseEntity<Video> createVideo(@PathVariable Long user_id,@RequestBody Video video) {
-    //have user service find by id and get the user
-        Video result = videoService.create(user_id, video);
-        return (result == null) ? (new ResponseEntity<>(HttpStatus.BAD_REQUEST) )
-             : new ResponseEntity<>(result, HttpStatus.CREATED);
+    public ResponseEntity<Video> createVideo(@RequestPart MultipartFile videoFile, @PathVariable Long user_id, @RequestBody Video video) {
+        Video createdVideo = videoService.create(user_id, video);
+        String uniqueVideoName = videoService.generateUniqueName(videoFile.getName(), createdVideo.getId());
+        amazonS3ClientService.uploadFileToS3Bucket(videoFile, uniqueVideoName);
+        createdVideo.setPath(amazonS3ClientService.gertUrl());
+        videoService.updatePath(createdVideo);
+        return new ResponseEntity<>(createdVideo, HttpStatus.CREATED);
     }
 
 
     @GetMapping("/videos/all")
-    public ResponseEntity<Set<Video>> getAllVideos() {
-
-        returnList.add(new Video("Video Object 1"));
-        returnList.add(new Video("Video Object 2"));
-        returnList.add(new Video("Video Object 3"));
-        returnList.add(new Video("Video Object 4"));
-        returnList.add(new Video("Video Object 5"));
-
-//        returnList.add(new Video("Video1");
-//        returnList.add("Video2");
-//        returnList.add("Video3");
-//        returnList.add("Video4");
-//        returnList.add("Video5");
-        return new ResponseEntity<>(returnList, HttpStatus.OK);
+    public ResponseEntity<Iterable<Video>> getAllVideos() {
+        return new ResponseEntity<>(videoService.index(), HttpStatus.OK);
     }
 
     @GetMapping("/videos/{id}")

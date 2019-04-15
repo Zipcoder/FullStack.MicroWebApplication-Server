@@ -1,5 +1,10 @@
 package com.phoenixvideos.phoenixapp.model;
 
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,12 +35,18 @@ public class AmazonS3Config {
     }
 
     @Bean(name = "awaRegion")
-    public String getAwsRegion() {
-        return awsRegion;
+    public Region getAwsRegion() {
+        return Region.getRegion(Regions.fromName(awsRegion));
     }
 
     @Bean(name = "awsS3Bucket")
     public String getAwsS3Bucket() {
         return awsS3Bucket;
+    }
+
+    @Bean(name = "awsCredentialsProvider")
+    public AWSCredentialsProvider getAWSCredentials() {
+        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(this.awsKeyID, this.awsKeySecret);
+        return new AWSStaticCredentialsProvider(awsCredentials);
     }
 }

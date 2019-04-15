@@ -10,18 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class VideoService {
     private VideoRepository videoRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    public VideoService(VideoRepository videoRepository) {
+    public VideoService(VideoRepository videoRepository, UserRepository userRepository) {
         this.videoRepository = videoRepository;
+        this.userRepository = userRepository;
     }
 
     public Video create(Long user_id, Video video) {
         Video result = null;
-        User user = userRepository.findById(user_id).orElseGet(null);
+        User user = userRepository.findById(user_id).get();//.orElseGet(null);
         if(user != null) {
             video.setUser(user);
             result = videoRepository.save(video);
@@ -35,6 +34,14 @@ public class VideoService {
 
     public Video show(Long id) {
         return videoRepository.findById(id).get();
+    }
+
+    public String generateUniqueName(String name, Long id) {
+        return name + "_" + id;
+    }
+
+    public void updatePath(Video video) {
+        videoRepository.save(video);
     }
 }
 
