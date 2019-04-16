@@ -31,7 +31,6 @@ public class Post {
   @Type(type = "text")
   private String postSummary;
 
-  @NotNull
   @Lob
   @Column(nullable = false)
   private String postContent;

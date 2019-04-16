@@ -33,7 +33,7 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	UserService userService;
 
-	@EventListener
+	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Random random = new Random();
 		for (int i = 1; i <= 10; i++) {
