@@ -1,6 +1,9 @@
 
 package com.example.WhatTheTekBlog.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,32 +14,20 @@ import java.util.*;
 @Entity
 public class Post {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue(strategy = GenerationType.AUTO)
   private Long postID;
 
-
-  @NotNull
-  @Size(max = 100)
-  @Column(nullable = false)
+  @NotNull @Size(max = 100) @Column(nullable = false)
   private String postTitle;
 
-  @NotNull
-  @Size(max = 250)
-  @Column(nullable = false)
-  @Type(type = "text")
+  @NotNull @Size(max = 250) @Column(nullable = false) @Type(type = "text")
   private String postSummary;
 
-  @NotNull
-  @Lob
-  @Column(nullable = false)
+  @NotNull @Lob @Column(nullable = false)
   private String postContent;
 
-  @NotNull
+  @NotNull @JsonFormat(pattern="yyyy-MM-dd")
   private Date createdDate = new Date();
-
-  @Transient
-  Calendar calendar = Calendar.getInstance();
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
   private Set<Comments> comments = new HashSet<>();
@@ -48,14 +39,14 @@ public class Post {
   private User creator;
 
   public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-              List<Comments> comments, List<Tags> tagsList, User author) {
+             Set<Comments> comments, Set<Tags> tags, User author) {
     this.postTitle = postTitle;
     this.postSummary = postDescription;
     this.postContent = postContent;
-    this.createdDate = calendar.getTime();
-    // this.comments = comments;
-    // this.tagsList = tagsList;
-    //this.creater = author;
+    this.createdDate = new Date();
+    this.comments = comments;
+    this.tagsSet = tags;
+    this.creator = author;
   }
 
   public Post() {
@@ -93,14 +84,6 @@ public class Post {
     this.postContent = postContent;
   }
 
-  public Calendar getCalendar() {
-    return calendar;
-  }
-
-  public void setCalendar(Calendar calendar) {
-    this.calendar = calendar;
-  }
-
   public Set<Comments> getComments() {
     return comments;
   }
@@ -132,8 +115,4 @@ public class Post {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
-
-
-
-
 }

@@ -4,12 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class UserTest {
 
@@ -46,40 +42,13 @@ public class UserTest {
     }
 
     @Test
-    public void getName() {
-        //Given
-        String expected = "testName";
-        user.setName(expected);
-
-        //When
-        String actual = user.getName();
-
-        //Then
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getNameNull() {
-        //Given
-        String expected = null;
-        user.setName(expected);
-
-        //When
-        String actual = user.getName();
-
-        //Then
-        Assert.assertEquals(expected, actual);
-    }
-
-
-    @Test
     public void getEmail() {
         //Given
         String expected = "testEmail@testing.gov";
-        user.setEmail(expected);
+        user.setName(expected);
 
         //When
-        String actual = user.getEmail();
+        String actual = user.getName();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -89,10 +58,10 @@ public class UserTest {
     public void getEmailNull() {
         //Given
         String expected = null;
-        user.setEmail(expected);
+        user.setName(expected);
 
         //When
-        String actual = user.getEmail();
+        String actual = user.getName();
 
         //Then
         Assert.assertEquals(expected, actual);
@@ -129,4 +98,54 @@ public class UserTest {
         //Then
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void setId() {
+        //Given
+        int expected = 1235678;
+        user.setId(expected);
+
+        //When
+        int actual = user.getId();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addPostTest() {
+        //Given
+        Set<Post> expected = new HashSet<>();
+        expected.add(new Post());
+        expected.add(new Post());
+
+        user.setPosts(expected);
+        Post newPost = new Post();
+
+        //When
+        user.addPost(newPost);
+        //Then
+        expected.add(newPost);
+        Set<Post> actual = user.getPosts();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addCommentTest() {
+        //Given
+        Set<Comments> expected = new HashSet<>();
+        expected.add(new Comments());
+        expected.add(new Comments());
+
+        user.setComments(expected);
+        Comments newComments = new Comments();
+
+        //When
+        user.addComment(newComments);
+        //Then
+        expected.add(newComments);
+        Set<Comments> actual = user.getComments();
+        Assert.assertEquals(expected, actual);
+    }
+
 }

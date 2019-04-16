@@ -4,7 +4,6 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,7 +13,6 @@ public class User {
     @GeneratedValue
     private Integer id;
     private String name;
-    private String email;
     @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Post> posts = new LinkedHashSet<>();
@@ -23,6 +21,10 @@ public class User {
     private Set<Comments> comments = new LinkedHashSet<>();
 
     public User() { }
+
+    public User(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -38,14 +40,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Set<Post> getPosts() {
@@ -73,4 +67,5 @@ public class User {
     public void setComments(Set<Comments> comments) {
         this.comments = comments;
     }
+
 }
