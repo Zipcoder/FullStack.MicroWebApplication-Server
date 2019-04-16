@@ -8,6 +8,7 @@ import com.example.WhatTheTekBlog.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+    @Autowired
     private UserService userService;
 
     public PostController(PostService service) {
@@ -45,14 +47,14 @@ public class PostController {
 //    }
 
     @GetMapping("/post/{postId}")
-    public ResponseEntity<?> getPost(@PathVariable Long postId) {
+    public ResponseEntity<Post> findPostById(@PathVariable Long postId) {
         Optional<Post> post = postService.findByPostId(postId);
         return post.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/users/createPost/")
-    public ResponseEntity<Post> createPost(@RequestBody Post post, @RequestBody String token) {
+    public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable String token) {
         String name = JWT.decode(token).getClaim("nickname").asString();
         if (userService.contains(name)) {
             LOG.info("Creating a new Post: {}", post);

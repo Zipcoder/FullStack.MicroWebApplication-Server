@@ -24,9 +24,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import sun.rmi.runtime.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static java.util.Optional.ofNullable;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.willReturn;
 
 
 @SpringBootTest
@@ -34,11 +38,14 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class PostControllerTest {
 
-   private Long givenId = 1L;
-   private Set<Comments> commentsList = new HashSet<>();
-   private Set<Tags> tagsSet = new HashSet<>();
-   private Post post = new Post();
+    private Long givenId = 1L;
+    private Set<Comments> commentsList = new HashSet<>();
+    private Set<Tags> tagsSet = new HashSet<>();
+    private Post post = new Post();
     private String token; //= "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJpc3MiOiJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVjYjJhYjFkM2QzNmU0MTBlMWIzMDRhNiIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU1NTI5NTU1MiwiZXhwIjoxNTU1MzAyNzUyLCJhenAiOiJ2Nk9NaE5tTjBPTzNhUFFuQzlWbkVBQ0JEWDdDT1IwTiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgdmlldzp1c2VycyB2aWV3OnVzZXIifQ.Nqezq6qy1lTq3vAGOZiHlWJflJw0oPwqM9Ngucv1jM4d4jOl_inGGr0EIfeA7jOECq9DicRDEYuu6Stk2dlNaaFfll5wUPDW59O69A5wWyzRUZppr2_gUeCebb7Vtwqd7JVeUc2e_2OXj4Ej4ECnWDBYu7qs9DDBZEnXwPr44zMy8hbcjSla_ejoRr6mQgMVPIKgySl1DgMDFqAIQSrUSucC6eATUTCN-JEH7AeHPyKMJNIaenje4TyfMiLSpJ0CsRJZynyp167QsKqe46tjQJ9m-2Kdxd2OLnyflnaPpjPsfrt_oV8d9JN417pZ8u4sAw7CrARVM2qsRPM43sr4iA";
+
+    public PostControllerTest() throws ParseException {
+    }
 
     @Before
     public void setup() {
@@ -50,6 +57,8 @@ public class PostControllerTest {
         User author1 = new User();
         author1.setId(1);
         author1.setName("author1");
+
+
 
         post.setPostID(givenId);
         post.setPostContent("Post1Content");
@@ -69,20 +78,20 @@ public class PostControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private PostService postService;
+    private PostRepository repository;
 
     @Test
     public void testGetPost() throws Exception {
         BDDMockito
-                .given(postService.findByPostId(1L))
-                .willReturn(Optional.ofNullable(post));
+                .given(repository.findById(givenId))
+                .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
-                "\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-15\",\"comments\":[]," +
+                "\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-16\",\"comments\":[]," +
                 "\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
 
         this.mvc.perform(MockMvcRequestBuilders
-                .get("/post/"+givenId))
+                .get("/post/" + givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
@@ -90,7 +99,7 @@ public class PostControllerTest {
     @Test
     public void testCreatePost() throws Exception {
         BDDMockito
-                .given(postService.createPost(post))
+                .given(repository.save(post))
                 .willReturn(post);
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\"," +
@@ -101,7 +110,6 @@ public class PostControllerTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .post("/users/createPost/")
                 .content(expectedContent)
-                //.header("Authorization", "Bearer " + token)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
         )
@@ -114,14 +122,14 @@ public class PostControllerTest {
     @Test
     public void testUpdatePost() throws Exception {
         BDDMockito
-                .given(postService.findByPostId(1L))
-                .willReturn(Optional.ofNullable(post));
+                .given(repository.findById(givenId))
+                .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
                 "\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-15\",\"comments\":[],\"tagsSet\":[]," +
                 "\"creator\":{\"id\":1,\"name\":\"author1\"}}";
         this.mvc.perform(MockMvcRequestBuilders
-                .get("users/updatePost/"+givenId))
+                .get("/users/updatePost/" + givenId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
 
@@ -130,14 +138,14 @@ public class PostControllerTest {
     @Test
     public void testDeletePost() throws Exception {
         BDDMockito
-                .given(postService.findByPostId(1L))
-                .willReturn(Optional.ofNullable(post));
+                .given(repository.findById(givenId))
+                .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
                 "\"postContent\":\"Post1Content\"," +
                 "\"createdDate\":\"2019-04-15\",\"comments\":[],\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
         this.mvc.perform(MockMvcRequestBuilders
-                .delete("/users/deletePost"+givenId)
+                .delete("/users/deletePost/" + givenId)
                 .header("Authorization", "Bearer " + token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
