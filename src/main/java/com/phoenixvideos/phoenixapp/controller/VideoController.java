@@ -19,13 +19,11 @@ import java.util.*;
 @RestController
 public class VideoController {
     private final VideoService videoService;
-    private final UserService userService;
     private final AmazonS3ClientService amazonS3ClientService;
 
     @Autowired
-    public VideoController(VideoService videoService, UserService userService, AmazonS3ClientService amazonS3ClientService) {
+    public VideoController(VideoService videoService, AmazonS3ClientService amazonS3ClientService) {
         this.videoService = videoService;
-        this.userService = userService;
         this.amazonS3ClientService = amazonS3ClientService;
     }
 
@@ -63,14 +61,4 @@ public class VideoController {
 
         return new ResponseEntity<>(videoService.delete(id), HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/videos/comments/all")
-    public ResponseEntity<Comment> show() {
-        return new ResponseEntity<>( HttpStatus.OK);
-    }
-
-
-
-
-
 }
