@@ -50,6 +50,7 @@ public class UserService {
         user.setName(updatedUser.getName());
         user.setComments(updatedUser.getComments());
         user.setPosts(updatedUser.getPosts());
+        userRepository.save(user);
         return user;
     }
 

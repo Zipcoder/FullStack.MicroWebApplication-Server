@@ -53,15 +53,15 @@ public class PostController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/users/createPost/")
+    @PostMapping("/users/createPost/{token}")
     public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable String token) {
         String name = JWT.decode(token).getClaim("nickname").asString();
         if (userService.contains(name)) {
             LOG.info("Creating a new Post: {}", post);
             User user = userService.findByName(name);
             post.setCreator(user);
-            user.addPost(post);
-            userService.create(user);
+            userService.update(user.getId(), user);
+            System.out.println(post);
             return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);

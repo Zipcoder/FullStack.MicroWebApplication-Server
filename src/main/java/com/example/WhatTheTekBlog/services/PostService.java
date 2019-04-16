@@ -18,6 +18,7 @@ public class PostService {
     }
 
     public Post createPost(Post post) {
+       // System.out.println(post);
         return this.postRepository.save(post);
     }
 
@@ -30,11 +31,11 @@ public class PostService {
     }
 
     public Post updatePost(Long postId, Post post) {
-        Post originalPost = this.postRepository.getOne(postId);
+        Post originalPost = this.postRepository.findByPostID(postId);
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
-
+        originalPost.setTagsSet(post.getTagsSet());
         return this.postRepository.save(originalPost);
     }
 
