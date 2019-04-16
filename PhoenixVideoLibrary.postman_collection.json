@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "5c1f80dd-eb1b-48e7-829a-ff062f058b71",
+		"name": "PhoenixVideoLibrary",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/users/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\":\"Marlys\",\n  \"lastName\":\"Alva\",\n  \"email\":\"sylram7@gmail.com\",\n  \"userName\":\"sylram\",\n  \"password\":\"secret\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Video1 created",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\":\"BigBuckBunny\",\n  \"format\":\"video/mp4\",\n  \"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/BigBuckBunny.mp4\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/videos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"videos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Video2 created",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\":\"Zipcode window\",\n  \"format\":\"video/mp4\",\n  \"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/IMG_4786.mp4\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/videos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"videos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save comment user1 video 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\": \"Thats great!!!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/videos/comment/1/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"videos",
+						"comment",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

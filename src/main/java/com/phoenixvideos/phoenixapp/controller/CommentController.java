@@ -32,7 +32,7 @@ public class CommentController {
                 : new ResponseEntity<>(returnComment,HttpStatus.CREATED);
     }
 
-    @GetMapping("videos/comment/{id}")
+    @GetMapping("/videos/comment/{user_id}/{video_id}")//videos/comment/1/2
     public ResponseEntity<Set<Comment>> show(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
