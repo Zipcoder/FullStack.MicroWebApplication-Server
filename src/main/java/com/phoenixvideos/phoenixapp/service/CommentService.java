@@ -9,6 +9,9 @@ import com.phoenixvideos.phoenixapp.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CommentService {
 
@@ -49,13 +52,22 @@ public class CommentService {
         return commentRepository.findById(id).get();
     }
 
-//    public User update(Long id, User newUser) {
-//        User user = userRepository.findById(id).get();
-//        user.setFirstName(newUser.getFirstName());
-//        user.setLastName(newUser.getLastName());
-//        user.setEmail(newUser.getEmail());
-//        user.setPassword(newUser.getPassword());
-//        user.setUserName(newUser.getUserName());
-//        return userRepository.save(user);
-//    }
+    public List<Comment> findCommentsByVideo(Long id) throws IllegalArgumentException {
+        Video video = videoRepository.findById(id).get();
+        Optional<List<Comment>> result = commentRepository.findCommentsByVideo(video);
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public Comment update(Long id, Comment comment) {
+        Comment originalComment = commentRepository.findById(id).get();
+        originalComment.setUser(originalComment.getUser());
+        originalComment.setComment(comment.getComment());
+
+        return commentRepository.save(originalComment);
+    }
+
 }

@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -32,14 +33,19 @@ public class CommentController {
                 : new ResponseEntity<>(returnComment,HttpStatus.CREATED);
     }
 
+
     @GetMapping("/videos/comment/{user_id}/{video_id}")//videos/comment/1/2
     public ResponseEntity<Set<Comment>> show(@PathVariable Long id) {
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
-    @PutMapping("videos/comment/{id}")
-    public ResponseEntity<Video> updateComment(@PathVariable Long id, @RequestBody Comment comment) {
-        return new ResponseEntity<>( HttpStatus.OK);
+    @PutMapping("videos/comment/{comment_id}")
+    public ResponseEntity<Comment> updateComment(@PathVariable("comment_id") Long comment_id,
+                                                 @RequestBody Comment comment) {
+        Comment newComment = commentService.update(comment_id,comment);
+
+        return new ResponseEntity<>(newComment,HttpStatus.OK);
     }
 
     @DeleteMapping("videos/comment/{id}")
