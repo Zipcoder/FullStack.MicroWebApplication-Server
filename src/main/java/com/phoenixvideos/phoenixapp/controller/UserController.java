@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
     private UserService userService;

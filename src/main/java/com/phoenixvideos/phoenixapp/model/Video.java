@@ -4,6 +4,7 @@ package com.phoenixvideos.phoenixapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,7 +13,7 @@ public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String title;
     private String format;
     private String path;
     private String uniqueName;
@@ -24,13 +25,13 @@ public class Video {
 
     @JsonIgnore
     @OneToMany(mappedBy = "video")
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
     public Video(){
 
     }
-    public Video(String name){
-        this.name = name;
+    public Video(String title){
+        this.title = title;
     }
 
     public Long getId() {
@@ -41,12 +42,12 @@ public class Video {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getFormat() {
@@ -73,11 +74,11 @@ public class Video {
         this.user = user;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

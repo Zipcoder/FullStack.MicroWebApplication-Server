@@ -54,9 +54,9 @@ public class CommentService {
 
     public List<Comment> findCommentsByVideo(Long id) throws IllegalArgumentException {
         Video video = videoRepository.findById(id).get();
-        Optional<List<Comment>> result = commentRepository.findCommentsByVideo(video);
-        if (result.isPresent()) {
-            return result.get();
+        List<Comment> result = video.getComments();
+        if (result!=null) {
+            return result;
         } else {
             throw new IllegalArgumentException();
         }
