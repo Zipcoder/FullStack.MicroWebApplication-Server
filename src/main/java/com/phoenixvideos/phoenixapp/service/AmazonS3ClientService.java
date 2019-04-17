@@ -59,7 +59,7 @@ public class AmazonS3ClientService {
 
             // To receive notifications when bytes are transferred, add a
             // ProgressListener to your request.
-            putObjectRequest.setGeneralProgressListener(progressEvent -> System.out.println("Transferred bytes: " + progressEvent.getBytesTransferred()));
+            //putObjectRequest.setGeneralProgressListener(progressEvent -> System.out.println("Transferred bytes: " + progressEvent.getBytesTransferred()));
             // TransferManager processes all transfers asynchronously,
             // so this call returns immediately.
             Upload upload = tm.upload(putObjectRequest);

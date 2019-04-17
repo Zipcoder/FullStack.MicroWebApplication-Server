@@ -18,14 +18,17 @@ public class VideoService {
         this.userRepository = userRepository;
     }
 
-    public Video create(Long user_id, Video video) {
-        Video result = null;
-        User user = userRepository.findById(user_id).get();//.orElseGet(null);
-        if(user != null) {
-            video.setUser(user);
-            result = videoRepository.save(video);
+    public Video create(Long user_id, String videoName, String videoDescription) {
+        Video newVideo = new Video();
+
+        if(userRepository.findById(user_id).isPresent()) {
+            User user = userRepository.findById(user_id).get();
+            newVideo.setUser(user);
+            newVideo.setName(videoName);
+            newVideo.setVideoDescription(videoDescription);
+            videoRepository.save(newVideo);
         }
-        return result;
+        return newVideo;
     }
 
     public Iterable<Video> index() {

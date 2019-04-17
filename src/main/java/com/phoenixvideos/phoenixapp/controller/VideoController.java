@@ -28,8 +28,8 @@ public class VideoController {
     }
 
     @PostMapping("/videos/{user_id}")//pass the id of the user uploading
-    public ResponseEntity<Video> createVideo(@RequestPart MultipartFile videoFile, @PathVariable Long user_id, @RequestBody Video video) {
-        Video createdVideo = videoService.create(user_id, video);
+    public ResponseEntity<Video> createVideo(@RequestPart(value = "file") MultipartFile videoFile, @PathVariable Long user_id, @RequestPart(value = "name") String videoName, @RequestPart(value = "desc") String videoDescription) {
+        Video createdVideo = videoService.create(user_id, videoName, videoDescription);
         String uniqueVideoName = videoService.generateUniqueName(videoFile.getName(), createdVideo.getId());
         amazonS3ClientService.uploadFileToS3Bucket(videoFile, uniqueVideoName);
         createdVideo.setPath(amazonS3ClientService.gertUrl());
