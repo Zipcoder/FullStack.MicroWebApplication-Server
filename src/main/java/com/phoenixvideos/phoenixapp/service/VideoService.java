@@ -6,19 +6,22 @@ import com.phoenixvideos.phoenixapp.repository.UserRepository;
 import com.phoenixvideos.phoenixapp.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class VideoService {
     private VideoRepository videoRepository;
     private UserRepository userRepository;
+    private AmazonS3ClientService amazonS3ClientService;
 
     @Autowired
-    public VideoService(VideoRepository videoRepository, UserRepository userRepository) {
+    public VideoService(VideoRepository videoRepository, UserRepository userRepository, AmazonS3ClientService amazonS3ClientService) {
         this.videoRepository = videoRepository;
         this.userRepository = userRepository;
+        this.amazonS3ClientService = amazonS3ClientService;
     }
 
-    public Video create(Long user_id, String videoName, String videoDescription) {
+    public Video create(MultipartFile videoFile, Long user_id, String videoName, String videoDescription, String format) {
         Video newVideo = new Video();
 
         if(userRepository.findById(user_id).isPresent()) {
@@ -26,8 +29,21 @@ public class VideoService {
             newVideo.setUser(user);
             newVideo.setName(videoName);
             newVideo.setVideoDescription(videoDescription);
+            newVideo.setFormat(format);
+
+            videoRepository.save(newVideo);
+
+            String uniqueVideoName = generateUniqueName(videoFile.getOriginalFilename(), format, newVideo.getId());
+
+            amazonS3ClientService.uploadFileToS3Bucket(videoFile, uniqueVideoName);
+
+            newVideo.setPath(amazonS3ClientService.gertUrl());
+            newVideo.setUniqueName(uniqueVideoName);
+
             videoRepository.save(newVideo);
         }
+
+
         return newVideo;
     }
 
@@ -39,12 +55,9 @@ public class VideoService {
         return videoRepository.findById(id).get();
     }
 
-    public String generateUniqueName(String name, Long id) {
-        return name + "_" + id;
-    }
-
-    public void updatePath(Video video) {
-        videoRepository.save(video);
+    public String generateUniqueName(String name, String format, Long id) {
+        name = name.replace(".mp4", "");
+        return name + "_" + id + "." + format;
     }
 
     public Video getVideo(Long id) {
@@ -53,7 +66,14 @@ public class VideoService {
 
     public Video updateVideoDetails(Long id, Video video) {
         Video originalVideo = videoRepository.findById(id).get();
+
         originalVideo.setName(video.getName());
+        originalVideo.setUniqueName(video.getUniqueName());
+        originalVideo.setVideoDescription(video.getVideoDescription());
+        originalVideo.setPath(video.getPath());
+        originalVideo.setName(video.getName());
+        originalVideo.setFormat(video.getFormat());
+
         videoRepository.save(originalVideo);
         return originalVideo;
     }
