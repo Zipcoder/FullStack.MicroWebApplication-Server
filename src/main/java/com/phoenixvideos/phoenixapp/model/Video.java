@@ -15,6 +15,8 @@ public class Video {
     private String name;
     private String format;
     private String path;
+    private String uniqueName;
+    private String videoDescription;
 
     @ManyToOne
     @JoinColumn
@@ -79,5 +81,19 @@ public class Video {
         this.comments = comments;
     }
 
+    public String getUniqueName() {
+        return uniqueName;
+    }
 
+    public void setUniqueName(String uniqueName) {
+        this.uniqueName = uniqueName;
+    }
+
+    public void setVideoDescription(String videoDescription) {
+        this.videoDescription = videoDescription;
+    }
+
+    public String getVideoDescription() {
+        return videoDescription;
+    }
 }

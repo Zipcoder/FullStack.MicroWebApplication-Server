@@ -1,82 +1,60 @@
 package com.phoenixvideos.phoenixapp.controller;
 
-import com.phoenixvideos.phoenixapp.model.Comment;
-import com.phoenixvideos.phoenixapp.model.User;
 import com.phoenixvideos.phoenixapp.model.Video;
-import com.phoenixvideos.phoenixapp.service.UserService;
+import com.phoenixvideos.phoenixapp.service.AmazonS3ClientService;
 import com.phoenixvideos.phoenixapp.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
-import java.util.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
 public class VideoController {
-    @Autowired
-    private VideoService videoService;
+    private final VideoService videoService;
+    private final AmazonS3ClientService amazonS3ClientService;
 
     @Autowired
-    private UserService userService;
-
-    Set<Video> returnList = new HashSet<>();
+    public VideoController(VideoService videoService, AmazonS3ClientService amazonS3ClientService) {
+        this.videoService = videoService;
+        this.amazonS3ClientService = amazonS3ClientService;
+    }
 
     @PostMapping("/videos/{user_id}")//pass the id of the user uploading
-    public ResponseEntity<Video> createVideo(@PathVariable Long user_id,@RequestBody Video video) {
-    //have user service find by id and get the user
-        Video result = videoService.create(user_id, video);
-        return (result == null) ? (new ResponseEntity<>(HttpStatus.BAD_REQUEST) )
-             : new ResponseEntity<>(result, HttpStatus.CREATED);
+    public ResponseEntity<Video> createVideo(@RequestPart(value = "file") MultipartFile videoFile,
+                                             @PathVariable Long user_id,
+                                             @RequestPart(value = "name") String videoName,
+                                             @RequestPart(value = "desc") String videoDescription,
+                                             @RequestPart(value = "format") String videoFormat) {
+
+        Video createdVideo = videoService.create(videoFile, user_id, videoName, videoDescription, videoFormat);
+
+        return new ResponseEntity<>(createdVideo, HttpStatus.CREATED);
     }
 
 
     @GetMapping("/videos/all")
-    public ResponseEntity<Set<Video>> getAllVideos() {
-
-        returnList.add(new Video("Video Object 1"));
-        returnList.add(new Video("Video Object 2"));
-        returnList.add(new Video("Video Object 3"));
-        returnList.add(new Video("Video Object 4"));
-        returnList.add(new Video("Video Object 5"));
-
-//        returnList.add(new Video("Video1");
-//        returnList.add("Video2");
-//        returnList.add("Video3");
-//        returnList.add("Video4");
-//        returnList.add("Video5");
-        return new ResponseEntity<>(returnList, HttpStatus.OK);
+    public ResponseEntity<Iterable<Video>> getAllVideos() {
+        return new ResponseEntity<>(videoService.index(), HttpStatus.OK);
     }
 
     @GetMapping("/videos/{id}")
     public ResponseEntity<Video> getVideo(@PathVariable Long id) {
-        return new ResponseEntity<>(new Video(), HttpStatus.OK);
-    }
-    @GetMapping("/videos/download/{id}")
-    public ResponseEntity<File> downloadVideo(@PathVariable Long id) {
-        return new ResponseEntity<>(new File("path"), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.getVideo(id), HttpStatus.OK);
     }
     
     @PutMapping("/videos/{id}")
     public ResponseEntity<Video> updateVideo(@PathVariable Long id, @RequestBody Video video) {
-        return new ResponseEntity<>(new Video(), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.updateVideoDetails(id, video), HttpStatus.OK);
     }
 
     @DeleteMapping("/videos/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteVideo(@PathVariable Long id) {
+    //@ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public ResponseEntity<Boolean> deleteVideo(@PathVariable Long id) {
+        Video video = videoService.getVideo(id);
+        amazonS3ClientService.deleteFileFromS3Bucket(video.getUniqueName());
 
+        return new ResponseEntity<>(videoService.delete(id), HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/videos/comments/all")
-    public ResponseEntity<Comment> show() {
-        return new ResponseEntity<>( HttpStatus.OK);
-    }
-
-
-
-
-
 }
