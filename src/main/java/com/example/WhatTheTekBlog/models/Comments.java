@@ -18,20 +18,15 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long comment_id;
 
-  private String comments;
-  @ManyToOne(cascade = CascadeType.ALL)
-  private User user;
+    private String comments;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JsonIgnore
-  private Post post;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Post post;
 
-
-    @NotNull
     private Date createdDate = new Date();
-
-    @Transient
-    Calendar calendar = Calendar.getInstance();
 
 
     public Long getComment_id() {
@@ -62,9 +57,9 @@ public class Comments {
         return post;
     }
 
-  public void setPost (Post post) {
-    this.post = post;
-  }
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
     public Date getCreatedDate() {
         return createdDate;
@@ -74,11 +69,4 @@ public class Comments {
         this.createdDate = createdDate;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
 }
