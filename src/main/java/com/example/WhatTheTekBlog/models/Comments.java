@@ -11,12 +11,9 @@ import java.util.Optional;
 @Entity
 public class Comments {
 
-//    @ManyToOne
-//    private User commenter;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long comment_id;
+    private Long commentId;
 
     private String comments;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -29,12 +26,12 @@ public class Comments {
     private Date createdDate = new Date();
 
 
-    public Long getComment_id() {
-        return comment_id;
+    public Long getCommentId() {
+        return commentId;
     }
 
-    public void setComment_id(Long comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public String getComments() {
