@@ -34,7 +34,7 @@ public class PostController {
     this.userService = userService;
   }
 
-  @GetMapping("/post/")
+  @GetMapping("/post")
   public ResponseEntity<Iterable<Post>> findAll() {
     return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
   }
@@ -58,8 +58,6 @@ public class PostController {
     String name = JWT.decode(token).getClaim("nickname").asString();
     User user = userService.findByName(name);
     post.setCreator(user);
-    user.addPost(post);
-    userService.update(user.getId(), user);
     LOG.info("Creating a new Post: {}", post);
     return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
   }
