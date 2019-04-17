@@ -1,5 +1,6 @@
 package com.example.WhatTheTekBlog.services;
 
+import com.auth0.jwt.JWT;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.*;
 public class CommentsService {
 
         private CommentsRepository commentsRepository;
+        private  UserService userService;
 
 
         @Autowired
@@ -18,12 +20,13 @@ public class CommentsService {
         }
 
 
-        public Comments create(Comments comments){
-            for (Comments comments1: commentsRepository.findAll()) {
-                if(comments1.getComment_id().equals(comments.getComments())) {
-                    throw new IllegalArgumentException();
-                }
+        public Comments create(String token, Comments comments){
+            String name = JWT.decode(token).getClaim("nickname").asString();
+            if (userService.contains(name)) {
+                User user = userService.findByName(name);
+                comments.setUser(user);
             }
+
             return commentsRepository.save(comments);
         }
 
@@ -44,27 +47,8 @@ public class CommentsService {
         }
 
 
-//    public Comments updateComments(Long comment_id, Comments updateComments) {
-//        updateComments.setComment_id(comment_id);
-//        Comments comments1 = commentsRepository.save(updateComments);
-//        return comments1;
-//    }
-
-
         public Boolean delete(Long comment_id) {
             commentsRepository.deleteById(comment_id);
-            return true;
-        }
-
-        public Boolean delete(String comment) {
-            List<Comments> listOfComments = (ArrayList<Comments>) this.commentsRepository.findAll();
-
-            for (Comments c: listOfComments) {
-                if(c.getComments().equals(comment)) {
-                    commentsRepository.delete(c);
-                }
-            }
-
             return true;
         }
 
