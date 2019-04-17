@@ -38,7 +38,6 @@ public class AmazonS3ClientService {
         this.url = null;
     }
 
-    @Async
     public void uploadFileToS3Bucket(MultipartFile multipartFile, String uniqueFileName){
 
         try {
@@ -71,10 +70,8 @@ public class AmazonS3ClientService {
             //removing the file created in the server
             file.delete();
 
-        } catch (IOException | AmazonServiceException ex) {
+        } catch (IOException | InterruptedException | AmazonServiceException ex) {
             logger.error("error [" + ex.getMessage() + "] occurred while uploading [" + uniqueFileName + "] ");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
