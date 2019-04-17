@@ -73,6 +73,7 @@ public class VideoService {
         originalVideo.setPath(video.getPath());
         originalVideo.setName(video.getName());
         originalVideo.setFormat(video.getFormat());
+        originalVideo.setComments(video.getComments());
 
         videoRepository.save(originalVideo);
         return originalVideo;
