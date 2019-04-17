@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 public class Comments {
@@ -61,7 +62,7 @@ public class Comments {
         return post;
     }
 
-  public void setPost(Post post) {
+  public void setPost (Post post) {
     this.post = post;
   }
 
