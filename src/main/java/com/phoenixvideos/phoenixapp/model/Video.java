@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Video {
@@ -14,10 +13,10 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    private String description;
     private String format;
     private String path;
     private String uniqueName;
-    private String videoDescription;
 
     @ManyToOne
     @JoinColumn
@@ -29,6 +28,13 @@ public class Video {
 
     public Video(){
 
+    }
+
+    public Video(String title, String path, long id){
+        this.title = title;
+        this.path = path;
+        this.id = id;
+        this.format = "video/mp4";
     }
     public Video(String title){
         this.title = title;
@@ -90,11 +96,11 @@ public class Video {
         this.uniqueName = uniqueName;
     }
 
-    public void setVideoDescription(String videoDescription) {
-        this.videoDescription = videoDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getVideoDescription() {
-        return videoDescription;
+    public String getDescription() {
+        return description;
     }
 }

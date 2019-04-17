@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Optional;
+
 @Service
 public class VideoService {
     private VideoRepository videoRepository;
@@ -28,7 +30,7 @@ public class VideoService {
             User user = userRepository.findById(user_id).get();
             newVideo.setUser(user);
             newVideo.setTitle(videoTitle);
-            newVideo.setVideoDescription(videoDescription);
+            newVideo.setDescription(videoDescription);
             newVideo.setFormat(format);
 
             videoRepository.save(newVideo);
@@ -51,17 +53,14 @@ public class VideoService {
         return videoRepository.findAll();
     }
 
-    public Video show(Long id) {
-        return videoRepository.findById(id).get();
-    }
-
     public String generateUniqueName(String name, String format, Long id) {
         name = name.replace(".mp4", "");
         return name + "_" + id + "." + format;
     }
 
     public Video getVideo(Long id) {
-        return videoRepository.findById(id).get();
+        Optional<Video> optionalVideo = videoRepository.findById(id);
+        return optionalVideo.isPresent() ? optionalVideo.get() : null;
     }
 
     public Video updateVideoDetails(Long id, Video video) {
@@ -69,7 +68,7 @@ public class VideoService {
 
         originalVideo.setTitle(video.getTitle());
         originalVideo.setUniqueName(video.getUniqueName());
-        originalVideo.setVideoDescription(video.getVideoDescription());
+        originalVideo.setDescription(video.getDescription());
         originalVideo.setPath(video.getPath());
         originalVideo.setTitle(video.getTitle());
         originalVideo.setFormat(video.getFormat());

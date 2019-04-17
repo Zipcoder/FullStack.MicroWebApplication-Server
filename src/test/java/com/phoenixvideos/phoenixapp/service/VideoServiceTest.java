@@ -26,11 +26,14 @@ public class VideoServiceTest {
     @MockBean
     private UserRepository userRepository;
 
+    @MockBean
+    private AmazonS3ClientService amazonS3ClientService;
+
     private VideoService service;
 
     @Before
     public void setup(){
-        this.service = new VideoService(videoRepository, userRepository);
+        this.service = new VideoService(videoRepository, userRepository, amazonS3ClientService);
     }
 
     @Test
