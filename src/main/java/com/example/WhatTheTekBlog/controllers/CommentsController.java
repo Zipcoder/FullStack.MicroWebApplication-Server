@@ -62,13 +62,13 @@ public class CommentsController {
 
 
     @PutMapping("/comment/update/{id}")
-    public ResponseEntity<Comments> updateComments(@PathVariable("id") Long id, @RequestBody Comments comments) {
-        return new ResponseEntity<>(this.commentsService.updateComments(id, comments), HttpStatus.OK);
+    public ResponseEntity<Comments> updateComments(@PathVariable("id") Long commentId, @RequestBody Comments comments) {
+        return new ResponseEntity<>(this.commentsService.updateComments(commentId, comments), HttpStatus.OK);
     }
 
     @DeleteMapping("/comment/delete/{comment_id}")
-    public ResponseEntity<Boolean> deleteComments(@PathVariable Long comment_id) {
-        return new ResponseEntity<>(this.commentsService.delete(comment_id), HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteComments(@PathVariable Long commentId) {
+        return new ResponseEntity<>(this.commentsService.delete(commentId), HttpStatus.OK);
     }
 
 }
