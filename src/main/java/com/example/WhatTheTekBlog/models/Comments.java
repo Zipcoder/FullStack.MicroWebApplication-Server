@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 public class Comments {
@@ -21,7 +22,6 @@ public class Comments {
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private Post post;
-
 
     private Date createdDate = new Date();
 
