@@ -1,11 +1,7 @@
 package com.example.WhatTheTekBlog.services;
 
 import com.example.WhatTheTekBlog.models.Comments;
-import com.example.WhatTheTekBlog.models.Post;
-import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
-import com.example.WhatTheTekBlog.repositories.TagsRepository;
-import org.hibernate.dialect.Oracle8iDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

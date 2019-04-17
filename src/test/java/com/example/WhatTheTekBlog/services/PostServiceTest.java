@@ -7,7 +7,6 @@ import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
 import com.example.WhatTheTekBlog.repositories.UserRepository;
-import javafx.geometry.Pos;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

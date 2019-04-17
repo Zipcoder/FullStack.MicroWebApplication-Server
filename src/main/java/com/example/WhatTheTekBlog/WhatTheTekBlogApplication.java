@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -20,11 +19,6 @@ import java.util.Set;
 
 @SpringBootApplication
 public class WhatTheTekBlogApplication {
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(WhatTheTekBlogApplication.class, args);
@@ -33,7 +27,7 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	UserService userService;
 
-	@EventListener
+	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Random random = new Random();
 		for (int i = 1; i <= 10; i++) {

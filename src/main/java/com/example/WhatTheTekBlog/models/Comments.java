@@ -26,7 +26,6 @@ public class Comments {
   private Post post;
 
 
-    @NotNull
     private Date createdDate = new Date();
 
     @Transient

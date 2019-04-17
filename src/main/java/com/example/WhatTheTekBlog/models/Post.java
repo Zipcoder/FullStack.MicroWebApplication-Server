@@ -4,7 +4,6 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

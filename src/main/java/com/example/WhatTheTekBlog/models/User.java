@@ -1,3 +1,4 @@
+
 package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
