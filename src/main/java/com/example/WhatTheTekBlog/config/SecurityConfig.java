@@ -26,10 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/post").permitAll()
                 .antMatchers(HttpMethod.GET, "/post/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/sign-up").hasAuthority("view:users")
+                .antMatchers(HttpMethod.POST, "/users/createPost/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/updatePost").hasAuthority("view:posts")
                 .antMatchers(HttpMethod.GET, "/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/id/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/posts/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/users/comments/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/tags").permitAll()
+                .antMatchers(HttpMethod.GET, "/tags/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/tags/posts/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/createTag/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/updateTag/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/deleteTags/**").permitAll()
                 .anyRequest().authenticated();
     }
 
