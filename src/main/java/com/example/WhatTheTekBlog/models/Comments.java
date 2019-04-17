@@ -25,7 +25,7 @@ public class Comments {
   @JsonIgnore
   private Post post;
 
-  
+
     private Date createdDate = new Date();
 
     @Transient
