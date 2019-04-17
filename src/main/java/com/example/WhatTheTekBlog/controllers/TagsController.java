@@ -1,3 +1,4 @@
+
 package com.example.WhatTheTekBlog.controllers;
 
 import com.example.WhatTheTekBlog.models.Post;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -21,28 +23,27 @@ public class TagsController {
         this.tagsService = tagsService;
     }
 
-    @PostMapping("/tags")
+    @PostMapping("/createTag")
     public ResponseEntity<Tags> create(@RequestBody Tags tags) {
-        return new ResponseEntity<>(tagsService.create(tags), HttpStatus.CREATED);
+        return new ResponseEntity<>(tagsService.createTags(tags), HttpStatus.CREATED);
     }
 
-    //Only 2 get mappings at a time otherwise I will get 500 error if I run all three
     @GetMapping("/tags")
     public ResponseEntity<Iterable<Tags>> findAll() {
         return new ResponseEntity<>(this.tagsService.findAllTags(), HttpStatus.OK);
     }
 
-//    @GetMapping("/tags/{id}")
-//    public ResponseEntity<Optional<Tags>> findTagById(@PathVariable Integer id) {
-//        return new ResponseEntity<>(this.tagsService.findTagById(id), HttpStatus.OK);
-//    }
+    @GetMapping("/tags/{id}")
+    public ResponseEntity<Optional<Tags>>findTagById(@PathVariable Integer id) {
+        return new ResponseEntity<>(this.tagsService.findTagById(id), HttpStatus.OK);
+    }
 
-    @GetMapping("/tags/{tagName}")
+    @GetMapping("/tags/posts/{tagName}")
     public ResponseEntity<Set<Post>> findPostsByTag(@PathVariable String tagName) {
         return new ResponseEntity<>(this.tagsService.findPostsByTag(tagName), HttpStatus.OK);
     }
 
-    @PutMapping("/tags/{id}")
+    @PutMapping("/updateTag/{id}")
     public ResponseEntity<Tags> update(@PathVariable("id") Integer id,@RequestBody Tags tag) {
         return new ResponseEntity<>(this.tagsService.update(id, tag), HttpStatus.OK);
     }
@@ -54,10 +55,12 @@ public class TagsController {
 //        return new ResponseEntity<>(tagsService.delete(id), HttpStatus.OK);
 //    }
 
-//    @DeleteMapping("/tags/{tagName}")
-//    public ResponseEntity<Boolean> delete(@PathVariable String tagName) {
-//        return new ResponseEntity<>(this.tagsService.delete(tagName), HttpStatus.OK);
-//    }
+    @DeleteMapping("/deleteTags/{tagName}")
+    public ResponseEntity<Boolean> delete(@PathVariable String tagName) {
+        return new ResponseEntity<>(this.tagsService.deleteTags(tagName), HttpStatus.OK);
+    }
 
 
 }
+
+

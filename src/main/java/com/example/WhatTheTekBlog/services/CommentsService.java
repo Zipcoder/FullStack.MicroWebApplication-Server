@@ -6,8 +6,6 @@ import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
-import com.example.WhatTheTekBlog.repositories.TagsRepository;
-import org.hibernate.dialect.Oracle8iDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,6 @@ public class CommentsService {
                 User user = userService.findByName(name);
                 comments.setUser(user);
             }
-
             return commentsRepository.save(comments);
         }
 
@@ -50,7 +47,6 @@ public class CommentsService {
             commentsRepository.save(originalComment);
             return originalComment;
         }
-
 
         public Boolean delete(Long comment_id) {
             commentsRepository.deleteById(comment_id);

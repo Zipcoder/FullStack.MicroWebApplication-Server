@@ -4,7 +4,6 @@ package com.example.WhatTheTekBlog.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -15,29 +14,19 @@ import java.util.*;
 @Entity
 public class Post {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue(strategy = GenerationType.AUTO)
   private Long postID;
 
-
-  @NotNull
-  @Size(max = 100)
-  @Column(nullable = false)
+  @NotNull @Size(max = 100) @Column(nullable = false)
   private String postTitle;
 
-  @NotNull
-  @Size(max = 250)
-  @Column(nullable = false)
-  @Type(type = "text")
+  @NotNull @Size(max = 250) @Column(nullable = false) @Type(type = "text")
   private String postSummary;
 
-  @NotNull
-  @Lob
-  @Column(nullable = false)
+  @NotNull @Lob @Column(nullable = false)
   private String postContent;
 
-  @NotNull
-  @JsonFormat(pattern="yyyy-MM-dd")
+  @NotNull @JsonFormat(pattern="yyyy-MM-dd")
   private Date createdDate = new Date();
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
@@ -126,8 +115,4 @@ public class Post {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
-
-
-
-
 }
