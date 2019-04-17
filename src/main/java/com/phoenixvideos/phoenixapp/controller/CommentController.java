@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 public class CommentController {
 
 
@@ -26,7 +27,8 @@ public class CommentController {
     }
 
     @PostMapping("/videos/comment/{user_id}/{video_id}")//videos/comment/1/2
-    public ResponseEntity<Comment> createComment(@PathVariable("user_id") Long user_id, @PathVariable("video_id") Long video_id, @RequestBody Comment comment) {
+    public ResponseEntity<Comment> createComment(@PathVariable("user_id") Long user_id,
+                                                 @PathVariable("video_id") Long video_id, @RequestBody Comment comment) {
 
         Comment returnComment = commentService.create(user_id,video_id,comment);
         return (returnComment == null) ? (new ResponseEntity<>(HttpStatus.BAD_REQUEST))
@@ -34,9 +36,9 @@ public class CommentController {
     }
 
 
-    @GetMapping("/videos/comment/{user_id}/{video_id}")//videos/comment/1/2
-    public ResponseEntity<Set<Comment>> show(@PathVariable Long id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/videos/comments/{video_id}")//videos/comment/1/2
+    public ResponseEntity<List<Comment>> show(@PathVariable ("video_id") Long id) {
+        return new ResponseEntity<>(commentService.findCommentsByVideo(id),HttpStatus.OK);
 
     }
 

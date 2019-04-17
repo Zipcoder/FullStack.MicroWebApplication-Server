@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
+@CrossOrigin
 public class VideoController {
     private final VideoService videoService;
     private final AmazonS3ClientService amazonS3ClientService;
@@ -24,11 +25,11 @@ public class VideoController {
     @PostMapping("/videos/{user_id}")//pass the id of the user uploading
     public ResponseEntity<Video> createVideo(@RequestPart(value = "file") MultipartFile videoFile,
                                              @PathVariable Long user_id,
-                                             @RequestPart(value = "name") String videoName,
+                                             @RequestPart(value = "title") String videoTitle,
                                              @RequestPart(value = "desc") String videoDescription,
                                              @RequestPart(value = "format") String videoFormat) {
 
-        Video createdVideo = videoService.create(videoFile, user_id, videoName, videoDescription, videoFormat);
+        Video createdVideo = videoService.create(videoFile, user_id, videoTitle, videoDescription, videoFormat);
 
         return new ResponseEntity<>(createdVideo, HttpStatus.CREATED);
     }

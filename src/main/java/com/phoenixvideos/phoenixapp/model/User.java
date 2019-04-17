@@ -4,6 +4,7 @@ package com.phoenixvideos.phoenixapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -74,11 +75,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

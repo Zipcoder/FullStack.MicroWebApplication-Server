@@ -21,13 +21,13 @@ public class VideoService {
         this.amazonS3ClientService = amazonS3ClientService;
     }
 
-    public Video create(MultipartFile videoFile, Long user_id, String videoName, String videoDescription, String format) {
+    public Video create(MultipartFile videoFile, Long user_id, String videoTitle, String videoDescription, String format) {
         Video newVideo = new Video();
 
         if(userRepository.findById(user_id).isPresent()) {
             User user = userRepository.findById(user_id).get();
             newVideo.setUser(user);
-            newVideo.setName(videoName);
+            newVideo.setTitle(videoTitle);
             newVideo.setVideoDescription(videoDescription);
             newVideo.setFormat(format);
 
@@ -67,11 +67,11 @@ public class VideoService {
     public Video updateVideoDetails(Long id, Video video) {
         Video originalVideo = videoRepository.findById(id).get();
 
-        originalVideo.setName(video.getName());
+        originalVideo.setTitle(video.getTitle());
         originalVideo.setUniqueName(video.getUniqueName());
         originalVideo.setVideoDescription(video.getVideoDescription());
         originalVideo.setPath(video.getPath());
-        originalVideo.setName(video.getName());
+        originalVideo.setTitle(video.getTitle());
         originalVideo.setFormat(video.getFormat());
         originalVideo.setComments(video.getComments());
 
