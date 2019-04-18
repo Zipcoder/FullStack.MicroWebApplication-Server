@@ -6,6 +6,7 @@ import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.WhatTheTekBlog.models.User;
 
 import java.util.*;
 @Service
@@ -46,7 +47,6 @@ public class CommentsService {
             commentsRepository.save(originalComment);
             return originalComment;
         }
-
 
         public Boolean delete(Long comment_id) {
             commentsRepository.deleteById(comment_id);

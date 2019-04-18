@@ -40,6 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/createTag/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/updateTag/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/deleteTags/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/comment/delete/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/comments/post/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/comments").permitAll()
+                .antMatchers(HttpMethod.GET, "/comment/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/comment/update/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/comment/create/**").permitAll()
                 .anyRequest().authenticated();
     }
 
