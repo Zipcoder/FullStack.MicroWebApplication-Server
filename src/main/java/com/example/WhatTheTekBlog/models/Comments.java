@@ -16,11 +16,10 @@ public class Comments {
     private Long commentId;
 
     private String comments;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
+    @ManyToOne
     private Post post;
 
     private Date createdDate = new Date();
