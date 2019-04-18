@@ -36,9 +36,7 @@ public class CommentsController {
     }
 
     @PostMapping("/comment/create/{token}")
-
-    public ResponseEntity<Comments> create(@PathVariable String token, @RequestBody Comments comments) {
-
+    public ResponseEntity<Comments> create(@RequestBody Comments comments, @PathVariable String token) {
             return new ResponseEntity<>(commentsService.create(token, comments), HttpStatus.CREATED);
         }
 
