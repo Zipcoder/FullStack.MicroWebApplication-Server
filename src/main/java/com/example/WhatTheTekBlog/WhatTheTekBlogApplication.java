@@ -5,6 +5,7 @@ import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
+import com.example.WhatTheTekBlog.services.PostService;
 import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -12,19 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootApplication
 public class WhatTheTekBlogApplication {
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(WhatTheTekBlogApplication.class, args);
@@ -32,6 +25,9 @@ public class WhatTheTekBlogApplication {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	PostService postService;
 
 	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -61,17 +57,22 @@ public class WhatTheTekBlogApplication {
 				tags.setListOfPosts(postList);
 				post.setTagsSet(tagSet);
 
+				Set<Comments> commentsList = new HashSet<>();
+
 				Comments comments = new Comments();
 				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments.setUser(user);
 				comments.setPost(post);
-				user.addPost(post);
 				user.addComment(comments);
 				Comments comments1 = new Comments();
 				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments1.setUser(user);
 				comments1.setPost(post);
+				post.setComments(commentsList);
+				commentsList.add(comments1);
+				commentsList.add(comments);
 				user.addComment(comments);
+                user.addPost(post);
 			}
 			userService.create(user);
 		}

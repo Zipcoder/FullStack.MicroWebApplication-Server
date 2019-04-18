@@ -18,7 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,7 +35,7 @@ public class UserServiceTest {
 
         @Before
         public void setup(){
-            this.controller = new UserController(userService, new BCryptPasswordEncoder());
+            this.controller = new UserController(userService);
             mockRepo = Mockito.mock(UserRepository.class);
             userService = new UserService(mockRepo);
         }
@@ -70,6 +69,7 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository mockRepo;
+
     @InjectMocks
     private UserService userService;
 
@@ -236,5 +236,23 @@ public class UserServiceTest {
 
         //Then
         Assert.assertEquals("expected", actual);
+    }
+
+
+    @Test
+    public void testContains(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        String expected = "testing";
+        user.setName(expected);
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findByName(expected)).thenReturn(Optional.of(user));
+        boolean actual = userService.contains(expected);
+
+        //Then
+        Assert.assertTrue(actual);
     }
 }
