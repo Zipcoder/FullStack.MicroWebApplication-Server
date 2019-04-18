@@ -28,7 +28,6 @@ public class CommentsService {
                 User user = userService.findByName(name);
                 comments.setUser(user);
             }
-
             return commentsRepository.save(comments);
         }
 

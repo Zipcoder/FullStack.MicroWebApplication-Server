@@ -33,7 +33,7 @@ public class Post {
   @ManyToMany(mappedBy = "listOfPosts")
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.PERSIST)
   private User creator;
 
   public Post() {

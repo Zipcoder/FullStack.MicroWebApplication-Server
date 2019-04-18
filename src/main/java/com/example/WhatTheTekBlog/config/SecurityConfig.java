@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .forRS256(apiAudience, issuer)
                 .configure(http)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users/createPost/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/sign-up").hasAuthority("view:users")
                 .antMatchers(HttpMethod.POST, "/users/createPost/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/updatePost/**").hasAuthority("view:users")

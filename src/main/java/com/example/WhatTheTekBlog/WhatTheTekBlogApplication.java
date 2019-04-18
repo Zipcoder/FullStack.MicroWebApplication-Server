@@ -5,7 +5,9 @@ import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
+import com.example.WhatTheTekBlog.services.CommentsService;
 import com.example.WhatTheTekBlog.services.PostService;
+import com.example.WhatTheTekBlog.services.TagsService;
 import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +31,13 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	PostService postService;
 
-	//@EventListener
+	@Autowired
+	CommentsService commentsService;
+
+	@Autowired
+	TagsService tagsService;
+
+	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		Random random = new Random();
 		for (int i = 1; i <= 10; i++) {
@@ -57,8 +65,6 @@ public class WhatTheTekBlogApplication {
 				tags.setListOfPosts(postList);
 				post.setTagsSet(tagSet);
 
-				Set<Comments> commentsList = new HashSet<>();
-
 				Comments comments = new Comments();
 				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments.setUser(user);
@@ -68,11 +74,7 @@ public class WhatTheTekBlogApplication {
 				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments1.setUser(user);
 				comments1.setPost(post);
-				post.setComments(commentsList);
-				commentsList.add(comments1);
-				commentsList.add(comments);
-				user.addComment(comments);
-                user.addPost(post);
+				//postService.createPost(post);
 			}
 			userService.create(user);
 		}
