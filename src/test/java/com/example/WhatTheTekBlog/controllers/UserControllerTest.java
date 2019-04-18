@@ -1,10 +1,15 @@
 package com.example.WhatTheTekBlog.controllers;
 
+import com.example.WhatTheTekBlog.config.SecurityConfig;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.services.PostService;
 import com.example.WhatTheTekBlog.services.UserService;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -42,7 +47,16 @@ public class UserControllerTest {
     @MockBean
     private PostService postService;
 
-    private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJpc3MiOiJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVjYjJhYjFkM2QzNmU0MTBlMWIzMDRhNiIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU1NTU4NzMzMSwiZXhwIjoxNTU1NTk0NTMxLCJhenAiOiJ2Nk9NaE5tTjBPTzNhUFFuQzlWbkVBQ0JEWDdDT1IwTiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgdmlldzp1c2VycyB2aWV3OnVzZXIifQ.jsR7gs3NgI4Dy23amY5KIAc14RWqSLVDsm1kQZUrZdk9zgEgQA9nO5I0190v4kzYPo6YrqjsZhiq1GGUVD_OQ3604I8_m6FJlSlmfV6FhsDJFaVjoN1X4yi9Mca2aHprH2pwmcV1b3yDUiDIXhHQcG0nbe7DsTo8nqTQpv4nCSb0nsxwb9crfzzsQNcLYFvLOLzfIxpG1OZm0tOru3g4v79Vba4kkFdNXFggHD6UmZY00TNAFimCx3IMqRYMm4JecFcjiRjtAuENjeg1sth-KTgEKNdbztfTS3YRu8tCc8paepxSS8qRrpoHeC68xdVO0tctzduIMS3K-wMwSn13WQ";
+    private String token;
+
+    @Before
+    public void setUp() throws Exception {
+        HttpResponse<String> response = Unirest.post("https://whatthetek.auth0.com/oauth/token")
+                .header("content-type", "application/json")
+                .body("{\"client_id\":\"v6OMhNmN0OO3aPQnC9VnEACBDX7COR0N\",\"client_secret\":\"VuhJwgSBFvCnrejevtGQleKDcxFNTwjqgsypcqCJ4RNj5-kCWfB7yvQu2vXQ4wbV\",\"audience\":\"http://localhost:8080\",\"grant_type\":\"client_credentials\"}")
+                .asString();
+        token = new JSONObject(response.getBody()).getString("access_token");
+    }
 
     @Test
     public void testFindById() throws Exception {
@@ -102,7 +116,7 @@ public class UserControllerTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .put("/users/update/" + givenId)
                 .content(input)
-                .header("Authorization", "Bearer " + token)
+                .header("Authorization", "Bearer " + SecurityConfig.getAccessToken())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
         )
@@ -124,7 +138,7 @@ public class UserControllerTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .post("/users/sign-up")
                 .content("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJuaWNrbmFtZSI6InRlc3RpbmcxMjM1IiwibmFtZSI6ImRpdGljQG1haWxsaW5rLmxpdmUiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMGVmMWNkMjYxNjc1MzBmMDIwM2ExMTBiYzU3Yjg4YTc_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZkaS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOS0wNC0xN1QxNjoxMDo0OC41MjJaIiwiaXNzIjoiaHR0cHM6Ly93aGF0dGhldGVrLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1Y2I3NTAwODcyNDI5YjExNDgwMGY2YTIiLCJhdWQiOiJ2Nk9NaE5tTjBPTzNhUFFuQzlWbkVBQ0JEWDdDT1IwTiIsImlhdCI6MTU1NTUyMjI3NiwiZXhwIjoxNTU1NTU4Mjc2LCJhdF9oYXNoIjoiYVFyTzB3WFJtS3JSVmZnSjE1VTZfQSIsIm5vbmNlIjoiLUlpRklnLWlydWRqNUtzRjltMGhrblZ2cFhQRGNSY1IifQ.Eq63Ta9VNUS9ITonZu-U9SaAkINeWawyGgg2rxlaPUPEtPHAjC2egaGzdZJAUXVmsySK2Is_0u9KvA-XQDuSv5rVxhxXQzn2jqePqzb_rIBUXALEtPTKiGGWsjX2_qiay_1x63K1nAWWSM0eVR0Fg67L01VCmRUAIoVZvPCmQHAccA71lvsDttvU0vFgBJ8NCJxBoG4ZQsRRdgHuBx_BmFH20B_hPp5WdWmQkl74UOL2aJaDn2VsHem4ZzGFJnjC3WlqxOamPkX9IVyKpcRvFb9VFEQxM5j2_nBrkyG5OLX20zEJlahEfU5RXeGUsq-nJFziJvQ52ZR2PI6MHWJ55w")
-                .header("authorization", "Bearer " + token)
+                .header("authorization", "Bearer " + SecurityConfig.getAccessToken())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
         )

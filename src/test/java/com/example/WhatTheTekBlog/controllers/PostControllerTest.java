@@ -64,7 +64,7 @@ public class PostControllerTest {
         post.setPostTitle("Post1Title");
         post.setPostSummary("Post1Summary");
         post.setCreator(author1);
-        post.setCreatedDate(new Date());
+        post.setCreatedDate(null);
         comments.setUser(author1);
         comments.setPost(post);
         tags.setId(1);
@@ -86,7 +86,7 @@ public class PostControllerTest {
                 .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
-                "\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-16\",\"comments\":[]," +
+                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"comments\":[]," +
                 "\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
 
         this.mvc.perform(MockMvcRequestBuilders
