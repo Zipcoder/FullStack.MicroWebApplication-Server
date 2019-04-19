@@ -1,6 +1,11 @@
 package com.example.WhatTheTekBlog.Utils;
 
 
+import com.example.WhatTheTekBlog.models.Tags;
+import com.example.WhatTheTekBlog.services.TagsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +14,11 @@ import java.util.Scanner;
 
 //All credit to Ignatius on SoloLearn
 //https://code.sololearn.com/c5g1ONqa324P/#java
+@Component
 public class RandomGenerator {
+    @Autowired
+    static TagsService tagsService;
+
     public static String generateSentence(int times) {
 
         String[] greeting={"Hello","Hey","Good morning","Good evening","Welcome","Hi","Good day"};

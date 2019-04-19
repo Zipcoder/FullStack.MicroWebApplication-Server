@@ -38,34 +38,46 @@ public class WhatTheTekBlogApplication {
 	@Autowired
 	TagsService tagsService;
 
+
+	static List<String> tags = new ArrayList();
+	static {
+		tags.add("Java");
+		tags.add("Castle");
+		tags.add("Pineapple");
+		tags.add("Mocha");
+		tags.add("Oreo");
+		tags.add("Python");
+		tags.add("Ruby");
+		tags.add("Rails");
+	}
+
+	public Tags generateTag() {
+		Random random = new Random();
+		List<Tags> tags = (List<Tags>) tagsService.findAllTags();
+		return tags.get(random.nextInt(tags.size()));
+	}
+
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		for (String tag : tags) {
+			Tags tags1 = new Tags();
+			tags1.setTagName(tag);
+			tagsService.createTags(tags1);
+		}
 		Random random = new Random();
 		for (int i = 1; i <= 10; i++) {
 			User user = new User();
 			String name = RandomGenerator.generateWord() + i;
 			user.setName(name);
+			List<Post> posts = new ArrayList<>();
 			for (int j = 0; j < 5; j++) {
 				Post post = new Post();
 				post.setCreator(user);
 				post.setPostTitle(RandomGenerator.generateWord());
-				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
+				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(50)));
 				post.setPostSummary(RandomGenerator.generateSentence(1));
-				Tags tags = new Tags();
-				tags.setTagName(RandomGenerator.generateWord());
-				Tags tags2 = new Tags();
-				tags2.setTagName(RandomGenerator.generateWord());
-				Tags tags3 = new Tags();
-				tags3.setTagName(RandomGenerator.generateWord());
-				Set<Post> postList = new HashSet<>();
-				Set<Tags> tagSet = new HashSet<>();
-				tagSet.add(tags);
-				tagsService.createTags(tags);
-				tagSet.add(tags2);
-				tagSet.add(tags3);
-				postList.add(post);
-				tags.setListOfPosts(postList);
-				post.setTagsSet(tagSet);
+//				tagsService.createTags(tags);
+//				tagsService.createTags(tags2);
 
 				Comments comments = new Comments();
 				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
@@ -80,8 +92,15 @@ public class WhatTheTekBlogApplication {
 				user.addPost(post);
 //				commentsRepository.save(comments);
 //				commentsRepository.save(comments1);
+				posts.add(post);
 			}
 			userService.create(user);
+			Tags tags = generateTag();
+			posts.forEach(tags::addPost);
+			tagsService.update(tags.getId(), tags);
+			Tags tags2 = generateTag();
+			posts.forEach(tags2::addPost);
+			tagsService.update(tags2.getId(), tags2);
 		}
 	}
 

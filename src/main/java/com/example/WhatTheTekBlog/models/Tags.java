@@ -12,8 +12,7 @@ public class Tags {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String tagName;
-    @ManyToMany
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Post> listOfPosts = new HashSet<>();
 
     public Tags() {
@@ -41,6 +40,10 @@ public class Tags {
 
     public void setListOfPosts(Set<Post> listOfPosts) {
         this.listOfPosts = listOfPosts;
+    }
+
+    public void addPost(Post post) {
+        this.listOfPosts.add(post);
     }
 
 }

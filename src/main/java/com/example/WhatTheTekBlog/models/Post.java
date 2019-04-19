@@ -2,6 +2,7 @@
 package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -30,7 +31,8 @@ public class Post {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
   private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(mappedBy = "listOfPosts")
+  @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "listOfPosts")
+  @JsonIgnore
   private Set<Tags> tagsSet = new HashSet<>();
 
   @ManyToOne

@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        return token;
+        return "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJpc3MiOiJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVjYjJhYjFkM2QzNmU0MTBlMWIzMDRhNiIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTU1NTYzMzY0MiwiZXhwIjoxNTU1NjQwODQyLCJhenAiOiJ2Nk9NaE5tTjBPTzNhUFFuQzlWbkVBQ0JEWDdDT1IwTiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgdmlldzp1c2VycyB2aWV3OnVzZXIifQ.LtinzbU07zCSyIZKbLosD4lf9wrAd7f43xF-cbtGnYiCam95e1bVw92lrjld9Jn9j9dRq6xJZ9Yu_njfAJF9hLmN7GdRK3zdhHkvrfwVgCvG1GjWmsHyFzGn2wBxng8thlRQrDvqbyFcufn83MM0eQujxS5tLNV62fo4xirCgDzMIgS0JH0sLE9kMbl4SuSbcJ8p8SisHEzw54NmyYQeMX-AHZbkHBycENC9pHidlH0xRKb2w0uNpb3CiPdq-XKvYA1ElPE8qOwxXCTHSrvYBgfbQsZkqrXu7lIQxX6n5frQlQTLZfigbb3lgNRZVo3Yf40OI8WT0Ss81tnAbCsIyw";
     }
 
 }
