@@ -70,37 +70,41 @@ public class WhatTheTekBlogApplication {
 			String name = RandomGenerator.generateWord() + i;
 			user.setName(name);
 			List<Post> posts = new ArrayList<>();
+			List<Comments> comments = new ArrayList<>();
+			userService.create(user);
 			for (int j = 0; j < 5; j++) {
 				Post post = new Post();
 				post.setCreator(user);
 				post.setPostTitle(RandomGenerator.generateWord());
-				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(50)));
+				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
 				post.setPostSummary(RandomGenerator.generateSentence(1));
 //				tagsService.createTags(tags);
 //				tagsService.createTags(tags2);
 
-				Comments comments = new Comments();
-				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
-				comments.setUser(user);
-				comments.setPost(post);
+				Comments comment = new Comments();
+				comment.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
+				comment.setUser(user);
+				comment.setPost(post);
 				Comments comments1 = new Comments();
 				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments1.setUser(user);
 				comments1.setPost(post);
-				user.addComment(comments);
-				user.addComment(comments1);
-				user.addPost(post);
+				comments.add(comment);
+				comments.add(comments1);
 //				commentsRepository.save(comments);
 //				commentsRepository.save(comments1);
 				posts.add(post);
+				postService.createPost(post);
+
+				Tags tags = generateTag();
+				posts.forEach(tags::addPost);
+				tagsService.update(tags.getId(), tags);
+				Tags tags2 = generateTag();
+				posts.forEach(tags2::addPost);
+				tagsService.update(tags2.getId(), tags2);
 			}
-			userService.create(user);
-			Tags tags = generateTag();
-			posts.forEach(tags::addPost);
-			tagsService.update(tags.getId(), tags);
-			Tags tags2 = generateTag();
-			posts.forEach(tags2::addPost);
-			tagsService.update(tags2.getId(), tags2);
+			//posts.forEach(post -> postService.createPost(post));
+			comments.forEach(comments1 -> commentsRepository.save(comments1));
 		}
 	}
 

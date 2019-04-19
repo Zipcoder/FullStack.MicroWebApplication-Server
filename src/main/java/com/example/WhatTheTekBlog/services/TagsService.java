@@ -12,7 +12,6 @@ import java.util.*;
 public class TagsService {
     private TagsRepository tagsRepository;
 
-
     @Autowired
     public TagsService(TagsRepository tagsRepository) {
         this.tagsRepository = tagsRepository;
@@ -71,5 +70,10 @@ public class TagsService {
     }
 
 
-
+//    public Set<Tags> findTagsByPost(Integer postId) {
+//        Set<Tags> tags = new HashSet<>();
+//        for (Tags tag: tagsRepository.findAll()) {
+//            if (tag.getListOfPosts().contains())
+//        }
+//    }
 }
