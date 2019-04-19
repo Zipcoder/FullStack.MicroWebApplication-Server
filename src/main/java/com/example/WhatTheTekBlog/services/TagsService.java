@@ -21,7 +21,7 @@ public class TagsService {
 
     public Tags createTags(Tags tags){
         if (tagsRepository.findByTagName(tags.getTagName()).isPresent()) {
-            throw new IllegalArgumentException();
+            return null;
         }
         return tagsRepository.save(tags);
     }
