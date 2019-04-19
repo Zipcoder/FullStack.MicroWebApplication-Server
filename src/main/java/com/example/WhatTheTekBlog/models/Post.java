@@ -29,6 +29,7 @@ public class Post {
   private Date createdDate = new Date();
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+  @JsonIgnore
   private Set<Comments> comments = new HashSet<>();
 
   @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "listOfPosts")
