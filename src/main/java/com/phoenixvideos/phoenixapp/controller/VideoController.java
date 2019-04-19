@@ -26,7 +26,7 @@ public class VideoController {
     public ResponseEntity<Video> createVideo(@RequestPart(value = "file") MultipartFile videoFile,
                                              @PathVariable Long user_id,
                                              @RequestPart(value = "title") String videoTitle,
-                                             @RequestPart(value = "desc") String videoDescription,
+                                             @RequestPart(value = "description") String videoDescription,
                                              @RequestPart(value = "format") String videoFormat) {
 
         Video createdVideo = videoService.create(videoFile, user_id, videoTitle, videoDescription, videoFormat);
