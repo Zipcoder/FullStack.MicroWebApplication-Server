@@ -20,11 +20,8 @@ public class TagsService {
 
 
     public Tags createTags(Tags tags){
-        for (Tags tag: tagsRepository.findAll()) {
-            System.out.println(tag.getTagName());
-            if(tag.getTagName() != null && tag.getTagName().equals(tags.getTagName())) {
-                throw new IllegalArgumentException();
-            }
+        if (tagsRepository.findByTagName(tags.getTagName()).isPresent()) {
+            throw new IllegalArgumentException();
         }
         return tagsRepository.save(tags);
     }

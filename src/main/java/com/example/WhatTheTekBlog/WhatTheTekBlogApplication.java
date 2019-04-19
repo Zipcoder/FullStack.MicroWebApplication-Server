@@ -5,6 +5,7 @@ import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
+import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import com.example.WhatTheTekBlog.services.CommentsService;
 import com.example.WhatTheTekBlog.services.PostService;
 import com.example.WhatTheTekBlog.services.TagsService;
@@ -32,7 +33,7 @@ public class WhatTheTekBlogApplication {
 	PostService postService;
 
 	@Autowired
-	CommentsService commentsService;
+	CommentsRepository commentsRepository;
 
 	@Autowired
 	TagsService tagsService;
@@ -42,8 +43,8 @@ public class WhatTheTekBlogApplication {
 		Random random = new Random();
 		for (int i = 1; i <= 10; i++) {
 			User user = new User();
-			user.setId(i);
-			user.setName(RandomGenerator.generateWord() + i);
+			String name = RandomGenerator.generateWord() + i;
+			user.setName(name);
 			for (int j = 0; j < 5; j++) {
 				Post post = new Post();
 				post.setCreator(user);
@@ -59,6 +60,7 @@ public class WhatTheTekBlogApplication {
 				Set<Post> postList = new HashSet<>();
 				Set<Tags> tagSet = new HashSet<>();
 				tagSet.add(tags);
+				tagsService.createTags(tags);
 				tagSet.add(tags2);
 				tagSet.add(tags3);
 				postList.add(post);
@@ -69,12 +71,15 @@ public class WhatTheTekBlogApplication {
 				comments.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments.setUser(user);
 				comments.setPost(post);
-				user.addComment(comments);
 				Comments comments1 = new Comments();
 				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comments1.setUser(user);
 				comments1.setPost(post);
-				//postService.createPost(post);
+				user.addComment(comments);
+				user.addComment(comments1);
+				user.addPost(post);
+//				commentsRepository.save(comments);
+//				commentsRepository.save(comments1);
 			}
 			userService.create(user);
 		}
