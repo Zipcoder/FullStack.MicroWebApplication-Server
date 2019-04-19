@@ -3,7 +3,6 @@ package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -33,22 +32,12 @@ public class Post {
   @JsonIgnore
   private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL, mappedBy = "listOfPosts")
+  @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "listOfPosts")
+  @JsonIgnore
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   private User creator;
-
-  public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             Set<Comments> comments, Set<Tags> tags, User author) {
-    this.postTitle = postTitle;
-    this.postSummary = postDescription;
-    this.postContent = postContent;
-    this.createdDate = new Date();
-    this.comments = comments;
-    this.tagsSet = tags;
-    this.creator = author;
-  }
 
   public Post() {
   }

@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class PostService {
 
-    @Autowired
     private PostRepository postRepository;
 
+    @Autowired
     public PostService(PostRepository repository) {
         this.postRepository = repository;
     }
@@ -36,11 +36,11 @@ public class PostService {
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
         originalPost.setTagsSet(post.getTagsSet());
-        return this.postRepository.save(originalPost);
+        return postRepository.save(originalPost);
     }
 
     public Boolean delete(Long postId) {
-        this.postRepository.deleteById(postId);
+        postRepository.delete(postRepository.findByPostID(postId));
         return true;
     }
 

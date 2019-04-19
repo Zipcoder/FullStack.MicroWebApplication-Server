@@ -69,6 +69,7 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository mockRepo;
+
     @InjectMocks
     private UserService userService;
 
@@ -148,7 +149,11 @@ public class UserServiceTest {
         //When
         userService.delete(1);
         //Then
-        Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
+        //Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
+        //expected.remove(user);
+        List<User> actual = (List<User>) mockRepo.findAll();
+        actual.forEach(user5 -> System.out.println(user5.getName()));
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -231,5 +236,23 @@ public class UserServiceTest {
 
         //Then
         Assert.assertEquals("expected", actual);
+    }
+
+
+    @Test
+    public void testContains(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        String expected = "testing";
+        user.setName(expected);
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findByName(expected)).thenReturn(Optional.of(user));
+        boolean actual = userService.contains(expected);
+
+        //Then
+        Assert.assertTrue(actual);
     }
 }

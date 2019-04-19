@@ -36,7 +36,7 @@ public class PostController {
         this.postService = service;
     }
 
-    @GetMapping("/post/")
+    @GetMapping("/post")
     public ResponseEntity<Iterable<Post>> findAll() {
         return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
     }
@@ -61,8 +61,6 @@ public class PostController {
             LOG.info("Creating a new Post: {}", post);
             User user = userService.findByName(name);
             post.setCreator(user);
-            userService.update(user.getId(), user);
-            System.out.println(post);
             return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -82,8 +80,7 @@ public class PostController {
     }
 
     @DeleteMapping("/users/deletePost/{postId}")
-    public ResponseEntity<Boolean> deletePost(@PathVariable Long postId, @RequestBody Post post) {
-        LOG.info("Deleting Post: {}", post);
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long postId) {
         return new ResponseEntity<>(this.postService.delete(postId), HttpStatus.OK);
     }
 

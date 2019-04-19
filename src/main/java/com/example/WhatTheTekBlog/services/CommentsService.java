@@ -2,6 +2,7 @@ package com.example.WhatTheTekBlog.services;
 
 import com.auth0.jwt.JWT;
 import com.example.WhatTheTekBlog.models.Comments;
+import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,6 @@ public class CommentsService {
                 User user = userService.findByName(name);
                 comments.setUser(user);
             }
-
             return commentsRepository.save(comments);
         }
 
