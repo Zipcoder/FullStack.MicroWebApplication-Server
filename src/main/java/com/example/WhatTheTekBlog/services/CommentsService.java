@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.CommentsRepository;
+import com.example.WhatTheTekBlog.repositories.UserRepository;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +15,19 @@ import java.util.*;
 public class CommentsService {
 
         private CommentsRepository commentsRepository;
-        private  UserService userService;
-        private  PostService postService;
+        private UserRepository userRepository;
 
 
         @Autowired
-        public CommentsService(CommentsRepository commentsRepository, UserService userService, PostService postService) {
-            this.userService = userService;
+        public CommentsService(CommentsRepository commentsRepository, UserRepository userRepository) {
+            this.userRepository = userRepository;
             this.commentsRepository = commentsRepository;
-            this.postService = postService;
         }
-
 
         public Comments create(String token, Comments comments){
             String name = JWT.decode(token).getClaim("nickname").asString();
-            if (userService.contains(name)) {
-                User user = userService.findByName(name);
-                comments.setUser(user);
+            if (userRepository.findByName(name).isPresent()) {
+                comments.setUser(userRepository.findByName(name).get());
             }
             return commentsRepository.save(comments);
         }

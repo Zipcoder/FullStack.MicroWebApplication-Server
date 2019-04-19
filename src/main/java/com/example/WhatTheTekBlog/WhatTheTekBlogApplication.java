@@ -57,7 +57,7 @@ public class WhatTheTekBlogApplication {
 		return tags.get(random.nextInt(tags.size()));
 	}
 
-	@EventListener
+	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		for (String tag : tags) {
 			Tags tags1 = new Tags();
@@ -78,9 +78,6 @@ public class WhatTheTekBlogApplication {
 				post.setPostTitle(RandomGenerator.generateWord());
 				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
 				post.setPostSummary(RandomGenerator.generateSentence(1));
-//				tagsService.createTags(tags);
-//				tagsService.createTags(tags2);
-
 				Comments comment = new Comments();
 				comment.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
 				comment.setUser(user);
@@ -103,7 +100,6 @@ public class WhatTheTekBlogApplication {
 				posts.forEach(tags2::addPost);
 				tagsService.update(tags2.getId(), tags2);
 			}
-			//posts.forEach(post -> postService.createPost(post));
 			comments.forEach(comments1 -> commentsRepository.save(comments1));
 		}
 	}
