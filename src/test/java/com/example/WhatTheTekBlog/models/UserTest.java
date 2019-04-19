@@ -16,6 +16,19 @@ public class UserTest {
     }
 
     @Test
+    public void nameConstructor() {
+        //Given
+        String expected = "testingname";
+
+        //When
+        User user = new User(expected);
+
+        //Then
+        Assert.assertEquals(expected, user.getName());
+        Assert.assertEquals(0, user.getPosts().size());
+    }
+
+    @Test
     public void getId() {
         //Given
         int expected = 1314;

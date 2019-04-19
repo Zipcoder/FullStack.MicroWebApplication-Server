@@ -13,10 +13,10 @@ public class User {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Post> posts = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Comments> comments = new LinkedHashSet<>();
 
