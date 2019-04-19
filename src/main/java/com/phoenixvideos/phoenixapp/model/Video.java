@@ -17,6 +17,7 @@ public class Video {
     private String format;
     private String path;
     private String uniqueName;
+    private String thumbnailPath;
 
     @ManyToOne
     @JoinColumn
@@ -102,5 +103,13 @@ public class Video {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(String thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
     }
 }
