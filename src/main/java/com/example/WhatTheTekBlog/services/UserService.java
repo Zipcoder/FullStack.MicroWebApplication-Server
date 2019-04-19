@@ -30,6 +30,9 @@ public class UserService {
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
+        if (!userRepository.findById(userId).isPresent()) {
+            return null;
+        }
         return userRepository.findById(userId).get().getPosts();
     }
 
