@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.mock.web.MockPart;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -29,8 +28,6 @@ public class VideoControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
-
     @MockBean
     private VideoService mockService;
 
@@ -53,6 +50,7 @@ public class VideoControllerTest {
                 "\"format\":\"mp4\"," +
                 "\"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/BigBuckBunny.mp4\"," +
                 "\"uniqueName\":null," +
+                "\"thumbnailPath\":null,"+
                 "\"user\":null" +
                 "}," +
                 "{" +
@@ -62,6 +60,7 @@ public class VideoControllerTest {
                 "\"format\":\"mp4\"," +
                 "\"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/IMG_4786.mp4\"," +
                 "\"uniqueName\":null," +
+                "\"thumbnailPath\":null,"+
                 "\"user\":null" +
                 "}" +
                 "]";
@@ -104,6 +103,7 @@ public class VideoControllerTest {
                 "\"format\":\"mp4\"," +
                 "\"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/BigBuckBunny.mp4\"," +
                 "\"uniqueName\":null," +
+                "\"thumbnailPath\":null,"+
                 "\"user\":null" +
                 "}";
 
@@ -149,6 +149,7 @@ public class VideoControllerTest {
                 "\"format\":\"mp4\"," +
                 "\"path\":\"https://s3.us-east-2.amazonaws.com/phoenix.videos/BigBuckBunny.mp4\"," +
                 "\"uniqueName\":null," +
+                "\"thumbnailPath\":null,"+
                 "\"user\":null" +
                 "}";
 
