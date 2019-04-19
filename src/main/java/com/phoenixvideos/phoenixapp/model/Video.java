@@ -18,6 +18,7 @@ public class Video {
     private String format;
     private String path;
     private String uniqueName;
+    private String thumbnailPath;
 
     @ManyToOne
     @JoinColumn
@@ -110,6 +111,7 @@ public class Video {
         return description;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,5 +130,13 @@ public class Video {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, description, format, path, uniqueName, user, comments);
+    }
+
+    public String getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(String thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
     }
 }

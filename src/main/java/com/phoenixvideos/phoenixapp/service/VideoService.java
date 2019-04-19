@@ -36,11 +36,12 @@ public class VideoService {
             videoRepository.save(newVideo);
 
             String uniqueVideoName = generateUniqueName(videoFile.getOriginalFilename(), format, newVideo.getId());
+            newVideo.setUniqueName(uniqueVideoName);
 
             amazonS3ClientService.uploadFileToS3Bucket(videoFile, uniqueVideoName);
-
             newVideo.setPath(amazonS3ClientService.gertUrl());
-            newVideo.setUniqueName(uniqueVideoName);
+
+
 
             videoRepository.save(newVideo);
         }
@@ -73,6 +74,7 @@ public class VideoService {
         originalVideo.setTitle(video.getTitle());
         originalVideo.setFormat(video.getFormat());
         originalVideo.setComments(video.getComments());
+        originalVideo.setThumbnailPath(video.getThumbnailPath());
 
         videoRepository.save(originalVideo);
         return originalVideo;
