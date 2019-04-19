@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/createTag/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/updateTag/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/deleteTags/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/tags/filteredPosts/**").permitAll()
                 .anyRequest().authenticated();
     }
 

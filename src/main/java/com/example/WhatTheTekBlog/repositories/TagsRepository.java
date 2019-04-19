@@ -7,4 +7,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Repository
 public interface TagsRepository extends CrudRepository<Tags,Integer> {
+    Tags findByTagName(String name);
 }

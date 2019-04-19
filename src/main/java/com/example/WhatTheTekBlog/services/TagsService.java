@@ -47,6 +47,16 @@ public class TagsService {
         return postsList;
     }
 
+    public Set<Post> findFilteredPostsByTag(List<String> tagNames) {
+        Set<Post> filteredPosts = tagsRepository.findByTagName(tagNames.get(0)).getListOfPosts();
+        for (String tagName: tagNames) {
+            if(filteredPosts.isEmpty()) {
+                return filteredPosts;
+            }
+            filteredPosts.retainAll(tagsRepository.findByTagName(tagName).getListOfPosts());
+        }
+        return filteredPosts;
+    }
 
     public Tags update(Integer id, Tags updatedTag) {
         Tags originalTag = tagsRepository.findById(id).get();
