@@ -32,7 +32,7 @@ public class Post {
   @JsonIgnore
   private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "listOfPosts")
+  @ManyToMany(mappedBy = "listOfPosts")
   @JsonIgnore
   private Set<Tags> tagsSet = new HashSet<>();
 

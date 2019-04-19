@@ -3,6 +3,7 @@ package com.example.WhatTheTekBlog.controllers;
 
 import com.auth0.jwt.JWT;
 import com.example.WhatTheTekBlog.models.Post;
+import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.services.PostService;
 import com.example.WhatTheTekBlog.services.UserService;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping
@@ -65,6 +67,11 @@ public class PostController {
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @GetMapping("/post/tags/{postId}")
+    public ResponseEntity<Set<String>> getTags(@PathVariable Long postId) {
+        return new ResponseEntity<>(postService.getTags(postId), HttpStatus.OK);
     }
 
     @PutMapping("/users/updatePost/{postId}")

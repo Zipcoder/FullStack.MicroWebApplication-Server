@@ -43,6 +43,11 @@ public class TagsController {
         return new ResponseEntity<>(this.tagsService.findPostsByTag(tagName), HttpStatus.OK);
     }
 
+//    @GetMapping("/post/tags/{postId}")
+//    public ResponseEntity<Set<Tags>> findTagsByPost(@PathVariable Integer postId) {
+//        return new ResponseEntity<>(this.tagsService.findTagsByPost(postId), HttpStatus.OK);
+//    }
+
     @PutMapping("/updateTag/{id}")
     public ResponseEntity<Tags> update(@PathVariable("id") Integer id,@RequestBody Tags tag) {
         return new ResponseEntity<>(this.tagsService.update(id, tag), HttpStatus.OK);
