@@ -13,6 +13,7 @@ public class TagsService {
     private TagsRepository tagsRepository;
     private PostService postService;
 
+
     @Autowired
     public TagsService(TagsRepository tagsRepository, PostService postService) {
         this.postService = postService;
@@ -21,8 +22,11 @@ public class TagsService {
 
 
     public Tags createTags(Tags tags){
-        if (tagsRepository.findByTagName(tags.getTagName()).isPresent()) {
-            return null;
+        for (Tags tag: tagsRepository.findAll()) {
+            System.out.println(tag.getTagName());
+            if(tag.getTagName() != null && tag.getTagName().equals(tags.getTagName())) {
+                throw new IllegalArgumentException();
+            }
         }
         return tagsRepository.save(tags);
     }
@@ -45,6 +49,16 @@ public class TagsService {
         return postsList;
     }
 
+    public Set<Post> findFilteredPostsByTag(List<String> tagNames) {
+        Set<Post> filteredPosts = tagsRepository.findByTagName(tagNames.get(0)).getListOfPosts();
+        for (String tagName: tagNames) {
+            if(filteredPosts.isEmpty()) {
+                return filteredPosts;
+            }
+            filteredPosts.retainAll(tagsRepository.findByTagName(tagName).getListOfPosts());
+        }
+        return filteredPosts;
+    }
 
     public Tags update(Integer id, Tags updatedTag) {
         Tags originalTag = tagsRepository.findById(id).get();
@@ -79,10 +93,5 @@ public class TagsService {
 //    }
 
 
-//    public Set<Tags> findTagsByPost(Integer postId) {
-//        Set<Tags> tags = new HashSet<>();
-//        for (Tags tag: tagsRepository.findAll()) {
-//            if (tag.getListOfPosts().contains())
-//        }
-//    }
+
 }

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -62,6 +64,12 @@ public class TagsController {
     @DeleteMapping("/deleteTags/{tagName}")
     public ResponseEntity<Boolean> delete(@PathVariable String tagName) {
         return new ResponseEntity<>(this.tagsService.deleteTags(tagName), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/tags/filteredPosts/{tagNames}")
+    public ResponseEntity<Set<Post>> findFilteredPostsByTag(@PathVariable List<String> tagNames ) {
+        return new ResponseEntity<>(this.tagsService.findFilteredPostsByTag(tagNames), HttpStatus.OK);
     }
 
 
