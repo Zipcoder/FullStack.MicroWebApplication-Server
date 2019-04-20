@@ -78,12 +78,15 @@ public class WhatTheTekBlogApplication {
 				post.setPostTitle(RandomGenerator.generateWord());
 				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
 				post.setPostSummary(RandomGenerator.generateSentence(1));
+//				tagsService.createTags(tags);
+//				tagsService.createTags(tags2);
+
 				Comments comment = new Comments();
-				comment.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
+				comment.setComments(RandomGenerator.generateSentence(1));
 				comment.setUser(user);
 				comment.setPost(post);
 				Comments comments1 = new Comments();
-				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
+				comments1.setComments(RandomGenerator.generateSentence(1));
 				comments1.setUser(user);
 				comments1.setPost(post);
 				comments.add(comment);

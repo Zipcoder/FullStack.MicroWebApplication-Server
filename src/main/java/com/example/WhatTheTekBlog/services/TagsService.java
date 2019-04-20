@@ -11,9 +11,11 @@ import java.util.*;
 @Service
 public class TagsService {
     private TagsRepository tagsRepository;
+    private PostService postService;
 
     @Autowired
-    public TagsService(TagsRepository tagsRepository) {
+    public TagsService(TagsRepository tagsRepository, PostService postService) {
+        this.postService = postService;
         this.tagsRepository = tagsRepository;
     }
 
@@ -68,6 +70,13 @@ public class TagsService {
 
         return true;
     }
+
+//    public Tags addPost(Integer tagId, Post post) {
+//        Tags tag = tagsRepository.findById(tagId).get();
+//        tag.addPost();
+//        tagsRepository.save(tag);
+//        return tag;
+//    }
 
 
 //    public Set<Tags> findTagsByPost(Integer postId) {

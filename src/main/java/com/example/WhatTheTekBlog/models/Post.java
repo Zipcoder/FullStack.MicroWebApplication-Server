@@ -3,6 +3,7 @@ package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Post {
   private Set<Comments> comments = new HashSet<>();
 
   @ManyToMany(mappedBy = "listOfPosts")
-  @JsonIgnore
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Set<Tags> tagsSet = new HashSet<>();
 
   @ManyToOne
@@ -82,6 +83,7 @@ public class Post {
     this.comments = comments;
   }
 
+  @JsonIgnore
   public Set<Tags> getTagsSet() {
     return tagsSet;
   }
@@ -104,5 +106,19 @@ public class Post {
 
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
+  }
+
+  @Override
+  public String toString() {
+    return "Post{" +
+            "postID=" + postID +
+            ", postTitle='" + postTitle + '\'' +
+            ", postSummary='" + postSummary + '\'' +
+            ", postContent='" + postContent + '\'' +
+            ", createdDate=" + createdDate +
+            ", comments=" + comments +
+            ", tagsSet=" + tagsSet +
+            ", creator=" + creator +
+            '}';
   }
 }

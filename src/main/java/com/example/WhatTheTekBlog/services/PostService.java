@@ -3,6 +3,7 @@ package com.example.WhatTheTekBlog.services;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
+import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,25 @@ import java.util.Set;
 public class PostService {
 
     private PostRepository postRepository;
+    private TagsRepository tagsRepository;
 
     @Autowired
-    public PostService(PostRepository repository) {
+    public PostService(PostRepository repository, TagsRepository tagsRepository) {
         this.postRepository = repository;
+        this.tagsRepository = tagsRepository;
     }
 
     public Post createPost(Post post) {
-       // System.out.println(post);
-        return this.postRepository.save(post);
+        Set<Tags> tagsSet = new HashSet<>();
+        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findById(tags.getId()).get()));
+        Post savedPost = this.postRepository.save(post);
+        for (Tags tags : post.getTagsSet()) {
+            Tags updatedTag = tagsRepository.findById(tags.getId()).get();
+            updatedTag.addPost(savedPost);
+            tagsRepository.deleteById(updatedTag.getId());
+            tagsRepository.save(updatedTag);
+        }
+        return savedPost;
     }
 
     public Iterable<Post> findAll() {
