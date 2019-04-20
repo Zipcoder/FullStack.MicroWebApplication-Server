@@ -25,7 +25,7 @@ public class PostService {
 
     public Post createPost(Post post) {
         Set<Tags> tagsSet = new HashSet<>();
-        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName()).get()));
+        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName())));
         Post savedPost = this.postRepository.save(post);
         saveTags(post.getTagsSet(), savedPost);
         return savedPost;
@@ -65,7 +65,7 @@ public class PostService {
 
     private void saveTags(Set<Tags> tagsSet, Post savedPost) {
         for (Tags tags : tagsSet) {
-            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.addPost(savedPost);
             tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
@@ -74,7 +74,7 @@ public class PostService {
 
     private void removeTags(Set<Tags> tagsSet, Post originalPost) {
         for (Tags tags : tagsSet) {
-            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.removePost(originalPost);
             tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
