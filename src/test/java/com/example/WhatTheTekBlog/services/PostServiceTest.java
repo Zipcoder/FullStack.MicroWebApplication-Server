@@ -39,7 +39,7 @@ public class PostServiceTest {
     @Before
     public void setup() {
         mockPostRepo = Mockito.mock(PostRepository.class);
-        postService = new PostService(mockPostRepo);
+        postService = new PostService(mockPostRepo, null);
     }
 
     @Test

@@ -58,6 +58,7 @@ public class PostController {
 
     @PostMapping("/users/createPost/{token}")
     public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable String token) {
+        System.out.println(post);
         String name = JWT.decode(token).getClaim("nickname").asString();
         if (userService.contains(name)) {
             LOG.info("Creating a new Post: {}", post);
