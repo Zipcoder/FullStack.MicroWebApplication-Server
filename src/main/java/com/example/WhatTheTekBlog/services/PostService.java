@@ -25,14 +25,9 @@ public class PostService {
 
     public Post createPost(Post post) {
         Set<Tags> tagsSet = new HashSet<>();
-        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findById(tags.getId()).get()));
+        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName()).get()));
         Post savedPost = this.postRepository.save(post);
-        for (Tags tags : post.getTagsSet()) {
-            Tags updatedTag = tagsRepository.findById(tags.getId()).get();
-            updatedTag.addPost(savedPost);
-            tagsRepository.deleteById(updatedTag.getId());
-            tagsRepository.save(updatedTag);
-        }
+        saveTags(post.getTagsSet(), savedPost);
         return savedPost;
     }
 
@@ -49,7 +44,10 @@ public class PostService {
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
-        originalPost.setTagsSet(post.getTagsSet());
+        removeTags(originalPost.getTagsSet(), originalPost);
+        originalPost.setTagsSet(new HashSet<>());
+        saveTags(post.getTagsSet(), originalPost);
+        postRepository.deleteById(originalPost.getPostID());
         return postRepository.save(originalPost);
     }
 
@@ -62,5 +60,24 @@ public class PostService {
         Set<String> tags = new HashSet<>();
         postRepository.findByPostID(postId).getTagsSet().forEach(tag -> tags.add(tag.getTagName()));
        return tags;
+    }
+
+
+    private void saveTags(Set<Tags> tagsSet, Post savedPost) {
+        for (Tags tags : tagsSet) {
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            updatedTag.addPost(savedPost);
+            tagsRepository.deleteById(updatedTag.getId());
+            tagsRepository.save(updatedTag);
+        }
+    }
+
+    private void removeTags(Set<Tags> tagsSet, Post originalPost) {
+        for (Tags tags : tagsSet) {
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            updatedTag.removePost(originalPost);
+            tagsRepository.deleteById(updatedTag.getId());
+            tagsRepository.save(updatedTag);
+        }
     }
 }

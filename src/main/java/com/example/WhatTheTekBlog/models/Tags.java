@@ -44,4 +44,8 @@ public class Tags {
         this.listOfPosts.add(post);
     }
 
+    public void removePost(Post post) {
+        this.listOfPosts.remove(post);
+    }
+
 }
