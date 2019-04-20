@@ -59,50 +59,49 @@ public class WhatTheTekBlogApplication {
 
 	//@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		List<User> users = new ArrayList<>();
 		for (String tag : tags) {
 			Tags tags1 = new Tags();
 			tags1.setTagName(tag);
 			tagsService.createTags(tags1);
 		}
-		Random random = new Random();
-		for (int i = 1; i <= 10; i++) {
+
+		for (int i = 0; i < 20; i++) {
 			User user = new User();
 			String name = RandomGenerator.generateWord() + i;
 			user.setName(name);
-			List<Post> posts = new ArrayList<>();
-			List<Comments> comments = new ArrayList<>();
-			userService.create(user);
-			for (int j = 0; j < 5; j++) {
-				Post post = new Post();
-				post.setCreator(user);
-				post.setPostTitle(RandomGenerator.generateWord());
-				post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
-				post.setPostSummary(RandomGenerator.generateSentence(1));
-				Comments comment = new Comments();
-				comment.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
-				comment.setUser(user);
-				comment.setPost(post);
-				Comments comments1 = new Comments();
-				comments1.setComments(String.format("Comment %d from user %d: \n%s", j, i, RandomGenerator.generateSentence(1)));
-				comments1.setUser(user);
-				comments1.setPost(post);
-				comments.add(comment);
-				comments.add(comments1);
-//				commentsRepository.save(comments);
-//				commentsRepository.save(comments1);
-				posts.add(post);
-				postService.createPost(post);
-
-				Tags tags = generateTag();
-				posts.forEach(tags::addPost);
-				tagsService.update(tags.getId(), tags);
-				Tags tags2 = generateTag();
-				posts.forEach(tags2::addPost);
-				tagsService.update(tags2.getId(), tags2);
-			}
-			comments.forEach(comments1 -> commentsRepository.save(comments1));
+			users.add(userService.create(user));
 		}
+
+		Random random = new Random();
+
+		List<Post> posts = new ArrayList<>();
+		List<Comments> comments = new ArrayList<>();
+		for (int j = 0; j < 60; j++) {
+			Post post = new Post();
+			post.setCreator(users.get(random.nextInt(users.size()-1)));
+			post.setPostTitle(RandomGenerator.generateWord());
+			post.setPostContent(RandomGenerator.generateSentence(random.nextInt(100)));
+			post.setPostSummary(RandomGenerator.generateSentence(1));
+
+			Comments comment = new Comments();
+			comment.setComments(RandomGenerator.generateSentence(1));
+			comment.setUser(users.get(random.nextInt(users.size()-1)));
+			comment.setPost(post);
+			Comments comments1 = new Comments();
+			comments1.setComments(RandomGenerator.generateSentence(1));
+			comments1.setUser(users.get(random.nextInt(users.size()-1)));
+			comments1.setPost(post);
+			comments.add(comment);
+			comments.add(comments1);
+			posts.add(post);
+			postService.createPost(post);
+			for (int i = 0; i < random.nextInt(tags.size()-2); i++) {
+				Tags tags = generateTag();
+				tags.addPost(post);
+				tagsService.update(tags.getId(), tags);
+			}
+		}
+		comments.forEach(comments1 -> commentsRepository.save(comments1));
 	}
-
-
 }

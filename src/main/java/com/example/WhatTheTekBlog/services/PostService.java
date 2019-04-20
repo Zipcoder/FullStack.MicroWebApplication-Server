@@ -3,6 +3,7 @@ package com.example.WhatTheTekBlog.services;
 import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
+import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,20 @@ import java.util.Set;
 public class PostService {
 
     private PostRepository postRepository;
+    private TagsRepository tagsRepository;
 
     @Autowired
-    public PostService(PostRepository repository) {
+    public PostService(PostRepository repository, TagsRepository tagsRepository) {
         this.postRepository = repository;
+        this.tagsRepository = tagsRepository;
     }
 
     public Post createPost(Post post) {
-       // System.out.println(post);
-        return this.postRepository.save(post);
+        Set<Tags> tagsSet = new HashSet<>();
+        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName()).get()));
+        Post savedPost = this.postRepository.save(post);
+        saveTags(post.getTagsSet(), savedPost);
+        return savedPost;
     }
 
     public Iterable<Post> findAll() {
@@ -38,7 +44,10 @@ public class PostService {
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
-        originalPost.setTagsSet(post.getTagsSet());
+        removeTags(originalPost.getTagsSet(), originalPost);
+        originalPost.setTagsSet(new HashSet<>());
+        saveTags(post.getTagsSet(), originalPost);
+        postRepository.deleteById(originalPost.getPostID());
         return postRepository.save(originalPost);
     }
 
@@ -51,5 +60,24 @@ public class PostService {
         Set<String> tags = new HashSet<>();
         postRepository.findByPostID(postId).getTagsSet().forEach(tag -> tags.add(tag.getTagName()));
        return tags;
+    }
+
+
+    private void saveTags(Set<Tags> tagsSet, Post savedPost) {
+        for (Tags tags : tagsSet) {
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            updatedTag.addPost(savedPost);
+            tagsRepository.deleteById(updatedTag.getId());
+            tagsRepository.save(updatedTag);
+        }
+    }
+
+    private void removeTags(Set<Tags> tagsSet, Post originalPost) {
+        for (Tags tags : tagsSet) {
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            updatedTag.removePost(originalPost);
+            tagsRepository.deleteById(updatedTag.getId());
+            tagsRepository.save(updatedTag);
+        }
     }
 }
