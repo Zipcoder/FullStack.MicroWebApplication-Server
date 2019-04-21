@@ -24,10 +24,8 @@ public class PostService {
     }
 
     public Post createPost(Post post) {
-        Set<Tags> tagsSet = new HashSet<>();
-        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName())));
         Post savedPost = this.postRepository.save(post);
-        saveTags(post.getTagsSet(), savedPost);
+        savedPost.setTagsSet(saveTags(post));
         return savedPost;
     }
 
@@ -44,9 +42,8 @@ public class PostService {
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
-        removeTags(originalPost.getTagsSet(), originalPost);
-        originalPost.setTagsSet(new HashSet<>());
-        saveTags(post.getTagsSet(), originalPost);
+        removeTags(originalPost);
+        originalPost.setTagsSet(saveTags(post));
         postRepository.deleteById(originalPost.getPostID());
         return postRepository.save(originalPost);
     }
@@ -56,27 +53,26 @@ public class PostService {
         return true;
     }
 
-    public Set<String> getTags(Long postId) {
-        Set<String> tags = new HashSet<>();
-        postRepository.findByPostID(postId).getTagsSet().forEach(tag -> tags.add(tag.getTagName()));
-       return tags;
+    public Set<Tags> getTags(Long postId) {
+        return postRepository.existsById(postId) ? new HashSet<>(postRepository.findByPostID(postId).getTagsSet()) : null;
     }
 
 
-    private void saveTags(Set<Tags> tagsSet, Post savedPost) {
-        for (Tags tags : tagsSet) {
+    private Set<Tags> saveTags(Post savedPost) {
+        Set<Tags> actualTags = new HashSet<>();
+        savedPost.getTagsSet().forEach(tags -> actualTags.add(tagsRepository.findByTagName(tags.getTagName())));
+        for (Tags tags : actualTags) {
             Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.addPost(savedPost);
-            tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
         }
+        return actualTags;
     }
 
-    private void removeTags(Set<Tags> tagsSet, Post originalPost) {
-        for (Tags tags : tagsSet) {
+    private void removeTags(Post originalPost) {
+        for (Tags tags : originalPost.getTagsSet()) {
             Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.removePost(originalPost);
-            tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
         }
     }
