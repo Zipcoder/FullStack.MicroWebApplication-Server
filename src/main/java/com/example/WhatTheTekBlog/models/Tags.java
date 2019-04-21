@@ -48,4 +48,15 @@ public class Tags {
         this.listOfPosts.remove(post);
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tags{" +
+                "id=" + id +
+                ", tagName='" + tagName + '\'' +
+                '}';
+    }
 }

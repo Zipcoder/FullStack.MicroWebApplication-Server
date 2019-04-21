@@ -10,10 +10,10 @@
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/controllers/TagsController.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/controllers/PostController.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/controllers/UserController.java
+/Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/Utils/RandomGenerator.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/services/TagsService.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/models/Post.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/WhatTheTekBlogApplication.java
-/Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/TagNames.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/repositories/PostRepository.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/repositories/UserRepository.java
 /Users/eleonorbart/Projects/WhatTheTec/FullStack.MicroWebApplication-Server/src/main/java/com/example/WhatTheTekBlog/services/CommentsService.java

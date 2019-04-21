@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.WhatTheTekBlog.models.UserTest" time="0.001" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.WhatTheTekBlog.models.PostTest" time="0.001" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -62,14 +62,17 @@
     <property name="java.class.version" value="54.0"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase name="addCommentTest" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="nameConstructor" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="addPostTest" classname="com.example.WhatTheTekBlog.models.UserTest" time="0.001"/>
-  <testcase name="getId" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="setId" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="getIdNull" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="getComments" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="getEmail" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="getPosts" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
-  <testcase name="getEmailNull" classname="com.example.WhatTheTekBlog.models.UserTest" time="0"/>
+  <testcase name="testGetTitle" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetSummary" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetPostIDNull" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetTitleNull" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetTags" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetUser" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetComments" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetSummaryNull" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetContent" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetPostID" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetCreatedDate" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testClassSignatureAnnotations" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
+  <testcase name="testGetContentNull" classname="com.example.WhatTheTekBlog.models.PostTest" time="0"/>
 </testsuite>
