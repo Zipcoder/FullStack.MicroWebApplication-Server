@@ -71,7 +71,7 @@ public class PostController {
     }
 
     @GetMapping("/post/tags/{postId}")
-    public ResponseEntity<Set<String>> getTags(@PathVariable Long postId) {
+    public ResponseEntity<Set<Tags>> getTags(@PathVariable Long postId) {
         return new ResponseEntity<>(postService.getTags(postId), HttpStatus.OK);
     }
 

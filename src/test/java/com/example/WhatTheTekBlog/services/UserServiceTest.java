@@ -199,6 +199,24 @@ public class UserServiceTest {
     }
 
     @Test
+    public void testgetPostsByUser2(){
+        //Given
+        Set<Post> expected = new HashSet<>();
+        User user = new User();
+        user.setId(1);
+        user.setPosts(expected);
+
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Set<Post> actual = (Set<Post>) userService.getPostsByUser(1);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void testgetCommentsByUser(){
         //Given
         Set<Comments> expected = new HashSet<>();
