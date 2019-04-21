@@ -6,10 +6,10 @@ import com.example.WhatTheTekBlog.repositories.PostRepository;
 import com.example.WhatTheTekBlog.repositories.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
 
 @Service
 public class PostService {
@@ -25,7 +25,7 @@ public class PostService {
 
     public Post createPost(Post post) {
         Set<Tags> tagsSet = new HashSet<>();
-        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName()).get()));
+        post.getTagsSet().forEach(tags -> tagsSet.add(tagsRepository.findByTagName(tags.getTagName())));
         Post savedPost = this.postRepository.save(post);
         saveTags(post.getTagsSet(), savedPost);
         return savedPost;
@@ -59,13 +59,13 @@ public class PostService {
     public Set<String> getTags(Long postId) {
         Set<String> tags = new HashSet<>();
         postRepository.findByPostID(postId).getTagsSet().forEach(tag -> tags.add(tag.getTagName()));
-       return tags;
+        return tags;
     }
 
 
     private void saveTags(Set<Tags> tagsSet, Post savedPost) {
         for (Tags tags : tagsSet) {
-            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.addPost(savedPost);
             tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
@@ -74,7 +74,7 @@ public class PostService {
 
     private void removeTags(Set<Tags> tagsSet, Post originalPost) {
         for (Tags tags : tagsSet) {
-            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName()).get();
+            Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.removePost(originalPost);
             tagsRepository.deleteById(updatedTag.getId());
             tagsRepository.save(updatedTag);
