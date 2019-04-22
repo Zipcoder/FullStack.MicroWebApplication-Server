@@ -3,8 +3,7 @@ package com.example.WhatTheTekBlog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -31,24 +30,15 @@ public class Post {
   private Date createdDate = new Date();
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+  @JsonIgnore
   private Set<Comments> comments = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL, mappedBy = "listOfPosts")
+  @ManyToMany(mappedBy = "listOfPosts")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private Set<Tags> tagsSet = new HashSet<>();
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   private User creator;
-
-  public Post(@NotNull @Size(max = 100) String postTitle, @NotNull @Size(max = 250) String postDescription, @NotNull String postContent,
-             Set<Comments> comments, Set<Tags> tags, User author) {
-    this.postTitle = postTitle;
-    this.postSummary = postDescription;
-    this.postContent = postContent;
-    this.createdDate = new Date();
-    this.comments = comments;
-    this.tagsSet = tags;
-    this.creator = author;
-  }
 
   public Post() {
   }
@@ -93,6 +83,7 @@ public class Post {
     this.comments = comments;
   }
 
+  @JsonIgnore
   public Set<Tags> getTagsSet() {
     return tagsSet;
   }
@@ -115,5 +106,19 @@ public class Post {
 
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
+  }
+
+  @Override
+  public String toString() {
+    return "Post{" +
+            "postID=" + postID +
+            ", postTitle='" + postTitle + '\'' +
+            ", postSummary='" + postSummary + '\'' +
+            ", postContent='" + postContent + '\'' +
+            ", createdDate=" + createdDate +
+            ", comments=" + comments +
+            ", tagsSet=" + tagsSet +
+            ", creator=" + creator +
+            '}';
   }
 }

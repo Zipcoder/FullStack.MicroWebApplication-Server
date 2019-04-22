@@ -2,6 +2,7 @@ package com.example.WhatTheTekBlog.controllers;
 
 import com.auth0.jwt.JWT;
 import com.example.WhatTheTekBlog.models.Post;
+import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.services.PostService;
 import com.example.WhatTheTekBlog.services.UserService;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping
@@ -35,7 +37,7 @@ public class PostController {
         this.postService = service;
     }
 
-    @GetMapping("/post/")
+    @GetMapping("/post")
     public ResponseEntity<Iterable<Post>> findAll() {
         return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
     }
@@ -55,17 +57,21 @@ public class PostController {
 
     @PostMapping("/users/createPost/{token}")
     public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable String token) {
+        System.out.println(post);
         String name = JWT.decode(token).getClaim("nickname").asString();
         if (userService.contains(name)) {
             LOG.info("Creating a new Post: {}", post);
             User user = userService.findByName(name);
             post.setCreator(user);
-          //  userService.update(user.getId(), user);
-            System.out.println(post);
             return new ResponseEntity<>(this.postService.createPost(post), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @GetMapping("/post/tags/{postId}")
+    public ResponseEntity<Set<Tags>> getTags(@PathVariable Long postId) {
+        return new ResponseEntity<>(postService.getTags(postId), HttpStatus.OK);
     }
 
     @PutMapping("/users/updatePost/{postId}")
@@ -81,8 +87,7 @@ public class PostController {
     }
 
     @DeleteMapping("/users/deletePost/{postId}")
-    public ResponseEntity<Boolean> deletePost(@PathVariable Long postId, @RequestBody Post post) {
-        LOG.info("Deleting Post: {}", post);
+    public ResponseEntity<Boolean> deletePost(@PathVariable Long postId) {
         return new ResponseEntity<>(this.postService.delete(postId), HttpStatus.OK);
     }
 

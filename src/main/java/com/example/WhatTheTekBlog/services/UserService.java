@@ -3,6 +3,7 @@ package com.example.WhatTheTekBlog.services;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
+import com.example.WhatTheTekBlog.repositories.PostRepository;
 import com.example.WhatTheTekBlog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ public class UserService {
     }
 
     public Iterable<Post> getPostsByUser(int userId) {
+        if (!userRepository.findById(userId).isPresent()) {
+            return null;
+        }
         return userRepository.findById(userId).get().getPosts();
     }
 
@@ -54,7 +58,7 @@ public class UserService {
         return user;
     }
 
-    public boolean contains(String email) {
-        return userRepository.findByName(email).isPresent();
+    public boolean contains(String name) {
+        return userRepository.findByName(name).isPresent();
     }
 }

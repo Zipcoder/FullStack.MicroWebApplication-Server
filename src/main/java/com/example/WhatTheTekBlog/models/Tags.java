@@ -1,7 +1,5 @@
 package com.example.WhatTheTekBlog.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +10,7 @@ public class Tags {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String tagName;
-    @ManyToMany
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Post> listOfPosts = new HashSet<>();
 
     public Tags() {
@@ -43,4 +40,23 @@ public class Tags {
         this.listOfPosts = listOfPosts;
     }
 
+    public void addPost(Post post) {
+        this.listOfPosts.add(post);
+    }
+
+    public void removePost(Post post) {
+        this.listOfPosts.remove(post);
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tags{" +
+                "id=" + id +
+                ", tagName='" + tagName + '\'' +
+                '}';
+    }
 }

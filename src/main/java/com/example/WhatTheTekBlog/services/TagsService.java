@@ -11,17 +11,20 @@ import java.util.*;
 @Service
 public class TagsService {
     private TagsRepository tagsRepository;
+    private PostService postService;
 
 
     @Autowired
-    public TagsService(TagsRepository tagsRepository) {
+    public TagsService(TagsRepository tagsRepository, PostService postService) {
+        this.postService = postService;
         this.tagsRepository = tagsRepository;
     }
 
 
-    public Tags create(Tags tags){
+    public Tags createTags(Tags tags){
         for (Tags tag: tagsRepository.findAll()) {
-            if(tag.getTagName().equals(tags.getTagName())) {
+            System.out.println(tag.getTagName());
+            if(tag.getTagName() != null && tag.getTagName().equals(tags.getTagName())) {
                 throw new IllegalArgumentException();
             }
         }
@@ -39,13 +42,23 @@ public class TagsService {
     public Set<Post> findPostsByTag(String hashName) {
         Set<Post> postsList = new HashSet<>();
         for (Tags tag: tagsRepository.findAll()) {
-            if(tag.getTagName().equals(hashName)) {
+            if(tag.getTagName() != null && tag.getTagName().equals(hashName)) {
                 postsList = tag.getListOfPosts();
             }
         }
         return postsList;
     }
 
+    public Set<Post> findFilteredPostsByTag(List<String> tagNames) {
+        Set<Post> filteredPosts = tagsRepository.findByTagName(tagNames.get(0)).getListOfPosts();
+        for (String tagName: tagNames) {
+            if(filteredPosts.isEmpty()) {
+                return filteredPosts;
+            }
+            filteredPosts.retainAll(tagsRepository.findByTagName(tagName).getListOfPosts());
+        }
+        return filteredPosts;
+    }
 
     public Tags update(Integer id, Tags updatedTag) {
         Tags originalTag = tagsRepository.findById(id).get();
@@ -55,22 +68,29 @@ public class TagsService {
         return originalTag;
     }
 
-    public Boolean delete(Integer id) {
+    public Boolean deleteTags(Integer id) {
         tagsRepository.deleteById(id);
         return true;
     }
 
-    public Boolean delete(String tagName) {
+    public Boolean deleteTags(String tagName) {
         List<Tags> listOfTags = (ArrayList<Tags>) this.tagsRepository.findAll();
 
         for (Tags tag: listOfTags) {
-            if(tag.getTagName().equals(tagName)) {
+            if(tag.getTagName() != null && tag.getTagName().equals(tagName)) {
                 tagsRepository.delete(tag);
             }
         }
 
         return true;
     }
+
+//    public Tags addPost(Integer tagId, Post post) {
+//        Tags tag = tagsRepository.findById(tagId).get();
+//        tag.addPost();
+//        tagsRepository.save(tag);
+//        return tag;
+//    }
 
 
 

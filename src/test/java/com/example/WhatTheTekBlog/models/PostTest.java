@@ -14,14 +14,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@JsonTest
-@RunWith(SpringRunner.class)
+//@JsonTest
+//@RunWith(SpringRunner.class)
 public class PostTest {
 
  //   private JacksonTester<Post> json;
 
-    @MockBean
-    UserService userService;
+//    @MockBean
+//    UserService userService;
 
     private Post post;
     @Before

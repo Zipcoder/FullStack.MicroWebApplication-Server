@@ -18,7 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,7 +35,7 @@ public class UserServiceTest {
 
         @Before
         public void setup(){
-            this.controller = new UserController(userService, new BCryptPasswordEncoder());
+            this.controller = new UserController(userService);
             mockRepo = Mockito.mock(UserRepository.class);
             userService = new UserService(mockRepo);
         }
@@ -70,6 +69,7 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository mockRepo;
+
     @InjectMocks
     private UserService userService;
 
@@ -149,7 +149,11 @@ public class UserServiceTest {
         //When
         userService.delete(1);
         //Then
-        Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
+        //Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
+        //expected.remove(user);
+        List<User> actual = (List<User>) mockRepo.findAll();
+        actual.forEach(user5 -> System.out.println(user5.getName()));
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -180,6 +184,24 @@ public class UserServiceTest {
         Set<Post> expected = new HashSet<>();
         expected.add(new Post());
         expected.add(new Post());
+        User user = new User();
+        user.setId(1);
+        user.setPosts(expected);
+
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findById(1)).thenReturn(Optional.of(user));
+        Set<Post> actual = (Set<Post>) userService.getPostsByUser(1);
+
+        //Then
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testgetPostsByUser2(){
+        //Given
+        Set<Post> expected = new HashSet<>();
         User user = new User();
         user.setId(1);
         user.setPosts(expected);
@@ -232,5 +254,23 @@ public class UserServiceTest {
 
         //Then
         Assert.assertEquals("expected", actual);
+    }
+
+
+    @Test
+    public void testContains(){
+        //Given
+        User user = new User();
+        user.setId(1);
+        String expected = "testing";
+        user.setName(expected);
+        mockRepo.save(user);
+
+        //When
+        Mockito.when(mockRepo.findByName(expected)).thenReturn(Optional.of(user));
+        boolean actual = userService.contains(expected);
+
+        //Then
+        Assert.assertTrue(actual);
     }
 }

@@ -22,7 +22,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import sun.rmi.runtime.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +64,7 @@ public class PostControllerTest {
         post.setPostTitle("Post1Title");
         post.setPostSummary("Post1Summary");
         post.setCreator(author1);
-        post.setCreatedDate(new Date());
+        post.setCreatedDate(null);
         comments.setUser(author1);
         comments.setPost(post);
         tags.setId(1);
@@ -87,8 +86,7 @@ public class PostControllerTest {
                 .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
-                "\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-16\",\"comments\":[]," +
-                "\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
+                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"}}";
 
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/post/" + givenId))
@@ -102,13 +100,13 @@ public class PostControllerTest {
                 .given(repository.save(post))
                 .willReturn(post);
 
-        String expectedContent = "{\"postID\":null,\"postTitle\":\"Post1Title\"," +
+        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\"," +
                 "\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\"," +
                 "\"createdDate\":\"2019-04-14\"," +
-                "\"comments\":[],\"tagsSet\":[],\"creator\":{null}";
+                "\"comments\":[],\"tagsSet\":[],\"creator\":null}";
 
         this.mvc.perform(MockMvcRequestBuilders
-                .post("/users/createPost/eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJuaWNrbmFtZSI6InRlc3QiLCJuYW1lIjoidGVzdEBnbWFpbC5jb20iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMWFlZGI4ZDlkYzQ3NTFlMjI5YTMzNWUzNzFkYjgwNTg_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZ0ZS5wbmciLCJ1cGRhdGVkX2F0IjoiMjAxOS0wNC0xNVQxMzo0MzoyNi40MzVaIiwiaXNzIjoiaHR0cHM6Ly93aGF0dGhldGVrLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1Y2I0OGE3ZTAyMGY4NzEwNDI5NzViNGUiLCJhdWQiOiJ2Nk9NaE5tTjBPTzNhUFFuQzlWbkVBQ0JEWDdDT1IwTiIsImlhdCI6MTU1NTQzNzkwNCwiZXhwIjoxNTU1NDczOTA0LCJhdF9oYXNoIjoiT0dkQ253TFJBQXVYOUZMYmZIbVV6USIsIm5vbmNlIjoiQVlEWm8wbEhYY05ueUlSSlhqWENjbTRtcjdJUTd0WFAifQ.hOkl-7VPrHQUO0tO7B8Wm-l9Wyx_ekYy5oHdSK4HO2DCsbdVXMIxfgaP_Ch_61bf8Df7nT2xnq4ku5636bhuAEUGX-GMkVVxxrDnb5izhW8kkKcT5yhK1F6Lh97FR9ego6Kl081yLqbHD42zvZQ9HJWHEbQ4BC3GqhrYUjxozK_LsODSPjwX4ldDFUV-pu4nZnW4YQSY4v9twyVg-BdZEk5TpWVR_bngXIFEtVYiINzRp2ygwKlcnv3dYeV-R9rrHsYrUPoYXlYrUNb5uBu2rp-fkMMToL9Ca8i6KHVlxxZ-6CYt2WfT-YHhaV9jgNrSCT6wq9DG3wuWDW-dJdttVg")
+                .post("/users/createPost/eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFUUXdNRFk1TXpFek5qazFOREUwTnpFNE5FSXpNREl6UlVZMU5UUTBOamRDTWpZNE5qQTBOdyJ9.eyJuaWNrbmFtZSI6ImVsZW9ub3JiYXJ0IiwibmFtZSI6ImVsZW9ub3JiYXJ0QGdtYWlsLmNvbSIsInBpY3R1cmUiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci81MDk2MjczNDM3ZThjOGFjOTIwMTAwYTE5NDM1YzY2Yz9zPTQ4MCZyPXBnJmQ9aHR0cHMlM0ElMkYlMkZjZG4uYXV0aDAuY29tJTJGYXZhdGFycyUyRmVsLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDE5LTA0LTE0VDAzOjM5OjQyLjQ0NFoiLCJpc3MiOiJodHRwczovL3doYXR0aGV0ZWsuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVjYjJhYjFkM2QzNmU0MTBlMWIzMDRhNiIsImF1ZCI6InY2T01oTm1OME9PM2FQUW5DOVZuRUFDQkRYN0NPUjBOIiwiaWF0IjoxNTU1MzY1NTI3LCJleHAiOjE1NTU0MDE1MjcsImF0X2hhc2giOiJHNzdsa1Q5cXE5TDh5NnFMUFo5SXJBIiwibm9uY2UiOiJZNmxaUmdUd0RtMGE0ejV4UUJLd2hhZkE5eDdCNjJScCJ9.h_FYlFmckr4lpQD-fc7Uh8y2Omal474qm1G3x4egTnCVSj35pOlgMXyI30IIgQN2A1-zXWAi9SDrC4CrofK1ahiNB1Ac3aIs0EBoO91TVcKJe03TKI2QE2zcIa46grXJld84DjNPgZkYy-HJGBYc-vScagO3YlJ_bX8TGEUoyt-BIUeobIfyauqOzyLomYpDP1soIeuvg_Fe8_Mk2iCVXlxSNJHaYEfC9SGg2m7XqolBhzNNC3eSCfqK8OFPm4v7n_fqojMJ9NXlE73S-dxM8ybE_08xCp0X3jJOY2S4mywGijprX0R9gMUlcbLoBRYdH0oRHA5k7jeoIqk3BFrpog")
                 .content(expectedContent)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

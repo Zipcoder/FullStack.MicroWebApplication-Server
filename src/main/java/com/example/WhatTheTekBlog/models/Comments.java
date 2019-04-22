@@ -6,39 +6,31 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 public class Comments {
 
-//    @ManyToOne
-//    private User commenter;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long comment_id;
+    private Long commentId;
 
-  private String comments;
-  @ManyToOne(cascade = CascadeType.ALL)
-  private User user;
+    private String comments;
+    @ManyToOne
+    private User user;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JsonIgnore
-  private Post post;
+    @ManyToOne
+    private Post post;
 
-
-    @NotNull
     private Date createdDate = new Date();
 
-    @Transient
-    Calendar calendar = Calendar.getInstance();
 
-
-    public Long getComment_id() {
-        return comment_id;
+    public Long getCommentId() {
+        return commentId;
     }
 
-    public void setComment_id(Long comment_id) {
-        this.comment_id = comment_id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public String getComments() {
@@ -61,9 +53,9 @@ public class Comments {
         return post;
     }
 
-  public void setPost(Post post) {
-    this.post = post;
-  }
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
     public Date getCreatedDate() {
         return createdDate;
@@ -73,11 +65,4 @@ public class Comments {
         this.createdDate = createdDate;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
 }
