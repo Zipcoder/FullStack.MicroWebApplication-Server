@@ -152,7 +152,6 @@ public class UserServiceTest {
         //Mockito.verify(mockRepo, Mockito.times(1)).deleteById(1);
         //expected.remove(user);
         List<User> actual = (List<User>) mockRepo.findAll();
-        actual.forEach(user5 -> System.out.println(user5.getName()));
         Assert.assertEquals(actual, expected);
     }
 
