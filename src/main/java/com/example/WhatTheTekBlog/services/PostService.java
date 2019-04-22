@@ -42,6 +42,7 @@ public class PostService {
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());
+        originalPost.setMyFile(post.getMyFile());
         removeTags(originalPost);
         originalPost.setTagsSet(saveTags(post));
         postRepository.deleteById(originalPost.getPostID());

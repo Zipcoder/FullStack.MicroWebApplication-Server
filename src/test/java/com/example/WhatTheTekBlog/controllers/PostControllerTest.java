@@ -78,15 +78,17 @@ public class PostControllerTest {
 
     @MockBean
     private PostRepository repository;
+    @MockBean
+    private PostService service;
 
     @Test
     public void testGetPost() throws Exception {
         BDDMockito
-                .given(repository.findById(givenId))
+                .given(service.findByPostId(givenId))
                 .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
-                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"}}";
+                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"},\"myFile\":null}";
 
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/post/" + givenId))
@@ -97,7 +99,7 @@ public class PostControllerTest {
     @Test
     public void testCreatePost() throws Exception {
         BDDMockito
-                .given(repository.save(post))
+                .given(service.createPost(post))
                 .willReturn(post);
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\"," +
