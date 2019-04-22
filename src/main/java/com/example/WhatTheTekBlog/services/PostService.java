@@ -38,7 +38,7 @@ public class PostService {
     }
 
     public Post updatePost(Long postId, Post post) {
-        Post originalPost = this.postRepository.findByPostID(postId);
+        Post originalPost = postRepository.findByPostID(postId);
         originalPost.setPostTitle(post.getPostTitle());
         originalPost.setPostSummary(post.getPostSummary());
         originalPost.setPostContent(post.getPostContent());

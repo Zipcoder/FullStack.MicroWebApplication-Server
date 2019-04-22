@@ -1,12 +1,7 @@
 package com.example.WhatTheTekBlog.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
 
 @Entity
 public class Comments {
@@ -65,4 +60,14 @@ public class Comments {
         this.createdDate = createdDate;
     }
 
+    @Override
+    public String toString() {
+        return "Comments{" +
+                "commentId=" + commentId +
+                ", comments='" + comments + '\'' +
+                ", user=" + user +
+                ", post=" + post +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }
