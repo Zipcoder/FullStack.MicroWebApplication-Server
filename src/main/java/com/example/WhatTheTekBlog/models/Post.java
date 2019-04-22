@@ -40,6 +40,8 @@ public class Post {
   @ManyToOne
   private User creator;
 
+  private String myFile;
+
   public Post() {
   }
 
@@ -108,6 +110,14 @@ public class Post {
     this.createdDate = createdDate;
   }
 
+  public String getMyFile() {
+    return myFile;
+  }
+
+  public void setMyFile(String myFile) {
+    this.myFile = myFile;
+  }
+
   @Override
   public String toString() {
     return "Post{" +
@@ -119,6 +129,7 @@ public class Post {
             ", comments=" + comments +
             ", tagsSet=" + tagsSet +
             ", creator=" + creator +
+            ", myFile='" + myFile + '\'' +
             '}';
   }
 }
