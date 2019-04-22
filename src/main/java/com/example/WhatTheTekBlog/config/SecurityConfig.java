@@ -49,6 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/comment/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/comment/update/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/comment/create/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/uploadFile").permitAll()
+                .antMatchers(HttpMethod.POST, "/uploadMultipleFiles").permitAll()
+                .antMatchers(HttpMethod.GET, "/downloadFile/**").permitAll()
                 .anyRequest().authenticated();
     }
 

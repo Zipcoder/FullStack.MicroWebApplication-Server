@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "file",
+      "type": "com.example.WhatTheTekBlog.config.FileStorageProperties",
+      "sourceType": "com.example.WhatTheTekBlog.config.FileStorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "file.upload-dir",
+      "type": "java.lang.String",
+      "sourceType": "com.example.WhatTheTekBlog.config.FileStorageProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,6 +1,7 @@
 package com.example.WhatTheTekBlog;
 
 import com.example.WhatTheTekBlog.Utils.RandomGenerator;
+import com.example.WhatTheTekBlog.config.FileStorageProperties;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.models.Comments;
 import com.example.WhatTheTekBlog.models.Post;
@@ -13,12 +14,18 @@ import com.example.WhatTheTekBlog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import java.util.*;
 
 @SpringBootApplication
+
+@EnableConfigurationProperties ({
+		FileStorageProperties.class
+})
+
 public class WhatTheTekBlogApplication {
 
 	public static void main(String[] args) {
