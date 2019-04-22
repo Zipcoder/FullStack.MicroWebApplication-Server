@@ -55,7 +55,6 @@ public class TagsController {
         return new ResponseEntity<>(this.tagsService.update(id, tag), HttpStatus.OK);
     }
 
-    // Only one DeleteMapping (either delete by id or tagName)
 //    @DeleteMapping("/tags/{id}")
 //    public ResponseEntity<Boolean> delete(@PathVariable Integer id) {
 //        return new ResponseEntity<>(tagsService.delete(id), HttpStatus.OK);
