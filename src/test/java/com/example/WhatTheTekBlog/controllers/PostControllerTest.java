@@ -86,8 +86,7 @@ public class PostControllerTest {
                 .willReturn(Optional.of(post));
 
         String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
-                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"comments\":[]," +
-                "\"tagsSet\":[],\"creator\":{\"id\":1,\"name\":\"author1\"}}";
+                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"}}";
 
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/post/" + givenId))
