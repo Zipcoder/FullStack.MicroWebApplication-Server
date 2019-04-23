@@ -131,6 +131,8 @@ public class UserControllerTest {
                 given(userService.create(any(User.class)))
                 .willReturn(user);
 
+        SecurityConfig.getAccessToken();
+
         String expectedContent = "{\"id\":2,\"name\":\"testUser\"}";
         this.mvc.perform(MockMvcRequestBuilders
                 .post("/users/sign-up")
