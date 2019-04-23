@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 public class UploadFileResponseTest {
 
     UploadFileResponse fileResponse = new UploadFileResponse();
+    UploadFileResponse fileResponse1 = new UploadFileResponse("Testing FileName","/downloadFile","jpg",5L);
 
     @Before
     public void setup() {

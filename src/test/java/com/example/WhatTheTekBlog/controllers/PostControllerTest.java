@@ -114,7 +114,7 @@ public class PostControllerTest {
                 "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"},\"myFile\":null}";
 
         this.mvc.perform(MockMvcRequestBuilders
-                .put("/users/updatePost/"+givenId)
+                .put("/users/updatePost/" + givenId)
                 .content(expectedContent)
                 .header("authorization", "Bearer " + SecurityConfig.getAccessToken())
                 .accept(MediaType.APPLICATION_JSON)
@@ -122,7 +122,6 @@ public class PostControllerTest {
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
-
     }
 
     @Test
@@ -139,6 +138,26 @@ public class PostControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-            //    .andExpect(MockMvcResultMatchers.status());
+        //    .andExpect(MockMvcResultMatchers.status());
+    }
+
+    @Test
+    public void testGetTags() throws Exception {
+        BDDMockito
+                .given(service.findByPostId(givenId))
+                .willReturn(Optional.of(post));
+
+        String expectedContent = "{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\"," +
+                "\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":1,\"name\":\"author1\"},\"myFile\":null}";
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .get("/post/tags/" + givenId)
+                .content(expectedContent)
+                .header("authorization", "Bearer " + SecurityConfig.getAccessToken())
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 }
