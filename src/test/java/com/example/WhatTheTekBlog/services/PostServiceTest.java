@@ -96,14 +96,15 @@ public class PostServiceTest {
     @Test
     public void testUpdate() {
         //Given
-        Long givenId = 1L;
         Post post1 = new Post();
+        Long givenId = 1000L;
         post1.setPostID(givenId);
         post1.setPostTitle("Post1Title");
         Post expected = new Post();
-        expected.setPostID(2L);
+        expected.setPostID(givenId);
         expected.setPostTitle("Post1TitleUpdated");
         mockPostRepo.save(post1);
+        mockPostRepo.save(expected);
 
         //When
         Mockito.when(mockPostRepo.findById(givenId)).thenReturn(Optional.of(post1));
