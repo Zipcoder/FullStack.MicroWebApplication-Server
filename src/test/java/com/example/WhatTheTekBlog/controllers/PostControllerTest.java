@@ -6,18 +6,13 @@ import com.example.WhatTheTekBlog.models.Post;
 import com.example.WhatTheTekBlog.models.Tags;
 import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
-import com.example.WhatTheTekBlog.repositories.UserRepository;
 import com.example.WhatTheTekBlog.services.PostService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -27,14 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static java.util.Optional.ofNullable;
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.willReturn;
-
 
 @SpringBootTest
 @AutoConfigureMockMvc//(secure = false)

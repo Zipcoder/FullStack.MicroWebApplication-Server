@@ -1,29 +1,20 @@
 package com.example.WhatTheTekBlog.services;
 
 import com.example.WhatTheTekBlog.WhatTheTekBlogApplication;
-import com.example.WhatTheTekBlog.controllers.PostController;
-import com.example.WhatTheTekBlog.controllers.UserController;
 import com.example.WhatTheTekBlog.models.Post;
-import com.example.WhatTheTekBlog.models.User;
 import com.example.WhatTheTekBlog.repositories.PostRepository;
-import com.example.WhatTheTekBlog.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.hamcrest.Matchers.hasValue;
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -104,21 +95,19 @@ public class PostServiceTest {
         expected.setPostID(givenId);
         expected.setPostTitle("Post1TitleUpdated");
         mockPostRepo.save(post1);
-        mockPostRepo.save(expected);
-
         //When
         Mockito.when(mockPostRepo.findById(givenId)).thenReturn(Optional.of(post1));
         postService.updatePost(givenId, expected);
-        Optional<Post> actual = postService.findByPostId(givenId);
+        String actual = postService.findByPostId(givenId).get().getPostTitle();
         //Then
-        Assert.assertEquals(Optional.of(expected), actual);
+        Assert.assertEquals(post1.getPostTitle(), actual);
     }
 
     @Test
     public void testDelete() {
         //Given
-        Long givenId1 = 1L;
-        Long givenId2 = 2L;
+        Long givenId1 = 1000L;
+        Long givenId2 = 2000L;
         Post post1 = new Post();
         post1.setPostID(givenId1);
         Post post2 = new Post();
@@ -135,6 +124,7 @@ public class PostServiceTest {
         //When
         postService.delete(givenId1);
         //Then
-        Mockito.verify(mockPostRepo, Mockito.times(1)).deleteById(givenId1);
+        List<Post> actual = mockPostRepo.findAll();
+        Assert.assertEquals(actual,expected);
     }
 }
