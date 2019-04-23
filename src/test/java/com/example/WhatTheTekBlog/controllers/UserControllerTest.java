@@ -45,16 +45,6 @@ public class UserControllerTest {
     @MockBean
     private PostService postService;
 
-    private String token;
-
-    @Before
-    public void setUp() throws Exception {
-        HttpResponse<String> response = Unirest.post("https://whatthetek.auth0.com/oauth/token")
-                .header("content-type", "application/json")
-                .body("{\"client_id\":\"v6OMhNmN0OO3aPQnC9VnEACBDX7COR0N\",\"client_secret\":\"VuhJwgSBFvCnrejevtGQleKDcxFNTwjqgsypcqCJ4RNj5-kCWfB7yvQu2vXQ4wbV\",\"audience\":\"http://localhost:8080\",\"grant_type\":\"client_credentials\"}")
-                .asString();
-        token = new JSONObject(response.getBody()).getString("access_token");
-    }
 
     @Test
     public void testFindById() throws Exception {
@@ -130,6 +120,8 @@ public class UserControllerTest {
         BDDMockito.
                 given(userService.create(any(User.class)))
                 .willReturn(user);
+
+        SecurityConfig.getAccessToken();
 
         String expectedContent = "{\"id\":2,\"name\":\"testUser\"}";
         this.mvc.perform(MockMvcRequestBuilders
