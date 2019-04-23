@@ -96,4 +96,19 @@ public class TagsTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void toStringTest() {
+        //Given
+        int id = 1;
+        String tagName = "One Piece";
+        tag.setId(id);
+        tag.setTagName(tagName);
+        String expected = "Tags{id=1, tagName='One Piece'}";
+        //When
+        String actual = tag.toString();
+        //Then
+        Assert.assertEquals(expected,actual);
+
+    }
+
 }
