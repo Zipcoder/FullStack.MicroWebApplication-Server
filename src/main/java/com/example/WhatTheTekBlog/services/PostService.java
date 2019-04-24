@@ -59,7 +59,7 @@ public class PostService {
     }
 
 
-    private Set<Tags> saveTags(Post savedPost) {
+    public Set<Tags> saveTags(Post savedPost) {
         Set<Tags> actualTags = new HashSet<>();
         savedPost.getTagsSet().forEach(tags -> actualTags.add(tagsRepository.findByTagName(tags.getTagName())));
         for (Tags tags : actualTags) {
@@ -70,7 +70,7 @@ public class PostService {
         return actualTags;
     }
 
-    private void removeTags(Post originalPost) {
+    public   void removeTags(Post originalPost) {
         for (Tags tags : originalPost.getTagsSet()) {
             Tags updatedTag = tagsRepository.findByTagName(tags.getTagName());
             updatedTag.removePost(originalPost);
