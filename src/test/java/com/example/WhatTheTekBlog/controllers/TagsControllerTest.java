@@ -119,6 +119,7 @@ public class TagsControllerTest {
         post.setPostTitle("Post1Title");
         post.setPostSummary("Post1Summary");
         post.setCreator(author1);
+        post.setCreatedDate(null);
         Set<Post> postSet = new HashSet<>();
         postSet.add(post);
         tag.setListOfPosts(postSet);
@@ -126,7 +127,7 @@ public class TagsControllerTest {
         //When
         BDDMockito.given(tagsService.findPostsByTag(tag.getTagName())).willReturn(tag.getListOfPosts());
         //Then
-        String expectedContent = "[{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-23\",\"creator\":{\"id\":null,\"name\":null},\"myFile\":null}]";
+        String expectedContent = "[{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":null,\"name\":null},\"myFile\":null}]";
 
         this.mvc.perform(MockMvcRequestBuilders.get("/tags/posts/Avengers")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
@@ -161,6 +162,7 @@ public class TagsControllerTest {
         post.setPostTitle("Post1Title");
         post.setPostSummary("Post1Summary");
         post.setCreator(author1);
+        post.setCreatedDate(null);
         Set<Post> postSet = new HashSet<>();
         postSet.add(post);
         tag.setListOfPosts(postSet);
@@ -174,7 +176,7 @@ public class TagsControllerTest {
 
         //When
         BDDMockito.given(tagsService.findFilteredPostsByTag(tagsList)).willReturn(postSet);
-        String expectedContent = "[{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":\"2019-04-23\",\"creator\":{\"id\":null,\"name\":null},\"myFile\":null}]";
+        String expectedContent = "[{\"postID\":1,\"postTitle\":\"Post1Title\",\"postSummary\":\"Post1Summary\",\"postContent\":\"Post1Content\",\"createdDate\":null,\"creator\":{\"id\":null,\"name\":null},\"myFile\":null}]";
         //Then
         this.mvc.perform(MockMvcRequestBuilders.get("/tags/filteredPosts/Avengers,EndGame")).
                 andExpect(MockMvcResultMatchers.status().isOk()).

@@ -48,6 +48,7 @@ public class CommentsControllerTest {
         user.setName("user1");
         Post post = new Post();
         post.setCreator(user);
+        post.setCreatedDate(null);
         comments1.setCommentId(commentId);
         comments1.setComments(commentString);
         comments1.setCreatedDate(null);
@@ -69,7 +70,7 @@ public class CommentsControllerTest {
                 .willReturn(Optional.of(comments1));
 
         String expectedContent = "{\"commentId\":30,\"comments\":\"This is a comment\",\"user\":{\"id\":10,\"name\":\"user1\"}," +
-                "\"post\":{\"postID\":null,\"postTitle\":null,\"postSummary\":null,\"postContent\":null,\"createdDate\":\"2019-04-23\"," +
+                "\"post\":{\"postID\":null,\"postTitle\":null,\"postSummary\":null,\"postContent\":null,\"createdDate\":null," +
                 "\"creator\":{\"id\":10,\"name\":\"user1\"},\"myFile\":null},\"createdDate\":null}";
 
         this.mvc.perform(MockMvcRequestBuilders
