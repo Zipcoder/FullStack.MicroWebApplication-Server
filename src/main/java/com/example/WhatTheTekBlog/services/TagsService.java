@@ -68,21 +68,25 @@ public class TagsService {
         return originalTag;
     }
 
-    public Boolean deleteTags(Integer id) {
-        tagsRepository.deleteById(id);
-        return true;
-    }
+//    public Boolean deleteTags(Integer id) {
+//        tagsRepository.deleteById(id);
+//        return true;
+//    }
 
     public Boolean deleteTags(String tagName) {
-        List<Tags> listOfTags = (ArrayList<Tags>) this.tagsRepository.findAll();
-
-        for (Tags tag: listOfTags) {
-            if(tag.getTagName() != null && tag.getTagName().equals(tagName)) {
-                tagsRepository.delete(tag);
-            }
+//        List<Tags> listOfTags = (ArrayList<Tags>) this.tagsRepository.findAll();
+//
+//        for (Tags tag: listOfTags) {
+//            if(tag.getTagName() != null && tag.getTagName().equals(tagName)) {
+//                tagsRepository.delete(tag);
+//            }
+//        }
+        Tags tags = tagsRepository.findByTagName(tagName);
+        if(tags != null) {
+            tagsRepository.delete(tags);
+            return true;
         }
-
-        return true;
+        return false;
     }
 
 //    public Tags addPost(Integer tagId, Post post) {
