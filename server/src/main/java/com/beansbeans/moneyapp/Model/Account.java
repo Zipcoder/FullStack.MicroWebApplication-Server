@@ -8,6 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Account {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double balance;
     private Long userId;
