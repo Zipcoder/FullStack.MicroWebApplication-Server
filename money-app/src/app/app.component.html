@@ -5,7 +5,7 @@
   </h1>
 
   <nav>
-    <a routerLink='/users' routerLinkActive='active'>User Management</a>
+    <a routerLink='/users' (click)="navigate()">User Management</a>
     <a routerLink='/deposit' routerLinkActive='active'>Deposit Money</a>
     <a routerLink='/withdraw' routerLinkActive='active'>Withdraw Money</a>
     <a routerLink='/transfer' routerLinkActive='active'>Transfer Money</a>
@@ -25,5 +25,6 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul> -->
-
+<!--  routerLinkActive='active'-->
+</div>
 <router-outlet></router-outlet>

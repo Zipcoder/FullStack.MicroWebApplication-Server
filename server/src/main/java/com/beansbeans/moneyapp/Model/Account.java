@@ -1,19 +1,22 @@
 package com.beansbeans.moneyapp.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double balance;
+    @Column(name="userid")
     private Long userId;
 
     public Account() {}
+
+    public Account(Double balance, Long userId) {
+        this.balance = balance;
+        this.userId = userId;
+    }
 
     public Account(Long id, Double balance, Long userId) {
         this.id = id;
@@ -43,5 +46,14 @@ public class Account {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", balance=" + balance +
+                ", userId=" + userId +
+                '}';
     }
 }
