@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from "../model/user"
+
 
 @Component({
   selector: 'app-account-creator',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountCreatorComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  title: string;
+  user: User = {
+    id: '123',
+    name: 'caleb',
+    email: 'caleb@caleb.caleb'
+  };
+
+  constructor() {
+    this.title = 'hello';
+  }
 
   ngOnInit() {
   }
