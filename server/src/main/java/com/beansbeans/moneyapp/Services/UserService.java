@@ -20,4 +20,20 @@ public class UserService {
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
+
+    public User show(Long id){
+        return userRepository.findById(id).get();
+    }
+
+    public User updateUser(Long id, User newUserData){
+        User originalUser = userRepository.findById(id).get();
+        originalUser.setFirstName(newUserData.getFirstName());
+        originalUser.setLastName(newUserData.getLastName());
+        return userRepository.save(originalUser);
+    }
+
+    public Boolean deleteUser(Long id){
+       userRepository.deleteById(id);
+       return true;
+    }
 }

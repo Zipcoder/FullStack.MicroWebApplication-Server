@@ -4,10 +4,11 @@ import { AccDepositComponent } from './acc-deposit/acc-deposit.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { AccWithdrawComponent } from './acc-withdraw/acc-withdraw.component';
 import { AccTransferComponent } from './acc-transfer/acc-transfer.component';
+import { AccountCreatorComponent} from './account-creator/account-creator.component';
 
 
 const routes: Routes = [
-  {path: 'users', component: UserManagementComponent},
+  {path: 'users', component: AccountCreatorComponent},
   {path: 'deposit', component: AccDepositComponent},
   {path: 'withdraw', component: AccWithdrawComponent},
   {path: 'transfer', component: AccTransferComponent}
