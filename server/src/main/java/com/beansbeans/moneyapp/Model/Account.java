@@ -15,6 +15,11 @@ public class Account {
 
     public Account() {}
 
+    public Account(Double balance, Long userId) {
+        this.balance = balance;
+        this.userId = userId;
+    }
+
     public Account(Long id, Double balance, Long userId) {
         this.id = id;
         this.balance = balance;
@@ -43,5 +48,14 @@ public class Account {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", balance=" + balance +
+                ", userId=" + userId +
+                '}';
     }
 }
