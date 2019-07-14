@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.beansbeans.moneyapp.Repositories.AccountRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,21 +23,28 @@ public class TransactionService {
     }
 
     public Transaction newTransaction(Transaction transaction) {
+
         return transactionRepository.save(transaction);
     }
 
-    public Transaction showTransaction(Long transactionId) {
-        return transactionRepository.findById(transactionId).get();
+    public Transaction findTransactionById(Long id){
+        return transactionRepository.findById(id).get();
     }
 
-    public void depositTo(Long id, Double amount){
+    public Iterable<Transaction> getAllTransactions(){
+        return transactionRepository.findAll();
+    }
+
+
+    public Boolean depositTo(Long id, Double amount){
         Account account = accountRepository.findById(id).get();
         Double initialBalance = account.getBalance();
         account.setBalance(initialBalance + amount);
         accountRepository.save(account);
+        return true;
     }
 
-    public void withdrawFrom(Long id, Double amount){
+    public Boolean withdrawFrom(Long id, Double amount){
         Account account = accountRepository.findById(id).get();
         Double initialBalance = account.getBalance();
         if((initialBalance - amount) < 0.0){
@@ -44,9 +52,10 @@ public class TransactionService {
         }
         account.setBalance(initialBalance - amount);
         accountRepository.save(account);
+        return true;
     }
 
-    public void transferFunds(Long fromId, Long toId, Double amount){
+    public Boolean transferFunds(Long fromId, Long toId, Double amount){
         Account fromAccount = accountRepository.findById(fromId).get();
         Account toAccount = accountRepository.findById(toId).get();
         Double initalBalance = fromAccount.getBalance();
@@ -56,6 +65,7 @@ public class TransactionService {
         fromAccount.setBalance(initalBalance - amount);
         toAccount.setBalance(initalBalance + amount);
         accountRepository.save(fromAccount);
-        accountRepository.save(toAccount); 
+        accountRepository.save(toAccount);
+        return true;
     }
 }
