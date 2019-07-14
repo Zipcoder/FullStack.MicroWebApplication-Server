@@ -22,4 +22,6 @@ public class AccountController {
     public ResponseEntity<Account> getById(@PathVariable Long id){
         return new ResponseEntity<>(accountService.show(id), HttpStatus.OK);
     }
+
+
 }

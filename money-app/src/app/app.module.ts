@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AccountService } from './account.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountCreatorComponent } from './account-creator/account-creator.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AccountCreatorComponent } from './account-creator/account-creator.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

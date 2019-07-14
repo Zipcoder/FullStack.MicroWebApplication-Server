@@ -10,4 +10,8 @@ import {Router} from '@angular/router';
 
 export class AppComponent {
   title = 'money-app';
+  constructor(private router: Router) { }
+  navigate() {
+    this.router.navigate(['account-creator']);
+  }
 }
