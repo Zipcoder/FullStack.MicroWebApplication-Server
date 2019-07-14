@@ -13,6 +13,7 @@ public class ValidateUserNamePassword {
 
         public userValidation() {
 
+            
         }
 
         public static Boolean isUserNamePasswordValid(String inputName, String inputPassword) {
