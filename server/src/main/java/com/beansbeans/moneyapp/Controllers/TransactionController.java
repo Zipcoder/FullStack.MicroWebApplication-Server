@@ -28,18 +28,18 @@ public class TransactionController {
         return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
     }
 
-    @PostMapping("/transaction")
+    @PostMapping("/transaction/deposit")
     public ResponseEntity<Boolean> deposit(@PathVariable Long toAccountId, @RequestBody Double amount){
         return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount), HttpStatus.OK);
     }
 
-    @PostMapping("/transaction")
+    @PostMapping("/transaction/withdraw")
     public ResponseEntity<Boolean> withdraw(@PathVariable Long fromAccountId, @RequestBody Double amount){
         return new ResponseEntity<>(transactionService.withdrawFrom(fromAccountId, amount), HttpStatus.OK);
     }
 
-    @PostMapping("/transaction")
+    @PostMapping("/transaction/transfer")
     public ResponseEntity<Boolean> transfer(@PathVariable Long fromAccountId, @PathVariable Long toAccountId, @RequestBody Double amount){
-        return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK); 
+        return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK);
     }
 }
