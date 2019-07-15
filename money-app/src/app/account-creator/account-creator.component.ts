@@ -11,9 +11,9 @@ export class AccountCreatorComponent implements OnInit {
 
   title: string;
   user: User = {
-    id: '123',
-    name: 'caleb',
-    email: 'caleb@caleb.caleb'
+    id: 123,
+    firstName: 'something',
+    lastName: 'else'
   };
 
   constructor() {
