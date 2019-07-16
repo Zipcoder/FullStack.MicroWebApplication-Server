@@ -155,4 +155,5 @@ fabric.properties
 target/
 
 .DS_Store
-.idea
+idea
+application.properties
