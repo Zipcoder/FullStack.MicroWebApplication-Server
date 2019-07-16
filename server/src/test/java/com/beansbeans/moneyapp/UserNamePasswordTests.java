@@ -3,7 +3,10 @@ package com.beansbeans.moneyapp;
 import com.beansbeans.moneyapp.Services.ValidateUserNamePassword;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.confirmPasswordHash;
+import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.makeHash;
 import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.isUserNamePasswordValid;
 
 public class UserNamePasswordTests {
@@ -286,5 +289,26 @@ public class UserNamePasswordTests {
             Assert.assertFalse(ans);
 
         }
+
+    @Test
+    public void makeHashTest01() {
+
+        String passWord = "AlexanderBrown1234!";
+
+        String hash =  makeHash(passWord);
+
+        Assert.assertTrue(BCrypt.checkpw(passWord, hash));
+    }
+
+    @Test
+    public void confirmPasswordHashTest02() {
+
+        String passWord = "AlexanderBrown1234!";
+
+        String hash =  makeHash(passWord);
+
+        Assert.assertTrue(confirmPasswordHash(passWord, hash));
+    }
+
 
 }
