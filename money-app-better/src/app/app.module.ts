@@ -12,6 +12,9 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AccountServiceService } from '../service/account-service.service';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +29,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AccountServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

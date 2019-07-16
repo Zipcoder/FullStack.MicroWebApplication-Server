@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from '../../model/account';
+import { AccountServiceService } from '../../service/account-service.service';
 
 @Component({
   selector: 'app-transactions',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionsComponent implements OnInit {
 
-  constructor() { }
+  balance: number = 0;
+  account: Account;
+  
+
+  constructor(private accountServiceService: AccountServiceService) { }
 
   ngOnInit() {
+    this.updateAccount();
+  }
+
+  updateAccount(){
+    this.accountServiceService.getAccount().subscribe(account => this.account = account);
+    this.balance = this.account.balance;
+  }
+
+  updateBalance(){
+    this.balance = this.account.balance;
   }
 
 }
