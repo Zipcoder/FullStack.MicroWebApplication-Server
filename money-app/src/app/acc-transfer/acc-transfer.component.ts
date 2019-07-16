@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../model/account';
-import { ACCOUNTS } from '../mock-accounts';
+// import { ACCOUNTS } from '../mock-accounts';
 import { AccountService } from '../account.service';
 
 @Component({
