@@ -28,7 +28,7 @@ public class AccountController {
         return new ResponseEntity<>(accountService.show(id), HttpStatus.OK);
     }
 
-    @PostMapping("/accounts/{id}")
+    @PutMapping("/accounts/{id}")
     public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account){
         return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
     }

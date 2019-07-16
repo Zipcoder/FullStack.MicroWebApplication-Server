@@ -2,6 +2,10 @@ package com.beansbeans.moneyapp.Services;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.lang.String;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
+
 
 public class ValidateUserNamePassword {
 
@@ -12,9 +16,35 @@ public class ValidateUserNamePassword {
 
 
         public userValidation() {
-
-            
         }
+
+/*      Methods:
+
+            1)  isUserNamePasswordValid(String inputName, String inputPassword)
+
+                Returns "true" if UserName and Password are valid and UserName is
+                not already in use (to be implemented).
+
+
+
+            2)  makeHash(String inputPassword)
+
+                Hash is mutable with same password.  DO NOT USE AS UNIQUE ID !!!
+
+                Returns String (hash) created by hashing inputPassword.  Use makeHash
+                to encode client's password and place the hash in the database.
+                When the client returns, use makeHash to encode the password and
+                compare with database version. DO NOT CHANGE "salt" !!!
+
+
+
+            3)  confirmPasswordHash(String passWord, String hash)
+
+                Returns "true" if passWord matches stored hash.  Hash will change
+                everytime makeHash is called, so we match the passWord with the original hash.
+*/
+
+
 
         public static Boolean isUserNamePasswordValid(String inputName, String inputPassword) {
 /*
@@ -40,13 +70,11 @@ public class ValidateUserNamePassword {
                                   and none of the following characters = ; : * / + ( ) [ ]  { } \ | ,
                                   cannot contain the User Name
 
+
+ Check User Name first
+
+
 */
-
-
-
-
-// Check User Name first
-
 
             // Name is at least 8 characters
             if (inputName.length() < 8) {return false;}
@@ -150,13 +178,30 @@ public class ValidateUserNamePassword {
             return true;
         }
 
+
+        public static Boolean isUserNameAvailable(String inputName) {
+
+            return false;
+        }
+
+
+        public static String makeHash(String inputPassword) {
+
+            String salt = BCrypt.gensalt(10);
+
+            String hash = BCrypt.hashpw(inputPassword, salt);
+
+            return hash;
+
+        }
+
+
+        public static Boolean confirmPasswordHash(String passWord, String hash) {
+
+            return (BCrypt.checkpw(passWord, hash));
+
+        }
+
     }
-
-
-
-
-
-
-
 
 }

@@ -36,6 +36,16 @@ public class Transaction {
         this.localDateTime = localDateTime;
     }
 
+    public Transaction(Long toAccountId, Double amount) {
+        this.toAccountId = toAccountId;
+        this.amount = amount;
+    }
+
+    public Transaction(Long fromAccountId, String memo) {
+        this.fromAccountId = fromAccountId;
+        this.memo = memo;
+    }
+
     public Long getTransactionId() {
         return transactionId;
     }
