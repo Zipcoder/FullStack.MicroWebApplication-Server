@@ -157,3 +157,4 @@ target/
 .DS_Store
 idea
 application.properties
+money-app-better/node_modules/

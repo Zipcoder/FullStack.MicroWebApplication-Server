@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+a.nav {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 5px;
+    background-color: rgb(48, 119, 211);
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Roboto', serif;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+nav {
+    padding: 2%;
+    background-color: rgb(48, 99, 211);
+    line-height: 220%;
+}
+
+.router {
+    font-family: 'Roboto', sans-serif;
+}
