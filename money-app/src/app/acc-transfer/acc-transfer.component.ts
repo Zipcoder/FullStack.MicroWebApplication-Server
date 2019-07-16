@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../model/account';
-import { ACCOUNTS } from '../mock-accounts';
+// import { ACCOUNTS } from '../mock-accounts';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -10,14 +10,13 @@ import { AccountService } from '../account.service';
 })
 export class AccTransferComponent implements OnInit {
 
-  usersAsString: string = "fuck it";
+  usersAsString: 'fuck it';
   accounts: Account[];
-  
   fromAccount: Account;
   fromId: number;
   toAccount: Account;
   toId: number;
-  amountToTransfer: number = 0;
+  amountToTransfer: 0;
 
   constructor(private accountService: AccountService) { }
 
@@ -25,30 +24,30 @@ export class AccTransferComponent implements OnInit {
     this.getAccounts();
   }
 
-  onSelectFrom(account: Account){
+  onSelectFrom(account: Account) {
     this.fromAccount = account;
     this.fromId = account.id;
   }
 
-  onSelectTo(account: Account){
+  onSelectTo(account: Account) {
     this.toAccount = account;
     this.toId = account.id;
   }
 
-  getAccounts(): void{
+  getAccounts(): void {
     this.accountService.getAll().subscribe(accounts => this.accounts = accounts);
   }
 
-  transfer(): void{
-    let updatedFromAccount: Account = {id: this.fromAccount.id, 
-      balance: this.fromAccount.balance - +this.amountToTransfer, 
+  transfer(): void {
+    const updatedFromAccount: Account = {id: this.fromAccount.id,
+      balance: this.fromAccount.balance - +this.amountToTransfer,
       userid: this.fromAccount.userid};
 
-    let updatedToAccount: Account = {id: this.toAccount.id, 
+    const updatedToAccount: Account = {id: this.toAccount.id,
       balance: this.toAccount.balance + +this.amountToTransfer,
       userid: this.toAccount.userid};
 
-      console.log(updatedToAccount.balance);
+    console.log(updatedToAccount.balance);
 
     this.accountService.update(updatedFromAccount).subscribe();
     this.accountService.update(updatedToAccount).subscribe();
