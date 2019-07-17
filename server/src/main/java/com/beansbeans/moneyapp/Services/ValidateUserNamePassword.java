@@ -4,6 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.String;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import java.sql.*;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.sql.SQLException;
 
 
 
@@ -179,12 +183,6 @@ public class ValidateUserNamePassword {
         }
 
 
-        public static Boolean isUserNameAvailable(String inputName) {
-
-            return false;
-        }
-
-
         public static String makeHash(String inputPassword) {
 
             String salt = BCrypt.gensalt(10);
@@ -200,6 +198,12 @@ public class ValidateUserNamePassword {
 
             return (BCrypt.checkpw(passWord, hash));
 
+        }
+
+
+        public static Boolean isUserNameAvailable(String inputName) {
+
+            return false;
         }
 
     }
