@@ -5,8 +5,6 @@
     to be selected from a dropdown box.
 </p>
 <div>
-    Balance: {{balance}}
+    Balance: <p *ngIf="account">{{account.balance}}</p>
 </div>
-<div>
-    <button (click)="updateBalance()">update</button>
-</div>
+ 

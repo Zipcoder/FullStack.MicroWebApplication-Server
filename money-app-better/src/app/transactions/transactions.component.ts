@@ -9,11 +9,10 @@ import { AccountServiceService } from '../../service/account-service.service';
 })
 export class TransactionsComponent implements OnInit {
 
-  balance: number = 0;
   account: Account;
-  
 
-  constructor(private accountServiceService: AccountServiceService) { }
+  constructor(private accountServiceService: AccountServiceService) {
+  }
 
   ngOnInit() {
     this.updateAccount();
@@ -21,11 +20,6 @@ export class TransactionsComponent implements OnInit {
 
   updateAccount(){
     this.accountServiceService.getAccount().subscribe(account => this.account = account);
-    this.balance = this.account.balance;
-  }
-
-  updateBalance(){
-    this.balance = this.account.balance;
   }
 
 }
