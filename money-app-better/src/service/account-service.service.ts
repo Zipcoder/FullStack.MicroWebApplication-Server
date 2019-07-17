@@ -1,0 +1,18 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Account } from '../model/account';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AccountServiceService {
+  accountUrl: string;
+  constructor(private http:HttpClient) { 
+    this.accountUrl = 'http://localhost:9065/accounts';
+  }
+
+  public getAccount(): Observable<Account>{
+    return this.http.get<Account>(this.accountUrl + "/1")
+  }
+}

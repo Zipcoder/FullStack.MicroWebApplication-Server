@@ -1,15 +1,73 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     Welcome to {{ title }}!
   </h1>
 
-  <nav>
-    <a routerLink='/users' routerLinkActive='active'>User Management</a>
-    <a routerLink='/deposit' routerLinkActive='active'>Deposit Money</a>
-    <a routerLink='/withdraw' routerLinkActive='active'>Withdraw Money</a>
-    <a routerLink='/transfer' routerLinkActive='active'>Transfer Money</a>
-  </nav>
+<!--  <nav>-->
+<!--    <a routerLink='/users' routerLinkActive='active'>User Management</a>-->
+<!--    <a routerLink='/deposit' routerLinkActive='active'>Deposit Money</a>-->
+<!--    <a routerLink='/withdraw' routerLinkActive='active'type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Withdraw Money</a>-->
+<!--    <a routerLink='/transfer' routerLinkActive='active'>Transfer Money</a>-->
+<!--  </nav>-->
+  <div id="btn-toolbar">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+     <div class="btn-group-lg mr-2" role="group" aria-label="First group">
+      <button type="button" class="btn btn-secondary">Create Account</button>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#depositModal">Deposit Funds</button>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#withdrawModal">Withdraw Funds</button>
+      <button type="button" class="btn btn-secondary">Transfer Funds</button>
+
+    </div>
+  </div>
+</div>
+<!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrawModal">-->
+<!--    Withdraw-->
+<!--  </button>-->
+  <div class="modal fade" id="withdrawModal" tabindex="-1" role="dialog" aria-labelledby="withdrawModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="withdrawModalLabel">Withdraw Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is where you withdraw funds
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#depositModal">-->
+<!--    Deposit-->
+<!--  </button>-->
+  <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="depositModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="depositModalLabel">Deposit Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is where you deposit funds
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
@@ -27,4 +85,4 @@
 </ul> -->
 <!--  routerLinkActive='active'-->
 </div>
-<router-outlet></router-outlet>
+
