@@ -20,7 +20,12 @@ export class TransactionsComponent implements OnInit {
   }
 
   updateAccount(){
-    this.accountServiceService.getAccount().subscribe(account => this.account = account);
+    let complete = false;
+    this.accountServiceService.getAccount()
+    .subscribe(account => {this.account = account; complete=true});
+    while(!complete){
+      
+    }
     this.balance = this.account.balance;
   }
 
