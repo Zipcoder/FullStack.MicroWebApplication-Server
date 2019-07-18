@@ -16,24 +16,27 @@ public class Transaction {
     private Double amount;
     private String memo;
     private LocalDateTime localDateTime;
+    private Long userId;
 
     public Transaction() { }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime) {
+    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = localDateTime;
+        this.userId = userId;
     }
 
-    public Transaction(Long transactionId, Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime) {
+    public Transaction(Long transactionId, Long fromAccountId, Long toAccountId, Double amount, String memo, LocalDateTime localDateTime, Long userId) {
         this.transactionId = transactionId;
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
         this.memo = memo;
         this.localDateTime = localDateTime;
+        this.userId = userId;
     }
 
     public Transaction(Long toAccountId, Double amount) {
@@ -93,4 +96,8 @@ public class Transaction {
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
     }
+
+    public Long getUserId(){ return userId; }
+
+    public void setUserId(Long userId){ this.userId = userId; }
 }
