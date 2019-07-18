@@ -4,7 +4,32 @@
     account on the page. The accounts should be able
     to be selected from a dropdown box.
 </p>
+<!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"   aria-expanded="false">
+        Choose Account
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+        <a class="dropdown-menu" href="#" *ngFor="let accountItem of accounts">
+            thpp
+        </a>
+    </div>
+</div> -->
 <div>
-    Balance: <p *ngIf="account">{{account.balance}}</p>
+    <select [(ngModel)]="currentAccount" (ngModelChange)="setCurrentAccount(currentAccount)">
+        <option *ngFor="let accItem of accounts" [ngValue]="accItem">
+            {{accItem.id}}, ${{accItem.balance}}
+        </option>
+    </select>
 </div>
- 
+    <!-- <div>
+            <ul class="search-result">
+                    <li *ngFor="let accItem2 of accounts" >
+                            {{accItem2.id}}
+                    </li>
+                </ul>
+    </div> -->
+    
+<div>
+    Balance: <p *ngIf="currentAccount">{{currentAccount.balance}}</p>
+</div>
+ <button (click)="clearAccount()">test</button>

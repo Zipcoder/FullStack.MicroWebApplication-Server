@@ -15,4 +15,8 @@ export class AccountServiceService {
   public getAccount(): Observable<Account>{
     return this.http.get<Account>(this.accountUrl + "/1")
   }
+
+  public getAccounts(): Observable<Account[]>{
+    return this.http.get<Account[]>(this.accountUrl);
+  }
 }
