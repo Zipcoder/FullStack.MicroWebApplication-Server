@@ -35,6 +35,7 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
+    public Transaction findTransactionByUserId(Long userId) { return transactionRepository.findById(userId).get(); }
 
     public Boolean depositTo(Long id, Double amount){
         Account account = accountRepository.findById(id).get();
