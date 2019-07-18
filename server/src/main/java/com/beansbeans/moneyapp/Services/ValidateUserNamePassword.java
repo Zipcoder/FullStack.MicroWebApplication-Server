@@ -8,7 +8,10 @@ import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.sql.SQLException;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class ValidateUserNamePassword {
@@ -50,7 +53,7 @@ public class ValidateUserNamePassword {
 
 
 
-        public static Boolean isUserNamePasswordValid(String inputName, String inputPassword) {
+        public static Boolean isUserNameValid(String inputName) {
 /*
         User Name must contain be at least 8 characters
                                   and 20 characters maximum
@@ -61,6 +64,109 @@ public class ValidateUserNamePassword {
                                   and no 3 same characters in a row
                                   and no spaces
                                   and none of the following characters = ; : * / + ( ) [ ]  { } \ | ,
+
+
+
+
+*/
+
+            // Name is at least 8 characters
+            if (inputName.length() < 8) {
+                return false;
+            }
+
+            // Name is less than 21 characters
+            if (inputName.length() > 20) {
+                return false;
+            }
+
+            // Name contains an uppercase character
+            if (inputName.equals(inputName.toLowerCase())) {
+                return false;
+            }
+
+            // Name contains a lowercase character
+            if (inputName.equals(inputName.toUpperCase())) {
+                return false;
+            }
+
+            // Check for forbidden characters
+            if (inputName.contains(" ")) {
+                return false;
+            }
+            if (inputName.contains("=")) {
+                return false;
+            }
+            if (inputName.contains(";")) {
+                return false;
+            }
+            if (inputName.contains(":")) {
+                return false;
+            }
+            if (inputName.contains("*")) {
+                return false;
+            }
+            if (inputName.contains("/")) {
+                return false;
+            }
+            if (inputName.contains("+")) {
+                return false;
+            }
+            if (inputName.contains("(")) {
+                return false;
+            }
+            if (inputName.contains(")")) {
+                return false;
+            }
+            if (inputName.contains("^")) {
+                return false;
+            }
+            if (inputName.contains("[")) {
+                return false;
+            }
+            if (inputName.contains("]")) {
+                return false;
+            }
+            if (inputName.contains("{")) {
+                return false;
+            }
+            if (inputName.contains("}")) {
+                return false;
+            }
+            if (inputName.contains("\\")) {
+                return false;
+            }
+            if (inputName.contains("|")) {
+                return false;
+            }
+            if (inputName.contains(",")) {
+                return false;
+            }
+
+            //Checks at least one char that is numeric
+            if (!inputName.matches(".*[0-9].*")) {
+                return false;
+            }
+
+            //Checks at least one char that is not alpha-numeric
+            if (inputName.matches("[A-Za-z0-9 ]*")) {
+                return false;
+            }
+
+            // Check for 3 identical characters in a row
+            final String ps = ".*(?:([a-z0-9])\\1{2,}).*";
+            final Pattern p1 = Pattern.compile(ps);
+            final Matcher m1 = p1.matcher(inputName);
+            if (m1.matches()) {
+                return false;
+            }
+            return true;
+        }
+
+
+            public static Boolean isPasswordValid(String inputPassword) {
+
+/*
 
 
         Password must contain be  at least 8 characters
@@ -75,58 +181,7 @@ public class ValidateUserNamePassword {
                                   cannot contain the User Name
 
 
- Check User Name first
-
-
 */
-
-            // Name is at least 8 characters
-            if (inputName.length() < 8) {return false;}
-
-            // Name is less than 21 characters
-            if (inputName.length() >20) {return false;}
-
-            // Name contains an uppercase character
-            if (inputName.equals(inputName.toLowerCase())) {return false;}
-
-            // Name contains a lowercase character
-            if (inputName.equals(inputName.toUpperCase())) {return false;}
-
-            // Check for forbidden characters
-            if (inputName.contains(" ")) {return false;}
-            if (inputName.contains("=")) {return false;}
-            if (inputName.contains(";")) {return false;}
-            if (inputName.contains(":")) {return false;}
-            if (inputName.contains("*")) {return false;}
-            if (inputName.contains("/")) {return false;}
-            if (inputName.contains("+")) {return false;}
-            if (inputName.contains("(")) {return false;}
-            if (inputName.contains(")")) {return false;}
-            if (inputName.contains("^")) {return false;}
-            if (inputName.contains("[")) {return false;}
-            if (inputName.contains("]")) {return false;}
-            if (inputName.contains("{")) {return false;}
-            if (inputName.contains("}")) {return false;}
-            if (inputName.contains("\\")) {return false;}
-            if (inputName.contains("|")) {return false;}
-            if (inputName.contains(",")) {return false;}
-
-            //Checks at least one char that is numeric
-            if (!inputName.matches(".*[0-9].*")) {return false;}
-
-            //Checks at least one char that is not alpha-numeric
-            if (inputName.matches("[A-Za-z0-9 ]*")) {return false;}
-
-            // Check for 3 identical characters in a row
-            final String ps = ".*(?:([a-z0-9])\\1{2,}).*";
-            final Pattern p1 = Pattern.compile(ps);
-            final Matcher m1 = p1.matcher(inputName);
-            if (m1.matches()) {return false;}
-
-
-// Check Password second
-
-
             // Name is at least 8 characters
             if (inputPassword.length() < 8) {return false;}
 
@@ -172,12 +227,10 @@ public class ValidateUserNamePassword {
             if (inputPassword.matches("[A-Za-z0-9 ]*")) {return false;}
 
             // Check for 3 identical characters in a row
-            final Pattern p2 = Pattern.compile(ps);
+                final String ps2 = ".*(?:([a-z0-9])\\1{2,}).*";
+            final Pattern p2 = Pattern.compile(ps2);
             final Matcher m2 = p2.matcher(inputPassword);
             if (m2.matches()) {return false;}
-
-            // Password cannot contain User Name
-            if (inputPassword.contains(inputName)) {return false;}
 
             return true;
         }
