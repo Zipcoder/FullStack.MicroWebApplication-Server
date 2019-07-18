@@ -7,7 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.confirmPasswordHash;
 import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.makeHash;
-import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.isUserNamePasswordValid;
+import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.isUserNameValid;
+import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.isPasswordValid;
+import static com.beansbeans.moneyapp.Services.ValidateUserNamePassword.userValidation.isUserNameAvailable;
 
 public class UserNamePasswordTests {
 
@@ -26,7 +28,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "Good123?";
 
-            ans = isUserNamePasswordValid(name, Pass);
+            ans = isUserNameValid(name);
 
             Assert.assertTrue(ans);
 
@@ -42,7 +44,7 @@ public class UserNamePasswordTests {
             String name = "bcdef?9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -58,7 +60,7 @@ public class UserNamePasswordTests {
             String name = "ABCDEF?9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -74,7 +76,7 @@ public class UserNamePasswordTests {
             String name = "abcDEFf?";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -90,7 +92,7 @@ public class UserNamePasswordTests {
             String name = "ABCabcdef$ 9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -107,7 +109,7 @@ public class UserNamePasswordTests {
             String name = "bbbcdXef?9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -123,7 +125,7 @@ public class UserNamePasswordTests {
             String name = "Abcdf?9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -139,7 +141,7 @@ public class UserNamePasswordTests {
             String name = "HHHHgtabchhhhhhhhhdXef?9";
             String Pass = "Good123?";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isUserNameValid(name);
 
             Assert.assertFalse(ans);
 
@@ -155,7 +157,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "good123$";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -171,7 +173,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "GOOD123$";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -187,7 +189,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "Goodeee$";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -203,7 +205,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "Goodaaa123$";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -219,7 +221,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "Gooda a123$";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -235,7 +237,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "Goodaa12345";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -251,7 +253,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "GoodabXABcd123?34";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -268,7 +270,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "GoodANDf?94";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -284,7 +286,7 @@ public class UserNamePasswordTests {
             String name = "ABcd123?";
             String Pass = "GoodNOTf?94";
 
-            ans =  isUserNamePasswordValid(name, Pass);
+            ans =  isPasswordValid(Pass);
 
             Assert.assertFalse(ans);
 
@@ -309,6 +311,23 @@ public class UserNamePasswordTests {
 
         Assert.assertTrue(confirmPasswordHash(passWord, hash));
     }
+
+    @Test
+    public void isUserNameAvailableTest01() {
+
+        String inputName = "Alex";
+
+        Assert.assertFalse(isUserNameAvailable(inputName));
+    }
+
+    @Test
+    public void isUserNameAvailableTest02() {
+
+        String inputName = "Alex2";
+
+        Assert.assertTrue(isUserNameAvailable(inputName));
+    }
+
 
 
 }
