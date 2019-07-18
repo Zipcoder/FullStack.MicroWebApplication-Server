@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+
 @RestController
 @CrossOrigin
+@RequestMapping(path="/transactions")
+@Transactional
 public class TransactionController {
     @Autowired
     private TransactionService transactionService;
@@ -22,6 +26,12 @@ public class TransactionController {
     public ResponseEntity<Transaction> findById(@PathVariable Long id){
         return new ResponseEntity<>(transactionService.findTransactionById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/transaction/{userId}")
+    public ResponseEntity<Transaction> findByUserId(@PathVariable Long userId){
+        return new ResponseEntity<>(transactionService.findTransactionByUserId(userId), HttpStatus.OK);
+    }
+
 
     @GetMapping("/transaction")
     public ResponseEntity<Iterable<Transaction>> getAllTransactions(){

@@ -13,6 +13,7 @@ import javax.xml.ws.RequestWrapper;
 
 @RestController
 @CrossOrigin
+@RequestMapping(path= "/api")
 public class UserController {
     @Autowired
     private UserService userService;
