@@ -3,6 +3,7 @@ package com.beansbeans.moneyapp.Model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
