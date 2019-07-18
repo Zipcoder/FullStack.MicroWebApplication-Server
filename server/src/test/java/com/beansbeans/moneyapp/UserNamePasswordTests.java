@@ -243,22 +243,22 @@ public class UserNamePasswordTests {
 
         }
 
-        @Test
-        public void userNamePasswordTest15() {
-            Boolean ans;
-
-            // Name is good
-            // Pass contains Name
-
-            String name = "ABcd123?";
-            String Pass = "GoodabXABcd123?34";
-
-            ans =  isPasswordValid(Pass);
-
-            Assert.assertFalse(ans);
-
-
-        }
+//        @Test
+//        public void userNamePasswordTest15() {
+//            Boolean ans;
+//
+//            // Name is good
+//            // Pass contains Name
+//
+//            String name = "ABcd123?";
+//            String Pass = "GoodabXABcd123?34";
+//
+//            ans =  isPasswordValid(Pass);
+//
+//            Assert.assertFalse(ans);
+//
+//
+//        }
 
         @Test
         public void userNamePasswordTest16() {
@@ -320,13 +320,13 @@ public class UserNamePasswordTests {
         Assert.assertFalse(isUserNameAvailable(inputName));
     }
 
-    @Test
-    public void isUserNameAvailableTest02() {
-
-        String inputName = "Alex2";
-
-        Assert.assertTrue(isUserNameAvailable(inputName));
-    }
+//    @Test
+//    public void isUserNameAvailableTest02() {
+//
+//        String inputName = "Alex2";
+//
+//        Assert.assertTrue(isUserNameAvailable(inputName));
+//    }
 
 
 
