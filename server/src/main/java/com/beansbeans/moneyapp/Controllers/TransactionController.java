@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path="/transactions")
+@RequestMapping(path="/api")
 @Transactional
 public class TransactionController {
     @Autowired
