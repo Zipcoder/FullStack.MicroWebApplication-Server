@@ -10,7 +10,8 @@ import { DepositComponent } from './deposit/deposit.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule }  from '@angular/forms';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AccountServiceService } from '../service/account-service.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,8 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [AccountServiceService],
   bootstrap: [AppComponent]
