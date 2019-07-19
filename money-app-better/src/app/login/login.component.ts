@@ -8,6 +8,8 @@ import { User } from 'src/model/user';
 })
 export class LoginComponent implements OnInit {
 
+  emailString: string = "what is in the email field will go here when you press test";
+
   @Input('loginStatus') loggedIn: boolean;
 
   user: User;
@@ -32,5 +34,9 @@ login():void{
 }
 
 
+
+  login():void{
+    this.emailString = (<HTMLInputElement>document.getElementById("email")).value;
+  }
 
 }

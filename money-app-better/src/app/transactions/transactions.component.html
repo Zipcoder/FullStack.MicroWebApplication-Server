@@ -4,7 +4,51 @@
     account on the page. The accounts should be able
     to be selected from a dropdown box.
 </p>
-<div>
-    Balance: <p *ngIf="account">{{account.balance}}</p>
+<!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"   aria-expanded="false">
+        Choose Account
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+        <a class="dropdown-menu" href="#" *ngFor="let accountItem of accounts">
+            thpp
+        </a>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col=sm">
+            <select [(ngModel)]="currentAccountFrom" (ngModelChange)="setCurrentAccountFrom(currentAccountFrom)">
+                <option *ngFor="let accItem of accounts" [ngValue]="accItem">
+                    {{accItem.id}}, ${{accItem.balance}}
+                </option>
+            </select>
+        </div>
+        <div class="col=sm">
+                <select [(ngModel)]="currentAccountTo" (ngModelChange)="setCurrentAccountTo(currentAccountTo)">
+                    <option *ngFor="let accItem of accounts" [ngValue]="accItem">
+                        {{accItem.id}}, ${{accItem.balance}}
+                    </option>
+                </select>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm" *ngIf="currentAccountFrom">
+            Balance: {{currentAccountFrom.balance}}
+        </div>
+        <div class="col-sm" *ngIf="currentAccountTo">
+                Balance: {{currentAccountTo.balance}}
+            </div>
+    </div>
 </div>
- 
+<!-- <div>
+            <ul class="search-result">
+                    <li *ngFor="let accItem2 of accounts" >
+                            {{accItem2.id}}
+                    </li>
+                </ul>
+    </div> -->
+
+<div>
+    Balance: <p *ngIf="currentAccountFrom">{{currentAccountFrom.balance}}</p>
+</div>
+<button (click)="clearAccount()">test</button>
