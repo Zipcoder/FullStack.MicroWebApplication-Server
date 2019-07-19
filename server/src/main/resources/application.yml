@@ -1,14 +1,29 @@
-#spring:
-#  profiles:
-#  jpa:
-#    database: mysql
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: none
-#  datasource:
-#    platform:
-#    url: jdbc:mysql://financialmanagerapp.c2vqje9fzrdj.us-east-2.rds.amazonaws.com:3306/KFGMMLO7TEBDRFLAOCMLF6LFMI
-#
-#    username: MasterAccount99
-#    password: rootroot
-#    driverClassName: com.mysql.jdbc.Driver
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://financialmanagerapp.c2vqje9fzrdj.us-east-2.rds.amazonaws.com:3306/financialManagerAppDB
+    username: MasterAccount99
+    password: rootroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  server:
+    port: 5000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+---
+
+spring:
+  profiles: local
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
