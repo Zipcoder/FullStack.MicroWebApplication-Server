@@ -11,7 +11,7 @@ export class TransactionService {
   transactionUrl: string;
 
   constructor(private http: HttpClient) { 
-    this.transactionUrl="http://localhost:9065/transactions";
+    this.transactionUrl="http://moneyapp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/";
   }
 
   public transfer(fromAccountId: number, toAccountId: number, amount: number, userId: number): Observable<any>{
