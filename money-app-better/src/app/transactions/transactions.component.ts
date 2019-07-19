@@ -22,4 +22,8 @@ export class TransactionsComponent implements OnInit {
     this.accountServiceService.getAccount().subscribe(account => this.account = account);
   }
 
+
+
+
+
 }

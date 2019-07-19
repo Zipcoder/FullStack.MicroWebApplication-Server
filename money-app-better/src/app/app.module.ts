@@ -12,6 +12,7 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
 import { TransactionsComponent } from './transactions/transactions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { UserServiceService } from '../service/user-service.service';
 import { AccountServiceService } from '../service/account-service.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     HttpClientModule
   ],
-  providers: [AccountServiceService],
+  providers: [AccountServiceService, UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
