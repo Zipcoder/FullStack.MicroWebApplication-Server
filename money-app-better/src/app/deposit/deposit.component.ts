@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/model/user';
 
 @Component({
   selector: 'app-deposit',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepositComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
   }
@@ -22,7 +25,7 @@ export class DepositComponent implements OnInit {
     // passwordHash: passwordstring,
     // email: emailstring};
 
-    // this.TransactionService.depositTo(id, deposit);
+    this.transactionService.depositTo(this.user.id, deposit);
 
 
 }

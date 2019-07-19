@@ -21,23 +21,23 @@ export class TransactionsComponent implements OnInit {
     this.getAccounts();
   }
 
-  updateAccount(){
+  updateAccount() {
     this.accountServiceService.getAccount().subscribe(account => this.account = account);
   }
 
-  getAccounts(){
+  getAccounts() {
     this.accountServiceService.getAccounts().subscribe(accounts => this.accounts = accounts);
   }
 
-  setCurrentAccountFrom(acc: Account): void{
+  setCurrentAccountFrom(acc: Account): void {
     this.currentAccountFrom = acc;
   }
 
-  setCurrentAccountTo(acc: Account): void{
+  setCurrentAccountTo(acc: Account): void {
     this.currentAccountTo = acc;
   }
 
-  clearAccount(): void{
+  clearAccount(): void {
     delete this.currentAccountFrom;
   }
 
