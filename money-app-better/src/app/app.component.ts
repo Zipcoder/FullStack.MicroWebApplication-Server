@@ -16,7 +16,10 @@ export class AppComponent {
   caleb: User = {
     id: '3',
     firstName: 'Caleb',
-    lastName: 'Powell'
+    lastName: 'Powell',
+    userName: 'z',
+    passwordHash: 'z',
+    email: 'z'
   }
 
   constructor(private userService: UserService){

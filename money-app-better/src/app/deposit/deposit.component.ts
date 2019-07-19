@@ -11,5 +11,19 @@ export class DepositComponent implements OnInit {
 
   ngOnInit() {
   }
+  depositFunds(): void {
+    let deposit: number = Number((document.getElementById('deposit') as HTMLInputElement).value);
 
+
+    // this.user = {id: '',
+    // firstName: firstName,
+    // lastName: lastName,
+    // userName: userName,
+    // passwordHash: passwordstring,
+    // email: emailstring};
+
+    // this.TransactionService.depositTo(id, deposit);
+
+
+}
 }
