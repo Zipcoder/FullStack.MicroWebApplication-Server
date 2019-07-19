@@ -13,6 +13,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { FormsModule }  from '@angular/forms';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { UserServiceService } from '../service/user-service.service';
 import { AccountServiceService } from '../service/account-service.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -33,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AccountServiceService],
+  providers: [AccountServiceService, UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

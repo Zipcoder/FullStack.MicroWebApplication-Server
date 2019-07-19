@@ -4,28 +4,12 @@
     Someday I'll have forms and buttons that work!
 </p>
 
-
-
-  <!-- <form #f="ngForm"> -->
-    <!-- Email: <input type="email" ngModel name="email" size="35" required email>
-    Password: <input type="text" ngModel name="Password" size="35"> -->
-    <!-- <button [disabled]="!f.valid">Submit</button>
-    <p>Form State: {{f.valid?'VALID':'INVALID'}}</p> -->
-  <!-- </form> -->
-  
-
-
-
   <form>
     Email:    <input id="email" type="email" name="email" size="35"><br>
-    Password: <input id="password" type="text" name="Password" size="35"><br>
-    <!-- <input type="image" src="/Documents/GitHub/FullStack.MicroWebApplication-Server/money-app-better/src/app/img_submit.png" alt="Submit" width="48" height="48"> -->
-    <button (click)="login()">test</button>
+    Password: <input id="password" type="text" name="password" size="35"><br>
+    <button (click)="login()" alt="Submit" width="48" height="48">Submit</button>
   </form>
 
-  <div>
-    {{emailString}}
-  </div>
 
 
 

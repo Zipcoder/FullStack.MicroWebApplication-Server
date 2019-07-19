@@ -15,7 +15,10 @@ export class AppComponent {
   caleb: User = {
     id: '123',
     firstName: 'Caleb',
-    lastName: 'Powell'
+    lastName: 'Powell',
+    userName: 'z',
+    passwordHash: 'z',
+    email: 'z'
   }
 
   constructor(){
