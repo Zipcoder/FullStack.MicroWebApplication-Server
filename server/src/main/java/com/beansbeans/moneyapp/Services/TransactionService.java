@@ -57,6 +57,7 @@ public class TransactionService {
     }
 
     public Boolean transferFunds(Long fromId, Long toId, Double amount){
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         Account fromAccount = accountRepository.findById(fromId).get();
         Account toAccount = accountRepository.findById(toId).get();
         Double initalBalance = fromAccount.getBalance();

@@ -39,6 +39,15 @@ public class Transaction {
         this.userId = userId;
     }
 
+    public Transaction(Long fromAccountId, Long toAccountId, Double amount, String memo, Long userId){
+        this.fromAccountId = fromAccountId;
+        this.toAccountId = toAccountId;
+        this.amount = amount;
+        this.memo = memo;
+        this.localDateTime = LocalDateTime.now();
+        this.userId = userId;
+    }
+
     public Transaction(Long toAccountId, Double amount) {
         this.toAccountId = toAccountId;
         this.amount = amount;

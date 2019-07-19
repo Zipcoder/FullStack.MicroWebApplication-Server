@@ -14,8 +14,9 @@ export class TransactionService {
     this.transactionUrl="http://localhost:9065/transactions";
   }
 
-  public transfer(fromAccountId:number, toAccountId: number, amount: number): Observable<any>{
-    let transaction: Transaction = {fromAccountId:fromAccountId, toAccountId:toAccountId, amount:amount};
+  public transfer(fromAccountId: number, toAccountId: number, amount: number, userId: number): Observable<any>{
+    let transaction: Transaction = {fromAccountId:fromAccountId, toAccountId:toAccountId,
+       amount:amount, memo: "this space left blank", userId: userId};
     return this.http.post(this.transactionUrl + "/transaction/transfer", transaction);
   }
 }
