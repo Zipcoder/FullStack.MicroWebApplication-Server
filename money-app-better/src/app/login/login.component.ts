@@ -35,8 +35,4 @@ login():void{
 
 
 
-  login():void{
-    this.emailString = (<HTMLInputElement>document.getElementById("email")).value;
-  }
-
 }

@@ -63,6 +63,6 @@ export class TransactionsComponent implements OnInit {
 
   makeTransaction(){
     this.transactionService.transfer(this.currentAccountFrom.id, 
-      this.currentAccountTo.id, this.transferAmount).subscribe();
+      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userid).subscribe(()=> {this.getAccounts; this.getUserAccounts;});
   }
 }
