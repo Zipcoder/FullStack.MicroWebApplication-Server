@@ -9,7 +9,7 @@ import { Account } from '../model/account';
 })
 export class UserServiceService {
 
-  private userUrl = 'http://localhost:8080/api';
+  private userUrl = 'http://moneyapp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/';
 
   constructor(private http: HttpClient) { }
 

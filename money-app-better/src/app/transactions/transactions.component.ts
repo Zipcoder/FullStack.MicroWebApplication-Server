@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../../model/account';
 import { AccountServiceService } from '../../service/account-service.service';
+import { UserService } from 'src/service/user.service';
+import { User } from 'src/model/user';
+import { TransactionService } from 'src/service/transaction.service';
 
 @Component({
   selector: 'app-transactions',
@@ -11,14 +14,20 @@ export class TransactionsComponent implements OnInit {
 
   account: Account;
   accounts: Account[];
+  userAccounts: Account[];
   currentAccountFrom: Account;
   currentAccountTo: Account;
+  user: User;
+  transferAmount: number;
 
-  constructor(private accountServiceService: AccountServiceService) {
+  constructor(private accountServiceService: AccountServiceService,
+    private userService: UserService,
+    private transactionService: TransactionService) {
   }
 
   ngOnInit() {
     this.getAccounts();
+    this.getUser();
   }
 
   updateAccount() {
@@ -29,7 +38,13 @@ export class TransactionsComponent implements OnInit {
     this.accountServiceService.getAccounts().subscribe(accounts => this.accounts = accounts);
   }
 
-  setCurrentAccountFrom(acc: Account): void {
+  getUserAccounts(){
+    this.accountServiceService.getAccountsByUser(this.user.id).subscribe(
+      userAccounts => this.userAccounts = userAccounts);
+
+  }
+
+  setCurrentAccountFrom(acc: Account): void{
     this.currentAccountFrom = acc;
   }
 
@@ -41,4 +56,13 @@ export class TransactionsComponent implements OnInit {
     delete this.currentAccountFrom;
   }
 
+  getUser(){
+    this.user = this.userService.getUser();
+    this.getUserAccounts();
+  }
+
+  makeTransaction(){
+    this.transactionService.transfer(this.currentAccountFrom.id,
+      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userid).subscribe(()=> {this.getAccounts; this.getUserAccounts;});
+  }
 }
