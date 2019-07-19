@@ -14,22 +14,41 @@
         </a>
     </div>
 </div> -->
-<div>
-    <select [(ngModel)]="currentAccount" (ngModelChange)="setCurrentAccount(currentAccount)">
-        <option *ngFor="let accItem of accounts" [ngValue]="accItem">
-            {{accItem.id}}, ${{accItem.balance}}
-        </option>
-    </select>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col=sm">
+            <select [(ngModel)]="currentAccountFrom" (ngModelChange)="setCurrentAccountFrom(currentAccountFrom)">
+                <option *ngFor="let accItem of accounts" [ngValue]="accItem">
+                    {{accItem.id}}, ${{accItem.balance}}
+                </option>
+            </select>
+        </div>
+        <div class="col=sm">
+                <select [(ngModel)]="currentAccountTo" (ngModelChange)="setCurrentAccountTo(currentAccountTo)">
+                    <option *ngFor="let accItem of accounts" [ngValue]="accItem">
+                        {{accItem.id}}, ${{accItem.balance}}
+                    </option>
+                </select>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm" *ngIf="currentAccountFrom">
+            Balance: {{currentAccountFrom.balance}}
+        </div>
+        <div class="col-sm" *ngIf="currentAccountTo">
+                Balance: {{currentAccountTo.balance}}
+            </div>
+    </div>
 </div>
-    <!-- <div>
+<!-- <div>
             <ul class="search-result">
                     <li *ngFor="let accItem2 of accounts" >
                             {{accItem2.id}}
                     </li>
                 </ul>
     </div> -->
-    
+
 <div>
-    Balance: <p *ngIf="currentAccount">{{currentAccount.balance}}</p>
+    Balance: <p *ngIf="currentAccountFrom">{{currentAccountFrom.balance}}</p>
 </div>
- <button (click)="clearAccount()">test</button>
+<button (click)="clearAccount()">test</button>

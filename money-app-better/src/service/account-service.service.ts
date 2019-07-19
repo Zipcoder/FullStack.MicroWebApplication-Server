@@ -9,7 +9,7 @@ import { Account } from '../model/account';
 export class AccountServiceService {
   accountUrl: string;
   constructor(private http:HttpClient) { 
-    this.accountUrl = 'http://localhost:9065/accounts';
+    this.accountUrl = 'MoneyApp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/accounts';
   }
 
   public getAccount(): Observable<Account>{

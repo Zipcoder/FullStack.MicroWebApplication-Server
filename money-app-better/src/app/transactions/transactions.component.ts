@@ -11,7 +11,8 @@ export class TransactionsComponent implements OnInit {
 
   account: Account;
   accounts: Account[];
-  currentAccount: Account;
+  currentAccountFrom: Account;
+  currentAccountTo: Account;
 
   constructor(private accountServiceService: AccountServiceService) {
   }
@@ -28,12 +29,16 @@ export class TransactionsComponent implements OnInit {
     this.accountServiceService.getAccounts().subscribe(accounts => this.accounts = accounts);
   }
 
-  setCurrentAccount(acc: Account): void{
-    this.currentAccount = acc;
+  setCurrentAccountFrom(acc: Account): void{
+    this.currentAccountFrom = acc;
+  }
+
+  setCurrentAccountTo(acc: Account): void{
+    this.currentAccountTo = acc;
   }
 
   clearAccount(): void{
-    delete this.currentAccount;
+    delete this.currentAccountFrom;
   }
 
 }

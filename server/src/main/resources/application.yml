@@ -1,14 +1,14 @@
-spring:
-  profiles:
-  jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-  datasource:
-    platform:
-    url: jdbc:mysql://financialmanagerapp.c2vqje9fzrdj.us-east-2.rds.amazonaws.com:3306/KFGMMLO7TEBDRFLAOCMLF6LFMI
-
-    username: MasterAccount99
-    password: rootroot
-    driverClassName: com.mysql.jdbc.Driver
+#spring:
+#  profiles:
+#  jpa:
+#    database: mysql
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
+#  datasource:
+#    platform:
+#    url: jdbc:mysql://financialmanagerapp.c2vqje9fzrdj.us-east-2.rds.amazonaws.com:3306/KFGMMLO7TEBDRFLAOCMLF6LFMI
+#
+#    username: MasterAccount99
+#    password: rootroot
+#    driverClassName: com.mysql.jdbc.Driver
