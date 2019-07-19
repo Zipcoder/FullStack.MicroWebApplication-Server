@@ -1,42 +1,20 @@
 <div style="text-align:center">
-    <!-- <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            One of three columns
-          </div>
-          <div class="col-sm">
-            One of three columns
-          </div>
-          <div class="col-sm">
-            One of three columns
-          </div>
-        </div>
-      </div> -->
   <!-- <nav *ngIf="loggedIn"> -->
     <div class="container-fluid" *ngIf="loggedIn">
       <div class="row">
-        <div class="col-sm">
-          <a routerLink='/deposit' class="nav">Deposit</a>
-        </div>
-        <div class="col-sm">
-          <a routerLink='/withdraw' class="nav">Withdraw</a>
-        </div>
-        <div class="col-sm">
-          <a routerLink='/addaccount' class="nav">Add Account</a>
-        </div>
-        <div class="col-sm">
-          <a routerLink='/deleteaccount' class="nav">Delete Account</a>
-        </div>
-        <div class="col-sm">
-          <a routerLink='/transactions' class="nav">Transactions</a>
-        </div>
+      <a routerLink='/deposit' class="nav">Deposit</a>
+      <a routerLink='/withdraw' class="nav">Withdraw</a>
+      <a routerLink='/addaccount' class="nav">Add Account</a>
+      <a routerLink='/deleteaccount' class="nav">Delete Account</a>
+      <a routerLink='/transactions' class="nav">Transactions</a>
       </div>
     </div>
   <!-- </nav> -->
   <h1>
     {{ title }}
   </h1>
- 
+  
+  
   <p>I am the root component and I should have stuff like a nav bar. I'll keep track of who's logged in.</p>
   <p>The current user first name is: {{loggedIn ? currentUser.firstName : 'none'}} (user object: {{loggedIn ? currentUser : 'none'}})</p>
   <p>Logged in? : {{loggedIn}}</p>

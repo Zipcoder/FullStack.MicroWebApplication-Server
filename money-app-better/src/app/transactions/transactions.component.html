@@ -18,15 +18,16 @@
     <div class="row">
         <div class="col=sm">
             <select [(ngModel)]="currentAccountFrom" (ngModelChange)="setCurrentAccountFrom(currentAccountFrom)">
-                <option *ngFor="let accItem of accounts" [ngValue]="accItem">
-                    {{accItem.id}}, ${{accItem.balance}}
+                <!-- <option value="" disabled selected hidden>Account From</option> -->
+                <option *ngFor="let userAcc of userAccounts" [ngValue]="userAcc">
+                    {{userAcc.id}}, ${{userAcc.balance}}
                 </option>
             </select>
         </div>
         <div class="col=sm">
                 <select [(ngModel)]="currentAccountTo" (ngModelChange)="setCurrentAccountTo(currentAccountTo)">
-                    <option *ngFor="let accItem of accounts" [ngValue]="accItem">
-                        {{accItem.id}}, ${{accItem.balance}}
+                    <option *ngFor="let acc of accounts" [ngValue]="acc">
+                        {{acc.id}}, ${{acc.balance}}
                     </option>
                 </select>
             </div>
@@ -40,6 +41,13 @@
             </div>
     </div>
 </div>
+<div>
+    Transfer Amount: $<input [(ngModel)]="transferAmount" type="number">
+</div>
+<div>
+    Amonut transfered: {{transferAmount}}
+</div>
+<button type="submit" [disabled]="!currentAccountFrom || !currentAccountTo || !transferAmount" (click)="makeTransaction()">Transfer</button>
 <!-- <div>
             <ul class="search-result">
                     <li *ngFor="let accItem2 of accounts" >
@@ -52,3 +60,13 @@
     Balance: <p *ngIf="currentAccountFrom">{{currentAccountFrom.balance}}</p>
 </div>
 <button (click)="clearAccount()">test</button>
+<br>
+<br>
+<div>
+    <ul>
+        <li *ngFor="let accItem3 of userAccounts">
+            {{accItem3.id}}, ${{accItem3.balance}}
+        </li>
+    </ul>
+</div>
+<button (click)="getUserAccounts()">get user accounts</button>
