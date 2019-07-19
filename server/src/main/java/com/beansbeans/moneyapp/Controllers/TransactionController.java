@@ -49,7 +49,11 @@ public class TransactionController {
     }
 
     @PostMapping("/transaction/transfer")
-    public ResponseEntity<Boolean> transfer(@PathVariable Long fromAccountId, @PathVariable Long toAccountId, @RequestBody Double amount){
+    public ResponseEntity<Boolean> transfer(@RequestBody Transaction transaction){
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        Long fromAccountId = transaction.getFromAccountId();
+        Long toAccountId = transaction.getToAccountId();
+        Double amount = transaction.getAmount();
         return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK);
     }
 }

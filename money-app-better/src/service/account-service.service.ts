@@ -9,7 +9,7 @@ import { Account } from '../model/account';
 export class AccountServiceService {
   accountUrl: string;
   constructor(private http:HttpClient) { 
-    this.accountUrl = "http://localhost:9065/api/accounts";
+    this.accountUrl = "http://moneyapp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/api/accounts";
     // this.accountUrl = 'MoneyApp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/accounts';
   }
 
