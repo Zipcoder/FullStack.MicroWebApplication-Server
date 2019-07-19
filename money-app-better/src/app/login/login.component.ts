@@ -33,10 +33,4 @@ login():void{
 // this.userService.createUser(this.user);
 }
 
-
-
-  login():void{
-    this.emailString = (<HTMLInputElement>document.getElementById("email")).value;
-  }
-
 }
