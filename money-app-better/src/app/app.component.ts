@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user'
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,20 @@ export class AppComponent {
   currentUser: User;
 
   caleb: User = {
-    id: '123',
+    id: '3',
     firstName: 'Caleb',
-    lastName: 'Powell'
+    lastName: 'Powell',
+    userName: 'z',
+    passwordHash: 'z',
+    email: 'z'
   }
 
-  constructor(){
+  constructor(private userService: UserService){
   }
 
   ngOnInit() {
     this.toggleLogin();
+    this.userService.setUser(this.caleb);
   }
 
   toggleLogin(){

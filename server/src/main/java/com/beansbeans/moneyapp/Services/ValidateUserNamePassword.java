@@ -27,14 +27,25 @@ public class ValidateUserNamePassword {
 
 /*      Methods:
 
-            1)  isUserNamePasswordValid(String inputName, String inputPassword)
+            1)  isUserNameValid(String inputName, String inputPassword)
 
-                Returns "true" if UserName and Password are valid and UserName is
-                not already in use (to be implemented).
-
+                Returns "true" if UserName is valid.
 
 
-            2)  makeHash(String inputPassword)
+
+            2)  isPasswordValid(String inputName, String inputPassword)
+
+                Returns "true" if Password is valid.
+
+
+
+            3)  isUserNameAvailable(String inputName, String inputPassword)
+
+                Returns "true" if UserName is not already in use (to be implemented).
+
+
+
+            4)  makeHash(String inputPassword)
 
                 Hash is mutable with same password.  DO NOT USE AS UNIQUE ID !!!
 
@@ -45,12 +56,11 @@ public class ValidateUserNamePassword {
 
 
 
-            3)  confirmPasswordHash(String passWord, String hash)
+            5)  confirmPasswordHash(String passWord, String hash)
 
                 Returns "true" if passWord matches stored hash.  Hash will change
                 everytime makeHash is called, so we match the passWord with the original hash.
 */
-
 
 
         public static Boolean isUserNameValid(String inputName) {
@@ -64,9 +74,6 @@ public class ValidateUserNamePassword {
                                   and no 3 same characters in a row
                                   and no spaces
                                   and none of the following characters = ; : * / + ( ) [ ]  { } \ | ,
-
-
-
 
 */
 
