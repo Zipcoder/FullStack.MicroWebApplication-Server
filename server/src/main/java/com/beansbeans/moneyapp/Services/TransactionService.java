@@ -13,13 +13,15 @@ import java.util.List;
 @Service
 @Transactional
 public class TransactionService {
+    @Autowired
     private AccountRepository accountRepository;
 
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
     public Transaction newTransaction(Transaction transaction) {
@@ -57,7 +59,7 @@ public class TransactionService {
     }
 
     public Boolean transferFunds(Long fromId, Long toId, Double amount){
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        System.out.println("FROM ID: " + fromId);
         Account fromAccount = accountRepository.findById(fromId).get();
         Account toAccount = accountRepository.findById(toId).get();
         Double initalBalance = fromAccount.getBalance();
