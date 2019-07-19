@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @Service
 public class AccountService {
@@ -19,6 +20,13 @@ public class AccountService {
 
     public Iterable<Account> getAllAccounts(){
         return accountRepository.findAll();
+    }
+
+    public Iterable<Account> findAllAccountsByUserId(Long userid) {
+//        ArrayList<Long> idList = new ArrayList<>();
+//        idList.add(userid);
+//        return accountRepository.findAllById(idList);
+        return accountRepository.findAllByUserIdIs(userid);
     }
 
     public Account create(Account account){

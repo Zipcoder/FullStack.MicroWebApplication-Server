@@ -24,6 +24,11 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
     }
 
+    @GetMapping("/accounts/user/{userId}")
+    public ResponseEntity<Iterable<Account>> findByUserId(@PathVariable Long userId){
+        return new ResponseEntity<>(accountService.findAllAccountsByUserId(userId), HttpStatus.OK);
+    }
+
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getById(@PathVariable Long id){
         return new ResponseEntity<>(accountService.show(id), HttpStatus.OK);
@@ -38,5 +43,7 @@ public class AccountController {
     public ResponseEntity<Boolean> deleteAccount(@PathVariable Long id){
         return new ResponseEntity<>(accountService.deleteAccount(id), HttpStatus.OK);
     }
+
+
 
 }
