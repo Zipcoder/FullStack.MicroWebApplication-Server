@@ -5,6 +5,7 @@ import { WithdrawComponent } from './withdraw/withdraw.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'addaccount', component: AddAccountComponent},
   {path: 'deleteaccount', component: DeleteAccountComponent},
   {path: 'transactions', component: TransactionsComponent},
-  {path: '', redirectTo: 'deposit', pathMatch: 'full'}
+  {path: '', redirectTo: 'deposit', pathMatch: 'full'},
+  {path: 'login', component:LoginComponent}
 ];
 
 @NgModule({
