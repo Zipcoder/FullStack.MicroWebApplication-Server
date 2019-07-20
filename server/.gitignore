@@ -165,4 +165,3 @@ money-app-better/node_modules/
 !.elasticbeanstalk/*.global.yml
 
 
-**/environment.prod.ts
