@@ -26,4 +26,10 @@ export class AccountServiceService {
   public getAccountsByUser(userid: string): Observable<Account[]>{
     return this.http.get<Account[]>("/proxy/api/accounts/user/" + userid);
   }
+
+  public createAccount(balance: number, userid: number): Observable<Account>{
+    let newAccount: Account = {id: 1, balance: balance, userId: userid}
+    console.log("creating new account with userid:" + newAccount.userId);
+    return this.http.post<Account>("/proxy/api/accounts", newAccount);
+  }
 }

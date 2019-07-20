@@ -18,6 +18,6 @@ export class TransactionService {
     let transaction: Transaction = {fromAccountId:fromAccountId, toAccountId:toAccountId,
        amount:amount, memo: "this space left blank", userId: userId};
       console.log("making transfer");
-    return this.http.post("proxy/transactions/transaction/transfer", transaction);
+    return this.http.post("/proxy/api/transaction/transfer", transaction);
   }
 }
