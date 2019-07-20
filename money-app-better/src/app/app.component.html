@@ -3,11 +3,11 @@
   <!-- <nav *ngIf="loggedIn">
     <div class="container-fluid" *ngIf="loggedIn">
       <div class="row">
-      <a routerLink='/deposit' class="nav">Deposit</a>
-      <a routerLink='/withdraw' class="nav">Withdraw</a>
-      <a routerLink='/addaccount' class="nav">Add Account</a>
-      <a routerLink='/deleteaccount' class="nav">Delete Account</a>
-      <a routerLink='/transactions' class="nav">Transactions</a>
+      <button (click)="setCurrentPage('deposit')">Deposit</button>
+      <button (click)="setCurrentPage('withdraw')">Withdraw</button>
+      <button routerLink='/addaccount' class="nav">Add Account</button>
+      <button routerLink='/deleteaccount' class="nav">Delete Account</button>
+      <button routerLink='/transactions' class="nav">Transactions</button>
       </div>
     </div>
   </nav> -->
