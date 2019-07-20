@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'Money Managing App';
   loggedIn: boolean = false;
   currentUser: User;
+  currentPage: string = 'login'; 
 
   caleb: User = {
     id: '3',
@@ -26,17 +27,26 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.toggleLogin();
-    this.userService.setUser(this.caleb);
+   this.loggedIn = this.userService.loggedIn; 
+    // this.toggleLogin();
+    // this.userService.setUser(this.caleb);
   }
 
   toggleLogin(){
     if(this.loggedIn){
       this.loggedIn = false;
       this.currentUser = null;
+      this.userService.clearUser; 
     } else {
       this.loggedIn = true;
       this.currentUser = this.caleb;
+      this.userService.setUser(this.caleb); 
     }
   }
+
+  setCurrentPage(newPage: string){
+    this.currentPage = newPage; 
+  }
+
+
 }
