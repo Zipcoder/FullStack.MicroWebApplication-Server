@@ -7,6 +7,7 @@ import { User } from '../model/user';
 export class UserService {
 
   currentUser: User;
+  loggedIn: boolean = false;
 
   constructor() { }
 
@@ -16,9 +17,11 @@ export class UserService {
 
   setUser(user: User){
     this.currentUser = user;
+    this.loggedIn = true;
   }
 
   clearUser(){
     delete this.currentUser;
+    this.loggedIn = false;
   }
 }

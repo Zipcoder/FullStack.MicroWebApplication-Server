@@ -10,7 +10,7 @@ import { UserService } from '../service/user.service';
 
 export class AppComponent {
   title = 'Money Managing App';
-  loggedIn: boolean = false;
+  loggedIn: boolean;
   currentUser: User;
 
   caleb: User = {
@@ -22,21 +22,30 @@ export class AppComponent {
     email: 'z'
   }
 
+  currentPage: string = 'withdraw';
+
   constructor(private userService: UserService){
   }
 
   ngOnInit() {
-    this.toggleLogin();
-    this.userService.setUser(this.caleb);
+    this.loggedIn = this.userService.loggedIn;
+    // this.toggleLogin();
+    // this.userService.setUser(this.caleb);
   }
 
   toggleLogin(){
     if(this.loggedIn){
       this.loggedIn = false;
       this.currentUser = null;
+      this.userService.clearUser();
     } else {
       this.loggedIn = true;
       this.currentUser = this.caleb;
+      this.userService.setUser(this.caleb);
     }
+  }
+
+  setCurrentPage(newPage: string){
+    this.currentPage = newPage;
   }
 }
