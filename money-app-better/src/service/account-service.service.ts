@@ -32,4 +32,10 @@ export class AccountServiceService {
     console.log("creating new account with userid:" + newAccount.userId);
     return this.http.post<Account>("/proxy/api/accounts", newAccount);
   }
+
+  public deleteAccount(id: number): Observable<boolean>{
+    return this.http.delete<boolean>("/proxy/api/accounts/" + id);
+  }
+
+  
 }

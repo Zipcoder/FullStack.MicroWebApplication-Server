@@ -1,6 +1,16 @@
 <p>
-    I am the delete account component. I should have a
-    dropdown to select accounts assosciated with the current
-    user. There should be a button to delete that account
-    from the database.
+    Choose Account to Delete
 </p>
+<select [(ngModel)]="selectedAccount">
+    <option *ngFor="let account of userAccounts" [ngValue]="account">
+        acc # {{account.id}}, ${{account.balance}}
+    </option>
+</select>
+
+<p  *ngIf="selectedAccount">Selected account: {{selectedAccount.id}}</p>
+<div>
+    <button class="button" (click)="deleteAccount()" [disabled]="!selectedAccount">
+        Delete Account
+    </button>
+</div>
+<p *ngIf="accountDeleted">Account Deleted</p>
