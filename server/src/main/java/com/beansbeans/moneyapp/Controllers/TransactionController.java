@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path="/transactions")
+@RequestMapping(path="/api")
 @Transactional
 public class TransactionController {
     @Autowired
@@ -39,7 +39,9 @@ public class TransactionController {
     }
 
     @PostMapping("/transaction/deposit")
-    public ResponseEntity<Boolean> deposit(@PathVariable Long toAccountId, @RequestBody Double amount){
+    public ResponseEntity<Boolean> deposit(@RequestBody Transaction transaction){
+        Double amount = transaction.getAmount();
+        Long toAccountId = transaction.getToAccountId();
         return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount), HttpStatus.OK);
     }
 
@@ -50,7 +52,6 @@ public class TransactionController {
 
     @PostMapping("/transaction/transfer")
     public ResponseEntity<Boolean> transfer(@RequestBody Transaction transaction){
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         Long fromAccountId = transaction.getFromAccountId();
         Long toAccountId = transaction.getToAccountId();
         Double amount = transaction.getAmount();

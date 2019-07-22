@@ -30,29 +30,29 @@ export class TransactionsComponent implements OnInit {
     this.getUser();
   }
 
-  updateAccount() {
+  updateAccount(){
     this.accountServiceService.getAccount().subscribe(account => this.account = account);
   }
 
-  getAccounts() {
+  getAccounts(){
     this.accountServiceService.getAccounts().subscribe(accounts => this.accounts = accounts);
   }
 
   getUserAccounts(){
     this.accountServiceService.getAccountsByUser(this.user.id).subscribe(
       userAccounts => this.userAccounts = userAccounts);
-
+    
   }
 
   setCurrentAccountFrom(acc: Account): void{
     this.currentAccountFrom = acc;
   }
 
-  setCurrentAccountTo(acc: Account): void {
+  setCurrentAccountTo(acc: Account): void{
     this.currentAccountTo = acc;
   }
 
-  clearAccount(): void {
+  clearAccount(): void{
     delete this.currentAccountFrom;
   }
 
@@ -62,7 +62,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   makeTransaction(){
-    this.transactionService.transfer(this.currentAccountFrom.id,
-      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userid).subscribe(()=> {this.getAccounts; this.getUserAccounts;});
+    this.transactionService.transfer(this.currentAccountFrom.id, 
+      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userId).subscribe(()=> {this.getAccounts; this.getUserAccounts;});
   }
 }
