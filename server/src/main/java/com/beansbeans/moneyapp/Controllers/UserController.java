@@ -17,26 +17,46 @@ public class UserController {
 
     @PostMapping(value = "/users")
     public ResponseEntity<User> create(@RequestBody User user){
-        return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = "/users")
     public ResponseEntity<Iterable<User>> findAll(){
-        return new ResponseEntity<Iterable<User>>(userService.findAll(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<Iterable<User>>(userService.findAll(), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping(value = "/users/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id){
-        return new ResponseEntity<>(userService.show(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.show(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping(value = "/users/{id}")
     public ResponseEntity<User> updateUserInfo(@PathVariable Long id, @RequestBody User user){
-        return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.updateUser(id, user), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping(value = "/users/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id){
-        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 }

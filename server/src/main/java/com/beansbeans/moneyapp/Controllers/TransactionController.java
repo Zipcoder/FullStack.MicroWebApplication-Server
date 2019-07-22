@@ -5,6 +5,7 @@ import com.beansbeans.moneyapp.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -19,41 +20,68 @@ public class TransactionController {
 
     @PostMapping("/transaction")
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction){
-        return new ResponseEntity<>(transactionService.newTransaction(transaction), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.newTransaction(transaction), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/transaction/{id}")
     public ResponseEntity<Transaction> findById(@PathVariable Long id){
-        return new ResponseEntity<>(transactionService.findTransactionById(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.findTransactionById(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/transaction/{userId}")
     public ResponseEntity<Transaction> findByUserId(@PathVariable Long userId){
-        return new ResponseEntity<>(transactionService.findTransactionByUserId(userId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.findTransactionByUserId(userId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
 
     @GetMapping("/transaction")
     public ResponseEntity<Iterable<Transaction>> getAllTransactions(){
-        return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/transaction/deposit")
     public ResponseEntity<Boolean> deposit(@PathVariable Long toAccountId, @RequestBody Double amount){
-        return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.depositTo(toAccountId, amount), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/transaction/withdraw")
     public ResponseEntity<Boolean> withdraw(@PathVariable Long fromAccountId, @RequestBody Double amount){
-        return new ResponseEntity<>(transactionService.withdrawFrom(fromAccountId, amount), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(transactionService.withdrawFrom(fromAccountId, amount), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/transaction/transfer")
     public ResponseEntity<Boolean> transfer(@RequestBody Transaction transaction){
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-        Long fromAccountId = transaction.getFromAccountId();
-        Long toAccountId = transaction.getToAccountId();
-        Double amount = transaction.getAmount();
-        return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK);
+        try {
+            Long fromAccountId = transaction.getFromAccountId();
+            Long toAccountId = transaction.getToAccountId();
+            Double amount = transaction.getAmount();
+            return new ResponseEntity<>(transactionService.transferFunds(fromAccountId, toAccountId, amount), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }
