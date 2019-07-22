@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/model/user';
+import { TransactionService } from 'src/service/transaction.service';
+import { Account } from '../../model/account';
+import { AccountServiceService } from '../../service/account-service.service';
+import { UserService } from 'src/service/user.service';
 
 @Component({
   selector: 'app-deposit',
@@ -8,25 +12,49 @@ import { User } from 'src/model/user';
 })
 export class DepositComponent implements OnInit {
 
+  account: Account;
+  accounts: Account[];
+  userAccounts: Account[];
+  currentAccountTo: Account;
   user: User;
 
-  constructor(private transactionService: TransactionService) { }
+  constructor(private accountServiceService: AccountServiceService,
+              private userService: UserService,
+              private transactionService: TransactionService) { }
 
   ngOnInit() {
+    this.getAccounts();
+    this.getUser();
   }
+
+  getAccounts() {
+    this.accountServiceService.getAccounts().subscribe(accounts => this.accounts = accounts);
+  }
+
+  getUserAccounts() {
+    this.accountServiceService.getAccountsByUser(this.user.id).subscribe(
+        userAccounts => this.userAccounts = userAccounts);
+  }
+
+  setCurrentAccountTo(acc: Account): void {
+    this.currentAccountTo = acc;
+  }
+
+  getUser() {
+    this.user = this.userService.getUser();
+    this.getUserAccounts();
+  }
+
   depositFunds(): void {
-    let deposit: number = Number((document.getElementById('deposit') as HTMLInputElement).value);
 
+    const accountId: number = +((document.getElementById('currentAccountTo') as HTMLInputElement).value);
+    const amount: number = +((document.getElementById('amount') as HTMLInputElement).value);
 
-    // this.user = {id: '',
-    // firstName: firstName,
-    // lastName: lastName,
-    // userName: userName,
-    // passwordHash: passwordstring,
-    // email: emailstring};
+    console.log('hello world from d.c.ts');
 
-    this.transactionService.depositTo(this.user.id, deposit);
-
-
+    console.log(accountId);
+    console.log(amount);
+    console.log(Number(this.user.id));
+    this.transactionService.deposit(accountId, amount, +(this.user.id));
 }
 }
