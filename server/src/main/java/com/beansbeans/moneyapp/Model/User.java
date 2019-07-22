@@ -17,6 +17,7 @@ public class User {
     private String email;
 
 
+
     public User() {}
 
     public User(String firstName, String lastName) {
@@ -28,6 +29,15 @@ public class User {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(Long id, String firstName, String lastName, String userName, String passwordHash, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.passwordHash = passwordHash;
+        this.email = email;
     }
 
     public Long getId() {

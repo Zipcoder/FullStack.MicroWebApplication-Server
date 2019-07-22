@@ -1,5 +1,6 @@
 package com.beansbeans.moneyapp.Controllers;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import com.beansbeans.moneyapp.Model.Account;
 import com.beansbeans.moneyapp.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +17,56 @@ public class AccountController {
 
     @PostMapping("/accounts")
     public ResponseEntity<Account> create(@RequestBody Account account){
-        return new ResponseEntity<>(accountService.create(account), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(accountService.create(account), HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/accounts")
     public ResponseEntity<Iterable<Account>> findAllAccounts(){
-        return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(accountService.getAllAccounts(), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/accounts/user/{userId}")
     public ResponseEntity<Iterable<Account>> findByUserId(@PathVariable Long userId){
-        return new ResponseEntity<>(accountService.findAllAccountsByUserId(userId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(accountService.findAllAccountsByUserId(userId), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Account> getById(@PathVariable Long id){
-        return new ResponseEntity<>(accountService.show(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(accountService.show(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/accounts/{id}")
     public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account){
-        return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
+       try {
+           return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
+       } catch (Exception e){
+           return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+       }
     }
 
     @DeleteMapping("/accounts/{id}")
     public ResponseEntity<Boolean> deleteAccount(@PathVariable Long id){
-        return new ResponseEntity<>(accountService.deleteAccount(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(accountService.deleteAccount(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 

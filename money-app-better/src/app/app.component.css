@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-a.nav {
+/* a.nav {
     font-family: 'Roboto', sans-serif;
-    color: white;
+    color: rgb(92, 114, 161);
     padding: 1%;
     margin: 1%;
     border-radius: 5px;
     background-color: rgb(42, 134, 255);
     text-decoration: none;
+    
+} */
+.bg-light{
+    background-color: #014fa2 !important;
 }
-
-
+.navbar-brand{
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px
+}
+.nav-item{
+    margin-left:10px;
+    }
 
 h1 {
     font-family: 'Roboto', serif;
@@ -20,14 +29,17 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 
-nav {
+
+
+/* nav {
     padding: 2%;
     background-color: rgb(48, 99, 211);
     line-height: 220%;
-}
+} */
 
 
-.router {
+/* .router {
     font-family: 'Roboto', sans-serif;
-    text-align: center;
-}
+    text-align: left;
+    margin-left: 20px
+} */

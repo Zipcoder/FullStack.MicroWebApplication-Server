@@ -1,4 +1,4 @@
-package com.beansbeans.moneyapp;
+package com.beansbeans.moneyapp.ServiceTests;
 
 import com.beansbeans.moneyapp.Services.ValidateUserNamePassword;
 import org.junit.Assert;
