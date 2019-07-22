@@ -18,8 +18,8 @@ user: User;
   ngOnInit() {
   }
   createUser(): void {
-    const emailstring: string = (document.getElementById('email') as HTMLInputElement).value;
-    const passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
+    const emailstring: string = (document.getElementById('emailCreateUser') as HTMLInputElement).value;
+    const passwordstring: string = (document.getElementById('passwordCreateUser') as HTMLInputElement).value;
     const firstName: string = (document.getElementById('first') as HTMLInputElement).value;
     const lastName: string = (document.getElementById('last') as HTMLInputElement).value;
     const userName: string = (document.getElementById('user') as HTMLInputElement).value;
