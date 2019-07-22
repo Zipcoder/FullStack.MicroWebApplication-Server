@@ -8,7 +8,7 @@ import { User } from 'src/model/user';
 })
 export class LoginComponent implements OnInit {
 
-  emailString: string = "what is in the email field will go here when you press test";
+  emailString = 'what is in the email field will go here when you press test';
 
   @Input('loginStatus') loggedIn: boolean;
 
@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-login():void{
-  let emailstring: string = (document.getElementById('email') as HTMLInputElement).value;
-  let passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
+login(): void {
+  const emailstring: string = (document.getElementById('email') as HTMLInputElement).value;
+  const passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
 
   this.user = {id: '',
   firstName: '',
@@ -32,7 +32,5 @@ login():void{
 // next line needs to be directed to correct method for user login
 // this.userService.createUser(this.user);
 }
-
-
 
 }
