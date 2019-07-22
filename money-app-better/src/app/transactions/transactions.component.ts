@@ -4,6 +4,7 @@ import { AccountServiceService } from '../../service/account-service.service';
 import { UserService } from 'src/service/user.service';
 import { User } from 'src/model/user';
 import { TransactionService } from 'src/service/transaction.service';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-transactions',
@@ -54,6 +55,8 @@ export class TransactionsComponent implements OnInit {
 
   clearAccount(): void{
     delete this.currentAccountFrom;
+    delete this.currentAccountTo;
+    delete this.transferAmount;
   }
 
   getUser(){
@@ -63,6 +66,6 @@ export class TransactionsComponent implements OnInit {
 
   makeTransaction(){
     this.transactionService.transfer(this.currentAccountFrom.id, 
-      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userId).subscribe(()=> {this.getAccounts; this.getUserAccounts;});
+      this.currentAccountTo.id, this.transferAmount, this.currentAccountFrom.userId).subscribe(()=> {this.getAccounts(); this.getUserAccounts();});
   }
 }
