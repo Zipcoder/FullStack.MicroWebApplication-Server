@@ -7,10 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+
 
 @RestController
-@CrossOrigin
 @RequestMapping(path= "/api")
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -18,6 +20,15 @@ public class UserController {
     @PostMapping(value = "/users")
     public ResponseEntity<User> create(@RequestBody User user){
         return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/users/login")
+    public ResponseEntity<User> login(@RequestBody User user){
+        try {
+            return new ResponseEntity<>(userService.login(user), HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(user, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
 
     @GetMapping(value = "/users")

@@ -5,6 +5,7 @@ import com.beansbeans.moneyapp.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,5 +38,9 @@ public class UserService {
        return true;
     }
 
-
+    public User login(User user) throws SQLException{
+        User check = userRepository.findByUserNameAndPasswordHash(user.getUserName(), user.getPasswordHash());
+        if(check == null) throw new SQLException();
+        return check;
+    }
 }
