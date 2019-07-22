@@ -3,11 +3,11 @@
   <!-- <nav *ngIf="loggedIn">
     <div class="container-fluid" *ngIf="loggedIn">
       <div class="row">
-      <a routerLink='/deposit' class="nav">Deposit</a>
-      <a routerLink='/withdraw' class="nav">Withdraw</a>
-      <a routerLink='/addaccount' class="nav">Add Account</a>
-      <a routerLink='/deleteaccount' class="nav">Delete Account</a>
-      <a routerLink='/transactions' class="nav">Transactions</a>
+      <button (click)="setCurrentPage('deposit')">Deposit</button>
+      <button (click)="setCurrentPage('withdraw')">Withdraw</button>
+      <button routerLink='/addaccount' class="nav">Add Account</button>
+      <button routerLink='/deleteaccount' class="nav">Delete Account</button>
+      <button routerLink='/transactions' class="nav">Transactions</button>
       </div>
     </div>
   </nav> -->
@@ -38,7 +38,7 @@
       <li class="nav-item"*ngIf="!loggedIn">
           <button class="btn btn-primary" (click)="setCurrentPage('login')">Login</button>
       </li>
-      
+
     </ul>
   </div>
 </nav>
@@ -70,7 +70,7 @@
     <h1>
   </h1>
    -->
-  
+
   <!-- <p>I am the root component and I should have stuff like a nav bar. I'll keep track of who's logged in.</p>
   <p>The current user first name is: {{loggedIn ? currentUser.firstName : 'none'}} (user object: {{loggedIn ? currentUser : 'none'}})</p>
   <p>Logged in? : {{loggedIn}}</p> -->
@@ -82,9 +82,9 @@
 </div>
 <!-- <app-login [loginStatus]='loggedIn'></app-login> -->
 <!-- <app-create-user [loginStatus]='loggedIn'></app-create-user> -->
-<router-outlet *ngIf='loggedIn'>
-  <p>
+<!-- <router-outlet *ngIf='loggedIn'>
+  <p> -->
     <!-- I am the router outlet. My contents (below) should 
     only be displayed when the user is logged in. -->
-  </p>
-</router-outlet>
+  <!-- </p>
+</router-outlet> -->

@@ -11,12 +11,13 @@ export class TransactionService {
   transactionUrl: string;
 
   constructor(private http: HttpClient) { 
-    this.transactionUrl="http://moneyapp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/";
+    // this.transactionUrl="http://moneyapp-env.njfvb73f7f.us-east-2.elasticbeanstalk.com/transactions";
   }
 
   public transfer(fromAccountId: number, toAccountId: number, amount: number, userId: number): Observable<any>{
     let transaction: Transaction = {fromAccountId:fromAccountId, toAccountId:toAccountId,
        amount:amount, memo: "this space left blank", userId: userId};
-    return this.http.post(this.transactionUrl + "/transaction/transfer", transaction);
+      console.log("making transfer");
+    return this.http.post("/proxy/api/transaction/transfer", transaction);
   }
 }

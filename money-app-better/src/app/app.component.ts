@@ -10,7 +10,7 @@ import { UserService } from '../service/user.service';
 
 export class AppComponent {
   title = 'Money Managing App';
-  loggedIn: boolean = false;
+  loggedIn: boolean;
   currentUser: User;
   currentPage: string = 'login'; 
 

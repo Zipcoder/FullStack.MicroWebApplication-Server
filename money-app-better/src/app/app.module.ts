@@ -10,7 +10,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { FormsModule }  from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserServiceService } from '../service/user-service.service';

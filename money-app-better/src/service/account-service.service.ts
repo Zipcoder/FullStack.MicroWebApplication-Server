@@ -18,10 +18,22 @@ export class AccountServiceService {
   }
 
   public getAccounts(): Observable<Account[]>{
-    return this.http.get<Account[]>(this.accountUrl);
+    return this.http.get<Account[]>("/proxy/api/accounts");
   }
 
   public getAccountsByUser(userid: string): Observable<Account[]>{
-    return this.http.get<Account[]>(this.accountUrl + "/user/" + userid);
+    return this.http.get<Account[]>("/proxy/api/accounts/user/" + userid);
   }
+
+  public createAccount(balance: number, userid: number): Observable<Account>{
+    let newAccount: Account = {id: 1, balance: balance, userId: userid}
+    console.log("creating new account with userid:" + newAccount.userId);
+    return this.http.post<Account>("/proxy/api/accounts", newAccount);
+  }
+
+  public deleteAccount(id: number): Observable<boolean>{
+    return this.http.delete<boolean>("/proxy/api/accounts/" + id);
+  }
+
+
 }
