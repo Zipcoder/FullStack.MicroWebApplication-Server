@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,24 @@ export class UserService {
   currentUser: User;
   loggedIn: boolean; 
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.loggedIn = true;
+    this.currentUser = {
+      id: '17',
+      firstName: 'John',
+      lastName: 'Smiff',
+      userName: 'JSmiff17',
+      passwordHash: 'SmiffRulez',
+      email: 'Smiff@sniffz.org'
+    }
+  }
 
   getUser(): User{
     return this.currentUser;
+  }
+
+  login(tryUser: User): Observable<User>{
+    return this.http.post<User>('/proxy/api/users/login', tryUser);
   }
 
   setUser(user: User){

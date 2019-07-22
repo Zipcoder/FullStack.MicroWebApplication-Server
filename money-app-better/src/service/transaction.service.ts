@@ -20,4 +20,11 @@ export class TransactionService {
       console.log("making transfer");
     return this.http.post("/proxy/api/transaction/transfer", transaction);
   }
+
+  public deposit(toAccountId: number, amount: number, userId: number): Observable<any>{
+    let transaction: Transaction = {fromAccountId:9999, toAccountId:toAccountId,
+      amount:amount, memo: "this space left blank", userId: userId};
+    console.log("making deposit");
+    return this.http.post("/proxy/api/transaction/deposit", transaction);
+  }
 }
