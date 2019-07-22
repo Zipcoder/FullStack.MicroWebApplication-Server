@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/model/user';
-import {UserServiceService} from '../../service/user-service.service';
+import { UserServiceService } from '../../service/user-service.service';
 
 @Component({
   selector: 'app-create-user',
@@ -18,16 +18,15 @@ user: User;
   ngOnInit() {
   }
   createUser(): void {
-    let emailstring: string = (document.getElementById('email') as HTMLInputElement).value;
-    let passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
-    let firstName: string = (document.getElementById('first') as HTMLInputElement).value;
-    let lastName: string = (document.getElementById('last') as HTMLInputElement).value;
-    let userName: string = (document.getElementById('user') as HTMLInputElement).value;
- 
+    const emailstring: string = (document.getElementById('email') as HTMLInputElement).value;
+    const passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
+    const firstName: string = (document.getElementById('first') as HTMLInputElement).value;
+    const lastName: string = (document.getElementById('last') as HTMLInputElement).value;
+    const userName: string = (document.getElementById('user') as HTMLInputElement).value;
     this.user = {id: '',
-    firstName: firstName,
-    lastName: lastName,
-    userName: userName,
+    firstName,
+    lastName,
+    userName,
     passwordHash: passwordstring,
     email: emailstring};
 

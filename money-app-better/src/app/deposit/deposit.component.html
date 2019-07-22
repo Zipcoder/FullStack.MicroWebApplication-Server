@@ -4,11 +4,28 @@
     'Inherits' visibility from the router-output component.
     The below elements are placeholders.
 </p>
+git status
+
+    <div class="row">
+        <div class="col=sm">
+            Select Account:
+            <select [(ngModel)]="currentAccountTo" (ngModelChange)="setCurrentAccountTo(currentAccountTo)">
+                <option *ngFor="let acc of accounts" [ngValue]="acc">
+                    {{acc.id}}, ${{acc.balance}}
+                </option>
+            </select>
+        </div>
+    </div>
+<!--    <div class="row">-->
+<!--        <div class="col-sm" *ngIf="currentAccountTo">-->
+<!--            Balance: {{currentAccountTo.balance}}-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
 
 <div>
 
-       
-
+<<<<<<< HEAD
   
             <!-- <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
                     <button class="menu-icon" type="button" data-toggle></button>
@@ -74,3 +91,12 @@
     <button (click)="depositFunds()" alt="Submit" width="48" height="48">Submit</button>
     <!-- <button>Deposit</button> -->
 <!-- </div> -->
+=======
+    <p>
+<!--        <input style="border-radius: .25em;" name="depositAmount="deposit type="number" placeholder="enter amount" class="form-control form-control-lg">-->
+        <input type="text" name="value" placeholder="enter amount" id='amount' />
+        <input onclick="depositFunds()" type="button" value='Make_Deposit'/>
+    </p>
+<!--    <button (click)="depositFunds()" alt="Deposit" width="48" height="48">Submit</button>-->
+</div>
+>>>>>>> b37e1caa642fca0876f213f7c978df8cb7535802
