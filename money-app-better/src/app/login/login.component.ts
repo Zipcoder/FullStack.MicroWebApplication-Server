@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/model/user';
-import { UserService } from '../../service/user.service'
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +32,6 @@ export class LoginComponent implements OnInit {
         this.userService.setUser(user);
         this.userService.loggedIn = true;
       }
-    })
+    });
   }
 }
