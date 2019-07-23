@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   }
   login():void{
     let user: User;
-    let usernamestring: string = (document.getElementById('username') as HTMLInputElement).value;
-    let passwordstring: string = (document.getElementById('password') as HTMLInputElement).value;
+    let usernamestring: string = (document.getElementById('emailLogin') as HTMLInputElement).value;
+    let passwordstring: string = (document.getElementById('passwordLogin') as HTMLInputElement).value;
 
     user = {id: '',
     firstName: '',
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(user).subscribe(x => {
       if(x.firstName != user.firstName){
-        this.userService.setUser(user);
+        this.userService.setUser(x);
         this.userService.loggedIn = true;
       }
     });
