@@ -45,11 +45,11 @@
     </ul>
   </div>
 </nav>
-<app-deposit *ngIf="currentPage =='deposit'"></app-deposit>
-<app-withdraw *ngIf="currentPage =='withdraw'"></app-withdraw>
-<app-add-account *ngIf="currentPage == 'addaccount'"></app-add-account>
-<app-delete-account *ngIf="currentPage == 'deleteaccount'"></app-delete-account>
-<app-transactions *ngIf="currentPage == 'transactions'"></app-transactions>
+<app-deposit *ngIf="currentPage =='deposit' && userService.loggedIn"></app-deposit>
+<app-withdraw *ngIf="currentPage =='withdraw' && userService.loggedIn"></app-withdraw>
+<app-add-account *ngIf="currentPage == 'addaccount' && userService.loggedIn"></app-add-account>
+<app-delete-account *ngIf="currentPage == 'deleteaccount' && userService.loggedIn"></app-delete-account>
+<app-transactions *ngIf="currentPage == 'transactions' && userService.loggedIn"></app-transactions>
 <app-login *ngIf="!userService.loggedIn"></app-login>
 <app-create-user *ngIf="!userService.loggedIn"></app-create-user>
 
