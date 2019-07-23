@@ -36,12 +36,15 @@ export class AppComponent {
     if(this.loggedIn){
       this.loggedIn = false;
       this.currentUser = null;
-      this.userService.clearUser; 
+      this.userService.clearUser();
+      //console.log("if"); 
     } else {
       this.loggedIn = true;
       this.currentUser = this.caleb;
       this.userService.setUser(this.caleb); 
+      //console.log("else");
     }
+    //console.log("userService.loggedIn = " + this.userService.loggedIn);
   }
 
   setCurrentPage(newPage: string){
