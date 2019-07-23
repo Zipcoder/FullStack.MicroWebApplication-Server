@@ -1,6 +1,6 @@
-<p>
+<h3>
     Choose Account to Delete
-</p>
+</h3>
 <select [(ngModel)]="selectedAccount">
     <option *ngFor="let account of userAccounts" [ngValue]="account">
         acc # {{account.id}}, ${{account.balance}}

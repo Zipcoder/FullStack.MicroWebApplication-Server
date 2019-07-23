@@ -12,15 +12,15 @@ export class UserService {
   loggedIn: boolean; 
 
   constructor(private http: HttpClient) {
-    this.loggedIn = true;
-    this.currentUser = {
-      id: '17',
-      firstName: 'John',
-      lastName: 'Smiff',
-      userName: 'JSmiff17',
-      passwordHash: 'SmiffRulez',
-      email: 'Smiff@sniffz.org'
-    }
+    this.loggedIn = false;
+    // this.currentUser = {
+    //   id: '17',
+    //   firstName: 'John',
+    //   lastName: 'Smiff',
+    //   userName: 'JSmiff17',
+    //   passwordHash: 'SmiffRulez',
+    //   email: 'Smiff@sniffz.org'
+    // }
   }
 
   getUser(): User{
@@ -31,6 +31,10 @@ export class UserService {
     return this.http.post<User>('/proxy/api/users/login', tryUser);
   }
 
+  createUser(newUser: User): Observable<User>{
+    return this.http.post<User>('/proxy/api/users', newUser);
+  }
+
   setUser(user: User){
     this.currentUser = user;
     this.loggedIn = true; 
@@ -38,6 +42,6 @@ export class UserService {
 
   clearUser(){
     delete this.currentUser;
-    this.loggedIn = false
+    this.loggedIn = false;
   }
 }

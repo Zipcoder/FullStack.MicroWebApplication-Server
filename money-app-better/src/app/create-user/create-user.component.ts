@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/model/user';
-import { UserServiceService } from '../../service/user-service.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -13,7 +13,7 @@ export class CreateUserComponent implements OnInit {
 
 user: User;
 
-  constructor(private userService: UserServiceService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -24,12 +24,12 @@ user: User;
     const lastName: string = (document.getElementById('last') as HTMLInputElement).value;
     const userName: string = (document.getElementById('user') as HTMLInputElement).value;
     this.user = {id: '',
-    firstName,
-    lastName,
-    userName,
+    firstName: firstName,
+    lastName: lastName,
+    userName: userName,
     passwordHash: passwordstring,
     email: emailstring};
 
-    this.userService.createUser(this.user);
+    this.userService.createUser(this.user).subscribe(newUser => this.userService.setUser(newUser));
     }
   }
