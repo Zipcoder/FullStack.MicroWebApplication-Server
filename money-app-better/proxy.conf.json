@@ -1,6 +1,6 @@
 {
 	"/proxy/*": {
-		"target": "http://localhost:5000",
+		"target": "http://MoneyAppDevLatest-env.2rxxpqd3i3.us-east-2.elasticbeanstalk.com",
 		"secure": false,
 		"logLevel": "debug",
 		"changeOrigin": true,
