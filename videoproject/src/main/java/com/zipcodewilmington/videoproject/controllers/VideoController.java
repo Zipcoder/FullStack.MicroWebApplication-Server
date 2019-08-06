@@ -38,7 +38,7 @@ public class VideoController {
 
 
     @PostMapping(value="/uploadFile")
-    public Video uploadFile(@RequestPart MultipartFile file, @RequestParam String title) {
+    public Video uploadFile(@RequestPart MultipartFile file, @RequestParam String title, @RequestParam String userId) {
         Video video = service.storeVideo(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -49,6 +49,7 @@ public class VideoController {
         if (!title.equals("")) {
           video.setVideoName(title);
         }
+        video.setUserId(userId);
         update(video.getVideoId(), video);
         return video;
     }
