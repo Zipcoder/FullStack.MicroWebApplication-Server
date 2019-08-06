@@ -13,12 +13,13 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 public class UserController {
-    private UserService service;
+  private UserService service;
 
-    @Autowired
-    public UserController(UserService service){
-        this.service = service;
-    }
+  @Autowired
+  public UserController(UserService service) {
+    this.service = service;
+  }
+
 
     @GetMapping(value = "/users/{userId}")
     public UserJson getVideoComments(@PathVariable("userId") String userId) {
@@ -41,6 +42,12 @@ public class UserController {
     }
 
   @PutMapping(value = "/login")
-  public void login(@RequestBody UserJson userJson){ service.login(userJson.getUserId(), userJson.getPassword());}
-
+  public ResponseEntity<Optional<User>> login(@RequestBody UserJson userJson) {
+    User user = service.login(userJson.getUserId(), userJson.getPassword());
+    if (user == null) {
+      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    } else {
+      return new ResponseEntity<>(service.getUserById(user.getUserId()), HttpStatus.OK);
+    }
+  }
 }

@@ -40,11 +40,16 @@ public class UserService {
         repository.save(user);
     }
 
-    public void login(String userId, String password){
+    public User login(String userId, String password){
     User user = repository.findById(userId).get();
+      System.out.println(user);
     String userPassword = user.getPassword();
-    if (userPassword.equals(password)) user.setLoggedIn(true);
-    repository.save(user);
+    if (userPassword.equals(password)){
+      user.setLoggedIn(true);
+      return user;
+    }
+      return null;
+    //repository.save(user);
     }
 
     public Iterable<User> index(){
