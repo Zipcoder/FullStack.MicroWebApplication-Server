@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/videos")
 public class VideoController {
 
