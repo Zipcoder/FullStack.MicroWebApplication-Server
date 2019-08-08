@@ -34,7 +34,7 @@ public class VideoService {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
-            String fileDownloadUri = "http://localhost:8080/videos" + fileName;
+            String fileDownloadUri = "https://video-new-tube.herokuapp.com/videos/" + fileName;
 
             Video video = new Video(fileName, fileDownloadUri,
                     file.getContentType(), file.getSize(), file.getBytes());

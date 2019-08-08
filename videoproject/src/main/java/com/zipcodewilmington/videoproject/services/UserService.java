@@ -1,14 +1,12 @@
 package com.zipcodewilmington.videoproject.services;
 
-import com.zipcodewilmington.videoproject.models.Comment;
 import com.zipcodewilmington.videoproject.models.User;
 import com.zipcodewilmington.videoproject.models.UserJson;
-import com.zipcodewilmington.videoproject.repositories.CommentRepository;
 import com.zipcodewilmington.videoproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -36,20 +34,17 @@ public class UserService {
         user.setUserId(userJson.getUserId());
         user.setFirstName(userJson.getFirstName());
         user.setLastName(userJson.getLastName());
-        user.setPassword(userJson.getPassword());
+        user.setPassword(encryptPassword(userJson.getPassword()));
         repository.save(user);
     }
 
     public User login(String userId, String password){
     User user = repository.findById(userId).get();
       System.out.println(user);
-    String userPassword = user.getPassword();
-    if (userPassword.equals(password)){
-      user.setLoggedIn(true);
-      return user;
-    }
-      return null;
-    //repository.save(user);
+      if (confirmPassword(password, user.getPassword())){
+        user.setLoggedIn(true);
+        return user;
+    }return null;
     }
 
     public Iterable<User> index(){
@@ -59,6 +54,17 @@ public class UserService {
     public Optional<User> getUserById(String id){
     return repository.findById(id);
   }
+
+
+
+    private String encryptPassword(String password){
+      String salt = BCrypt.gensalt(4);
+      return BCrypt.hashpw(password, salt);
+    }
+
+    public Boolean confirmPassword(String password, String hashed){
+      return BCrypt.checkpw(password, hashed);
+    }
 
 
 

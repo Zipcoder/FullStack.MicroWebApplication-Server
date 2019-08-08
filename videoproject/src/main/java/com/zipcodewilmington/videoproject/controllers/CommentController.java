@@ -1,6 +1,5 @@
 package com.zipcodewilmington.videoproject.controllers;
 
-import com.zipcodewilmington.videoproject.models.Comment;
 import com.zipcodewilmington.videoproject.models.UserComment;
 import com.zipcodewilmington.videoproject.models.VideoComments;
 import com.zipcodewilmington.videoproject.services.CommentService;
