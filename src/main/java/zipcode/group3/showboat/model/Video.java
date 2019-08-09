@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,7 @@ public class Video {
 
     @OneToMany(mappedBy = "video")
     @JsonIgnoreProperties("video")
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
 //    @Transient
 //    private transient MultipartFile file;
@@ -84,11 +85,11 @@ public class Video {
         this.description = description;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComment(Set<Comment> comments) {
+    public void setComment(List<Comment> comments) {
         this.comments = comments;
     }
 
