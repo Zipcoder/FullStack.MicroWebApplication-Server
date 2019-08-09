@@ -36,8 +36,14 @@
 ehthumbs.db
 Thumbs.db
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
 
 target/
 **/node_modules/
 **/dist/
-**.idea/**
