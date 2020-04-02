@@ -33,10 +33,10 @@ public class UserController {
         return new ResponseEntity<>(service.create(u), HttpStatus.CREATED);
     }
 
-    @PutMapping("/User/{id}")
+    /*@PutMapping("/User/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User u) {
         return new ResponseEntity<>(service.update(id, u), HttpStatus.OK);
-    }
+    }*/
 
     @DeleteMapping("/User/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable long id) {
