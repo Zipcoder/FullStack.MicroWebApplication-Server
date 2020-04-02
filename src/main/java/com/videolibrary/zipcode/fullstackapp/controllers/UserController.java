@@ -5,10 +5,11 @@ import com.videolibrary.zipcode.fullstackapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 public class UserController {
 
     private UserService service;
@@ -33,10 +34,15 @@ public class UserController {
         return new ResponseEntity<>(service.create(u), HttpStatus.CREATED);
     }
 
-    /*@PutMapping("/User/{id}")
+    @PutMapping("/User/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User u) {
         return new ResponseEntity<>(service.update(id, u), HttpStatus.OK);
-    }*/
+    }
+
+    @PostMapping("/User/list")
+    public ResponseEntity<List<User>> addMultiple(List<User> list) {
+        return new ResponseEntity<>(service.create(list), HttpStatus.CREATED);
+    }
 
     @DeleteMapping("/User/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable long id) {

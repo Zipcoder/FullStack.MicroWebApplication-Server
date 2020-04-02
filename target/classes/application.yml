@@ -16,4 +16,4 @@ spring:
     ##driverClassName: org.mysql.Driver
 ---
 profiles: prod
-spring:
+spring: 

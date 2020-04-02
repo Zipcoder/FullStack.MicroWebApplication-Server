@@ -5,7 +5,7 @@ import com.videolibrary.zipcode.fullstackapp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -21,10 +21,6 @@ public class UserService {
         return userRepository.save(u);
     }
 
-    /*public Optional<User> show(Long id) {
-        return userRepository.findById(id);
-    }*/
-
     public User show(Long id) {
         return userRepository.getUserById(id);
     }
@@ -38,10 +34,19 @@ public class UserService {
         return true;
     }
 
-    public void update(Long id, User newUser) {
+    public User update(Long id, User newUser) {
         User user = userRepository.getUserById(id);
         user.setFirstName(newUser.getFirstName());
         user.setLastName(newUser.getLastName());
+        create(user);
+        return user;
+    }
+
+    public List<User> create(List<User> users) {
+        for (User u : users) {
+            userRepository.save(u);
+        }
+        return users;
     }
 
 }
