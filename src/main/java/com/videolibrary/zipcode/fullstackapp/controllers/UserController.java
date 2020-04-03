@@ -37,11 +37,6 @@ public class UserController {
         return new ResponseEntity<>(service.update(id, u), HttpStatus.OK);
     }
 
-/*    @PostMapping("/User/list")
-    public ResponseEntity<List<User>> addMultiple(List<User> list) {
-        return new ResponseEntity<>(service.create(list), HttpStatus.CREATED);
-    }*/
-
     @DeleteMapping("/User/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable long id) {
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);

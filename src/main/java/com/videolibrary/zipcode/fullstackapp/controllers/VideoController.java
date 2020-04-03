@@ -1,15 +1,11 @@
 package com.videolibrary.zipcode.fullstackapp.controllers;
 
-import com.videolibrary.zipcode.fullstackapp.models.User;
 import com.videolibrary.zipcode.fullstackapp.models.Video;
 import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.Entity;
-import java.util.List;
 
 @RestController
 public class VideoController {
