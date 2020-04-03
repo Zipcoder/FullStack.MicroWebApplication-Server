@@ -10,9 +10,9 @@ spring:
       ddl-auto: create-drop
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/videoLibrary?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: gbrad
-    password: kali
+    url: zipcodefullstack.ctneiu8xwepi.us-east-2.rds.amazonaws.com}:3306/FullStackVideo
+    username: DreamTeam
+    password: ZipCodeWilmington
     ##driverClassName: org.mysql.Driver
 ---
 profiles: prod
@@ -24,7 +24,7 @@ spring:
       ddl-auto: update
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/videoLibrary?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: gbrad
-    password: kali
+    url: zipcodefullstack.ctneiu8xwepi.us-east-2.rds.amazonaws.com}:3306/FullStackVideo
+    username: DreamTeam
+    password: ZipCodeWilmington
     ##driverClassName: org.mysql.Driver
