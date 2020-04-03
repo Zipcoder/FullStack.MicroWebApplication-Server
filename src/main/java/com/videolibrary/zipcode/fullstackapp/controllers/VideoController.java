@@ -31,12 +31,12 @@ public class VideoController {
         return new ResponseEntity<>(service.create(v), HttpStatus.CREATED);
     }
 
-    @PutMapping("/Vido/{id}")
+    @PutMapping("/Video/{id}")
     public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody Video v) {
-        return new ResponseEntity<Video>(service.update(id, v), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(id, v), HttpStatus.OK);
     }
 
-    @DeleteMapping("/Vido/{id}")
+    @DeleteMapping("/Video/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable long id) {
         return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
     }
