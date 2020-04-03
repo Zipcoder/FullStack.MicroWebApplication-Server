@@ -9,10 +9,10 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    platform: postgres
+    platform: mysql
     url: jdbc:mysql://localhost:3306/videoLibrary?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: gbrad
-    password: kali
+    username: root
+    password: zipcoder
     ##driverClassName: org.mysql.Driver
 ---
 profiles: prod

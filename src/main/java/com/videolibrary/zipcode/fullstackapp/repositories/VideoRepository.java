@@ -1,4 +1,11 @@
 package com.videolibrary.zipcode.fullstackapp.repositories;
 
-public interface VideoRepository {
+import com.videolibrary.zipcode.fullstackapp.models.Video;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface VideoRepository  extends CrudRepository<Video, Long> {
+
+    Video getVideoById(Long id);
 }
