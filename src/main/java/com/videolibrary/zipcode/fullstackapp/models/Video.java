@@ -1,13 +1,8 @@
 package com.videolibrary.zipcode.fullstackapp.models;
 
-import com.videolibrary.zipcode.fullstackapp.HashTag;
-import com.videolibrary.zipcode.fullstackapp.Publisher;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Video {
@@ -15,12 +10,9 @@ public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //private List<Comment> comments;
     private String title;
-   // private Publisher accountInfo;
     private Integer thumbsUp;
     private Integer thumbsDown;
-   //private List<HashTag> hashTags;
 
     @Lob
     @Nationalized
@@ -61,14 +53,6 @@ public class Video {
         this.id = id;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
-
     public String getTitle() {
         return title;
     }
@@ -76,14 +60,6 @@ public class Video {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    public Publisher getAccountInfo() {
-//        return accountInfo;
-//    }
-//
-//    public void setAccountInfo(Publisher accountInfo) {
-//        this.accountInfo = accountInfo;
-//    }
 
     public Integer getThumbsUp() {
         return thumbsUp;
@@ -101,16 +77,5 @@ public class Video {
         this.thumbsDown = thumbsDown;
     }
 
-//    public List<HashTag> getHashTags() {
-//        return hashTags;
-//    }
 //
-//    public void setHashTags(List<HashTag> hashTags) {
-//        this.hashTags = hashTags;
-//    }
-
-
-
-
-
 }
