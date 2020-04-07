@@ -2,8 +2,8 @@ package com.videolibrary.zipcode.fullstackapp.Controllers;
 
 import com.videolibrary.zipcode.fullstackapp.models.User;
 import com.videolibrary.zipcode.fullstackapp.services.UserService;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,7 +28,7 @@ public class TestUserController {
 
     @Test
     @DisplayName("GET /User/1 - Found")
-    void testGetUserById() throws Exception {
+    public void testGetUserById() throws Exception {
         // Setup the mocked service
         User mockUser = new User(1L, "Winston", "The Corgi");
         mockUserService.create(mockUser);
