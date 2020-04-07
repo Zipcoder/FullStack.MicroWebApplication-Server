@@ -13,7 +13,6 @@ spring:
     url: zipcodefullstack.ctneiu8xwepi.us-east-2.rds.amazonaws.com}:3306/FullStackVideo
     username: DreamTeam
     password: ZipCodeWilmington
-
     ##driverClassName: org.mysql.Driver
 ---
 profiles: prod
@@ -30,3 +29,4 @@ spring:
     password: ZipCodeWilmington
     ##driverClassName: org.mysql.Driver
 ---
+
