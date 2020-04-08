@@ -9,7 +9,7 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String title;
     private Integer thumbsUp;
     private Integer thumbsDown;
@@ -18,38 +18,32 @@ public class Video {
     @Nationalized
     private String content;
 
-    @Lob
-    private byte[] details;
-
-    public Video() {
-    }
-
-    public Video (Long id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public byte[] getDetails() {
         return details;
     }
 
-    public void setDetails(byte[] details) {
-        this.details = details;
+    @Lob
+    private byte[] details;
+
+    public Video() {
     }
 
-    public Long getId() {
+    public Video (long id, String title, Integer thumbsUp, Integer thumbsDown) {
+        this.id = id;
+        this.title = title;
+        this.thumbsDown = thumbsDown;
+        this.thumbsUp = thumbsUp;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -77,5 +71,5 @@ public class Video {
         this.thumbsDown = thumbsDown;
     }
 
-//
+
 }

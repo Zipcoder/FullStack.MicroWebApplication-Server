@@ -1,7 +1,7 @@
 package com.videolibrary.zipcode.fullstackapp.controllers;
 
 import com.videolibrary.zipcode.fullstackapp.models.Video;
-import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
+
 import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class VideoController {
     }
 
     @GetMapping("/video/{id}")
-    public ResponseEntity<Video>getVideo(@PathVariable Long id) {
-        return new ResponseEntity<> ( videoService.getVideo(id), HttpStatus.FOUND );
+    public ResponseEntity<Video>getVideoById(@PathVariable long id) {
+        return new ResponseEntity<> ( videoService.getVideoById(id), HttpStatus.FOUND );
     }
 
     @GetMapping("/video")
@@ -39,7 +39,8 @@ public class VideoController {
     }
 
     @DeleteMapping("/video/{id}")
-    public ResponseEntity<Boolean> deleteVideo(@PathVariable ("id") Long id) {
+    public ResponseEntity<Boolean> deleteVideo(@PathVariable ("id") long id) {
         return new ResponseEntity<> ( videoService.deleteVideo ( id ), HttpStatus.OK );
     }
+
 }
