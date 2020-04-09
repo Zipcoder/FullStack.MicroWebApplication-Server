@@ -4,7 +4,11 @@ import com.videolibrary.zipcode.fullstackapp.models.Video;
 import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -41,5 +45,12 @@ public class VideoService {
         return true;
     }
 
+    public File convertMultiPartFile(MultipartFile file) throws IOException {
+        File convertedFile = new File(file.getOriginalFilename());
+        FileOutputStream fileOutputStream = new FileOutputStream(convertedFile);
+        fileOutputStream.write(file.getBytes());
+        fileOutputStream.close();
+        return convertedFile;
+    }
 
 }
