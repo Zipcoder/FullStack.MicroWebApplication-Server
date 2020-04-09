@@ -18,21 +18,13 @@ public class Video {
     @Nationalized
     private String content;
 
-    public String getContent() {
-        return content;
-    }
-
-    public byte[] getDetails() {
-        return details;
-    }
-
     @Lob
     private byte[] details;
 
     public Video() {
     }
 
-    public Video (long id, String title, Integer thumbsUp, Integer thumbsDown) {
+    public Video(long id, String title, Integer thumbsUp, Integer thumbsDown) {
         this.id = id;
         this.title = title;
         this.thumbsDown = thumbsDown;
@@ -71,5 +63,19 @@ public class Video {
         this.thumbsDown = thumbsDown;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setDetails(byte[] details) {
+        this.details = details;
+    }
+
+    public byte[] getDetails() {
+        return details;
+    }
 }

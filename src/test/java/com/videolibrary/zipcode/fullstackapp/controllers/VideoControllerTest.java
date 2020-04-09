@@ -4,7 +4,6 @@ import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
 import static org.hamcrest.Matchers.is;
@@ -34,29 +33,33 @@ public class VideoControllerTest {
     @Test
     @DisplayName("GET /video/1 - Found")
     public void testGetVideoById() throws Exception {
-        MockitoAnnotations.initMocks ( this );
         //setup Mock service
         Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
-        System.out.println (mockVideo);
+        String expectedMock = "{id: 1, title: TestVideo1, thumbsUp: 5, thumbsDown: 1}";
         //mockVideoService.getVideoById ( 1 );
+        //doReturn ( expectedMock ).when(mockVideoService).getVideoById ( 1 );
         doReturn ( Optional.of ( mockVideo ) ).when( mockVideoService).getVideoById ( 1 );
         //execute GET request
-        mockMvc.perform ( get ( "/video/{id}", 1 ) )
-                .andExpect ( status ().isOk () )
-                .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
-                .andExpect ( jsonPath ( "$.id,", is ( 1 ) ) )
-                .andExpect ( jsonPath ( "$.title", is ( "TestVideo1" ) ) )
-                .andExpect ( jsonPath ( "$.thumbsUp", is ( 5 ) ) )
-                .andExpect ( jsonPath ( "$.thumbsDown", is ( 1 ) ) );
+        mockMvc.perform ( get ( "/video/{id}", 1 )
+                .contentType ( MediaType.APPLICATION_JSON )
+                .accept ( MediaType.APPLICATION_JSON )
+                .content ( expectedMock ))
 
+                .andExpect(MockMvcResultMatchers.status ().isFound () )
+                .andExpect(MockMvcResultMatchers.content ().string (expectedMock));
+//                .andExpect ( status ().isOk () )
+//                .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
+//                .andExpect ( jsonPath ( "$.id,", is ( 1 ) ) )
+//                .andExpect ( jsonPath ( "$.title", is ( "TestVideo1" ) ) )
+//                .andExpect ( jsonPath ( "$.thumbsUp", is ( 5 ) ) )
+//                .andExpect ( jsonPath ( "$.thumbsDown", is ( 1 ) ) );
     }
-
 
     @Test
     @DisplayName ( "GET /video/1 - Not Found" )
    public void testVideoFoundById() throws Exception {
         doReturn ( Optional.empty () ).when ( mockVideoService ).getVideoById ( 1 );
-        mockMvc.perform ( MockMvcRequestBuilders.get ("/video/{id}, 1") )
+        mockMvc.perform ( get ("/video/{id}, 1") )
                 .andExpect ( status ().isNotFound ());
     }
 
@@ -73,6 +76,7 @@ public class VideoControllerTest {
     }
 
     @Test
-    public void deleteVideo() {
+    public void deleteVideo() throws Exception {
+        Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
     }
 }
