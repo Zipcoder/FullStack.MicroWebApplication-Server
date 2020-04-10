@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/FullStackVideo/video")
+@RequestMapping("/Video")
 public class VideoController {
 
     private VideoService service;
@@ -43,9 +43,9 @@ public class VideoController {
     public ResponseEntity<Video> uploadVideo(@RequestParam String videoName, @RequestPart(value = "file") MultipartFile multipartFile) throws Exception {
         Video tempVideo = service.saveVideo(videoName,multipartFile);
         if(tempVideo != null){
-            return new ResponseEntity<>(tempVideo,HttpStatus.OK);
+            return new ResponseEntity<>(tempVideo, HttpStatus.OK);
         } else
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
 }

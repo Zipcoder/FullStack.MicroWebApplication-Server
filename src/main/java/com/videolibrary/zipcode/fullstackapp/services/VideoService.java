@@ -63,11 +63,11 @@ public class VideoService {
     public Video saveVideo(String videoName, MultipartFile multipartFile) throws Exception{
         String endPointUrl = "https://zip-code-video-app.s3.amazonaws.com";
         File file = convertMultiPartFile(multipartFile);
-        Video video = new Video(videoName,multipartFile.getContentType());
+        Video video = new Video(videoName, multipartFile.getContentType());
         String fileName = generateFileName(file.getName());
         String fileUrl = endPointUrl + "/" + fileName;
         video.setVideoPath(fileUrl);
-        if(uploadFile(file,fileName).isSuccessful()){
+        if(uploadFile(file, fileName).isSuccessful()){
             return create(video);
         } else
             return null;
