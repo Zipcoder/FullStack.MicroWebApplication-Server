@@ -35,24 +35,17 @@ public class VideoControllerTest {
     public void testGetVideoById() throws Exception {
         //setup Mock service
         Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
-        String expectedMock = "{id: 1, title: TestVideo1, thumbsUp: 5, thumbsDown: 1}";
-        //mockVideoService.getVideoById ( 1 );
-        //doReturn ( expectedMock ).when(mockVideoService).getVideoById ( 1 );
-        doReturn ( Optional.of ( mockVideo ) ).when( mockVideoService).getVideoById ( 1 );
-        //execute GET request
-        mockMvc.perform ( get ( "/video/{id}", 1 )
-                .contentType ( MediaType.APPLICATION_JSON )
-                .accept ( MediaType.APPLICATION_JSON )
-                .content ( expectedMock ))
 
-                .andExpect(MockMvcResultMatchers.status ().isFound () )
-                .andExpect(MockMvcResultMatchers.content ().string (expectedMock));
-//                .andExpect ( status ().isOk () )
-//                .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
-//                .andExpect ( jsonPath ( "$.id,", is ( 1 ) ) )
-//                .andExpect ( jsonPath ( "$.title", is ( "TestVideo1" ) ) )
-//                .andExpect ( jsonPath ( "$.thumbsUp", is ( 5 ) ) )
-//                .andExpect ( jsonPath ( "$.thumbsDown", is ( 1 ) ) );
+        doReturn ( Optional.of ( mockVideo ) ).when ( mockVideoService ).getVideoById ( 1 );
+//        doReturn ( mockVideo ).when( mockVideoService).getVideoById ( 1 );
+        //execute GET request
+        mockMvc.perform ( get ( "/video/{id}", 1 ))
+                .andExpect ( status ().isFound () )
+                .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
+                .andExpect ( jsonPath ( "$.id,", is ( 1 ) ) )
+                .andExpect ( jsonPath ( "$.title", is ( "TestVideo1" ) ) )
+                .andExpect ( jsonPath ( "$.thumbsUp", is ( 5 ) ) )
+                .andExpect ( jsonPath ( "$.thumbsDown", is ( 1 ) ) );
     }
 
     @Test

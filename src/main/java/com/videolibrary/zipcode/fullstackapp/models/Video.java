@@ -9,10 +9,12 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//<<<<<<< HEAD
     private long id;
     private String title;
     private Integer thumbsUp;
     private Integer thumbsDown;
+    private String url;
 
     @Lob
     @Nationalized
@@ -30,6 +32,19 @@ public class Video {
         this.thumbsDown = thumbsDown;
         this.thumbsUp = thumbsUp;
     }
+//=======
+//    private Long id;
+//    private String title;
+//    private String url;
+
+//    public Video() {
+//    }
+
+    public Video(String title, String content, String url) {
+        this.title = title;
+        this.url = url;
+//>>>>>>> cd7996837b3fc9b8bc6284d43792377a21de5474
+    }
 
     public long getId() {
         return id;
@@ -46,6 +61,7 @@ public class Video {
     public void setTitle(String title) {
         this.title = title;
     }
+//<<<<<<< HEAD
 
     public Integer getThumbsUp() {
         return thumbsUp;
@@ -78,4 +94,6 @@ public class Video {
     public byte[] getDetails() {
         return details;
     }
+//=======
+//>>>>>>> cd7996837b3fc9b8bc6284d43792377a21de5474
 }
