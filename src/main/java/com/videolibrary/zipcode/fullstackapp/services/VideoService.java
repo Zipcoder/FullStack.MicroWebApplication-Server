@@ -60,6 +60,7 @@ public class VideoService {
         return convertedFile;
     }
 
+    //Could possibly rework
     public Video saveVideo(String videoName, MultipartFile multipartFile) throws Exception{
         String endPointUrl = "https:/videolibrary-video-bucket.s3.amazonaws.com";
         File file = convertMultiPartFile(multipartFile);
@@ -73,6 +74,7 @@ public class VideoService {
             return null;
     }
 
+    //stays the same
     public SdkHttpResponse uploadFile(File file, String fileName) throws S3Exception,
             AwsServiceException, SdkClientException, URISyntaxException, FileNotFoundException {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
@@ -86,6 +88,7 @@ public class VideoService {
         return videoRepository.deleteVideoById(videoId);
     }
 
+    //stays the same
     public DeleteObjectResponse deleteFile(String fileName, String videoPath) {
         DeleteObjectRequest deleteObjectResponse = DeleteObjectRequest.builder()
                 .bucket(s3client.getBucket()).key(fileName).build();
