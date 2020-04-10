@@ -36,4 +36,12 @@ public class Video {
     public void setTitle(String title) {
         this.videoTitle = title;
     }
+
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
 }

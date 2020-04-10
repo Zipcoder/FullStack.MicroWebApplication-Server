@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/FullStackVideo/video")
 public class VideoController {
 
     private VideoService service;
@@ -33,8 +35,17 @@ public class VideoController {
     }
 
     @DeleteMapping("/Video/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable long id) {
-        return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
+    public ResponseEntity<Boolean> delete(@PathVariable long id) throws Exception {
+        return new ResponseEntity<>(service.delete(id), HttpStatus.GONE);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<Video> uploadVideo(@RequestParam String videoName, @RequestPart(value = "file") MultipartFile multipartFile) throws Exception {
+        Video tempVideo = service.saveVideo(videoName,multipartFile);
+        if(tempVideo != null){
+            return new ResponseEntity<>(tempVideo,HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
     }
 
 }
