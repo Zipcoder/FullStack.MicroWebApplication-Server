@@ -35,23 +35,24 @@ public class TestVideoController {
     @DisplayName ( "GET /video1 - Found" )
     public void testGetVideoById() throws Exception {
         //setup Mock Service
-        Video mockVideo = new Video ( 1, "TestVideo1", 5,1 );
-        doReturn(mockVideo).when(mockVideoService).addVideo(mockVideo);
-        doReturn(Optional.of(mockVideo)).when(mockVideoService).getVideoById(1);
+        Video mockVideo = new Video ( 1L, "video1", "https:/videolibrary-video-bucket.s3.amazonaws.com/bobs");
+        doReturn(mockVideo).when(mockVideoService).create(mockVideo);
+        doReturn(Optional.of(mockVideo)).when(mockVideoService).show(1L);
         //execute GET request
         mockMvc.perform ( get ( "/video/{id}", 1 ) )
                 .andExpect ( status ().isFound () )
                 .andExpect ( content ().contentType ( MediaType.APPLICATION_JSON ) )
                 .andExpect ( jsonPath ( "$.id", is ( 1 ) ) )
-                .andExpect ( jsonPath ( "$.title", is ( "TestVideo1" ) ) )
                 .andExpect ( jsonPath ( "$.thumbsUp", is ( 5 ) ) )
-                .andExpect ( jsonPath ( "$.thumbsDown", is(1 ) ));
+                .andExpect ( jsonPath ( "$.thumbsDown", is(1 ) ))
+                .andExpect ( jsonPath ( "$.videoTitle", is ( "TestVideo1" ) ) )
+                .andExpect ( jsonPath ("$.videoPath", is("urlPath")  ));
         }
 
     @Test
     @DisplayName ( "GET /video/1 - Not Found" )
    public void testVideoFoundById() throws Exception {
-        doReturn ( Optional.empty () ).when ( mockVideoService ).getVideoById ( 2 );
+        doReturn ( Optional.empty () ).when ( mockVideoService ).show ( 2L );
         mockMvc.perform ( get ("/video/{id}, 1") )
                 .andExpect ( status ().isNotFound ());
     }
@@ -68,8 +69,8 @@ public class TestVideoController {
     public void updateVideo() {
     }
 
-    @Test
-    public void deleteVideo() throws Exception {
-        Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
-    }
+//    @Test
+//    public void deleteVideo() throws Exception {
+//        Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
+//    }
 }

@@ -9,44 +9,28 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//<<<<<<< HEAD
-    private long id;
-    private String title;
+    private Long id;
     private Integer thumbsUp;
     private Integer thumbsDown;
-    private String url;
+    private String videoTitle;
+    private String videoPath;
 
-    @Lob
-    @Nationalized
-    private String content;
+    public Video() {}
 
-    @Lob
-    private byte[] details;
-
-    public Video() {
+    public Video(String videoTitle, String videoPath) {
+        this.videoTitle = videoTitle;
+        this.videoPath = videoPath;
     }
 
-    public Video(long id, String title, Integer thumbsUp, Integer thumbsDown) {
+    public Video(Long id, String title, String videoPath) {
         this.id = id;
-        this.title = title;
-        this.thumbsDown = thumbsDown;
-        this.thumbsUp = thumbsUp;
-    }
-//=======
-//    private Long id;
-//    private String title;
-//    private String url;
-
-//    public Video() {
-//    }
-
-    public Video(String title, String content, String url) {
-        this.title = title;
-        this.url = url;
-//>>>>>>> cd7996837b3fc9b8bc6284d43792377a21de5474
+        this.thumbsUp = 0;
+        this.thumbsDown = 0;
+        this.videoTitle = title;
+        this.videoPath = videoPath;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -55,13 +39,20 @@ public class Video {
     }
 
     public String getTitle() {
-        return title;
+        return videoTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.videoTitle = title;
     }
-//<<<<<<< HEAD
+
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
 
     public Integer getThumbsUp() {
         return thumbsUp;
@@ -78,22 +69,4 @@ public class Video {
     public void setThumbsDown(Integer thumbsDown) {
         this.thumbsDown = thumbsDown;
     }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setDetails(byte[] details) {
-        this.details = details;
-    }
-
-    public byte[] getDetails() {
-        return details;
-    }
-//=======
-//>>>>>>> cd7996837b3fc9b8bc6284d43792377a21de5474
 }

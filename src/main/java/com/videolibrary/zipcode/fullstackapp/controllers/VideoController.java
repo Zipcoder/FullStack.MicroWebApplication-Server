@@ -1,46 +1,56 @@
 package com.videolibrary.zipcode.fullstackapp.controllers;
 
 import com.videolibrary.zipcode.fullstackapp.models.Video;
-
 import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/Video/")
 public class VideoController {
 
-    VideoService videoService ;
+    private VideoService service;
 
     @Autowired
-    public VideoController(VideoService videoService) {
-        this.videoService = videoService;
+    public VideoController(VideoService service) {
+        this.service = service;
     }
 
-    @PostMapping("/video")
-    public ResponseEntity<Video> addVideo(@RequestBody Video video) {
-        return new ResponseEntity<> ( videoService.addVideo (video), HttpStatus.CREATED);
+    @GetMapping()
+    public ResponseEntity<?> index() {
+        return new ResponseEntity<>(service.index(), HttpStatus.OK);
     }
 
-    @GetMapping("/video/{id}")
-    public ResponseEntity<?>getVideoById(@PathVariable long id) {
-        return new ResponseEntity<> ( videoService.getVideoById(id), HttpStatus.FOUND );
+    @GetMapping("{id}")
+    public ResponseEntity<Video> show(@PathVariable Long id) {
+        return new ResponseEntity<>(service.show(id), HttpStatus.OK);
     }
 
-    @GetMapping("/video")
-    public ResponseEntity<Iterable<Video>> getVideoList() {
-        return new ResponseEntity<> ( videoService.getVideoList (), HttpStatus.FOUND );
+    @PostMapping("create")
+    public ResponseEntity<Video> create(@RequestBody Video v) {
+        return new ResponseEntity<>(service.create(v), HttpStatus.CREATED);
     }
 
-    @PutMapping("/video")
-    public ResponseEntity<Video> updateVideo(@RequestBody Video video) {
-            return new ResponseEntity<> ( videoService.addVideo ( video ), HttpStatus.CREATED );
+    @PutMapping("{id}")
+    public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody Video v) {
+        return new ResponseEntity<>(service.update(id, v), HttpStatus.OK);
     }
 
-    @DeleteMapping("/video/{id}")
-    public ResponseEntity<Boolean> deleteVideo(@PathVariable ("id") long id) {
-        return new ResponseEntity<> ( videoService.deleteVideo ( id ), HttpStatus.OK );
+    @DeleteMapping("{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable long id) throws Exception {
+        return new ResponseEntity<>(service.delete(id), HttpStatus.GONE);
+    }
+
+    @PostMapping("upload")
+    public ResponseEntity<Video> uploadVideo(@RequestParam String videoName, @RequestPart(value = "file") MultipartFile multipartFile) throws Exception {
+        Video tempVideo = service.saveVideo(videoName, multipartFile);
+        if(tempVideo != null){
+            return new ResponseEntity<>(tempVideo, HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
 }
