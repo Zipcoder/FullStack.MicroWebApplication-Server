@@ -5,6 +5,8 @@ import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class VideoService {
@@ -12,7 +14,6 @@ public class VideoService {
     private VideoRepository videoRepository;
 
     @Autowired
-
     public VideoService (VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
     }
@@ -21,8 +22,8 @@ public class VideoService {
         return videoRepository.save(video);
     }
 
-    public Video getVideoById (long id) {
-        return videoRepository.getVideoById ( id );
+    public Optional<Video> getVideoById (long id) {
+        return videoRepository.findById ( id );
     }
 
     public Iterable<Video> getVideoList() {

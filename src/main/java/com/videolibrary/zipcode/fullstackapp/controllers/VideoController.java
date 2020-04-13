@@ -24,7 +24,7 @@ public class VideoController {
     }
 
     @GetMapping("/video/{id}")
-    public ResponseEntity<Video>getVideoById(@PathVariable long id) {
+    public ResponseEntity<?>getVideoById(@PathVariable long id) {
         return new ResponseEntity<> ( videoService.getVideoById(id), HttpStatus.FOUND );
     }
 
@@ -35,7 +35,7 @@ public class VideoController {
 
     @PutMapping("/video")
     public ResponseEntity<Video> updateVideo(@RequestBody Video video) {
-            return  new ResponseEntity<> ( videoService.addVideo ( video ), HttpStatus.CREATED );
+            return new ResponseEntity<> ( videoService.addVideo ( video ), HttpStatus.CREATED );
     }
 
     @DeleteMapping("/video/{id}")

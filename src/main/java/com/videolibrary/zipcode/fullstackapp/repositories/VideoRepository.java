@@ -11,5 +11,4 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 
     public Video getVideoById(Long id);
 
-    public List<Iterable<Video>> getVideoList();
 }
