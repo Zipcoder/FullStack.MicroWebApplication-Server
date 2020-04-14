@@ -2,6 +2,7 @@ package com.videolibrary.zipcode.fullstackapp.services;
 
 import com.videolibrary.zipcode.fullstackapp.aws.AmazonClient;
 import com.videolibrary.zipcode.fullstackapp.models.Video;
+
 import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,26 +20,27 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VideoService {
 
     private VideoRepository videoRepository;
 
-    @Autowired
     private AmazonClient s3client;
 
     @Autowired
-    public VideoService(VideoRepository videoRepository) {
+    public VideoService(VideoRepository videoRepository, AmazonClient s3client) {
         this.videoRepository = videoRepository;
+        this.s3client = s3client;
     }
 
     public Video create(Video v) {
         return videoRepository.save(v);
     }
 
-    public Video show(Long id) {
-        return videoRepository.getVideoById(id);
+    public Optional<Video> show(Long id) {
+        return videoRepository.findById(id);
     }
 
     public List<Video> index() {
@@ -47,7 +49,7 @@ public class VideoService {
 
     public Video update(Long id, Video v) {
         Video video = videoRepository.getVideoById(id);
-        video.setTitle(v.getTitle());
+        video.setVideoTitle (v.getVideoTitle());
         videoRepository.save(video);
         return video;
     }

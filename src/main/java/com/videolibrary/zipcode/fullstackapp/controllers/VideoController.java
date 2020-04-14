@@ -25,8 +25,14 @@ public class VideoController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Video> show(@PathVariable Long id) {
-        return new ResponseEntity<>(service.show(id), HttpStatus.OK);
+    public ResponseEntity<?> show(@PathVariable Long id) {
+        return this.service.show ( id )
+                .map ( video -> ResponseEntity
+                .ok ()
+                .body ( video ))
+                .orElse ( ResponseEntity
+                .notFound ()
+                .build ());
     }
 
     @PostMapping("create")

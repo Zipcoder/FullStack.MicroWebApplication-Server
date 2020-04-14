@@ -22,11 +22,11 @@ public class Video {
         this.videoPath = videoPath;
     }
 
-    public Video(Long id, String title, String videoPath) {
+    public Video(Long id, String videoTitle, String videoPath) {
         this.id = id;
         this.thumbsUp = 0;
         this.thumbsDown = 0;
-        this.videoTitle = title;
+        this.videoTitle = videoTitle;
         this.videoPath = videoPath;
     }
 
@@ -38,12 +38,12 @@ public class Video {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getVideoTitle() {
         return videoTitle;
     }
 
-    public void setTitle(String title) {
-        this.videoTitle = title;
+    public void setVideoTitle(String videoTitle) {
+        this.videoTitle = videoTitle;
     }
 
     public String getVideoPath() {
