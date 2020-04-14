@@ -35,13 +35,15 @@ public class TestVideoServices {
     @DisplayName("Test findByIdSuccess")
     public void testGetVideoByIdSuccess() {
         Video mockVideo = new Video ( 1L, "testVideo", "urlPath" );
-        doReturn ( Optional.of (mockVideo )).when ( videoRepository ).getVideoById ( 1L );
+        doReturn ( Optional.of (mockVideo )).when ( videoRepository ).findById ( 1L ) ;
 
         Optional<Video> testVideo = videoService.show ( 1L );
+        String expected = testVideo.get ().getVideoTitle ();
 
-        Assertions.assertTrue(testVideo.isPresent(), "No Video was found when there should be");
+      //  Assertions.assertEquals ( expected, "testVideo" );
+
+        Assertions.assertTrue(testVideo.isPresent(), "No Video was found when there should be one");
         Assertions.assertSame(testVideo.get(),mockVideo, "Models don't match up");
-        //Assert.assertTrue (testVideo.isPresent ());
     }
 
     @Test
