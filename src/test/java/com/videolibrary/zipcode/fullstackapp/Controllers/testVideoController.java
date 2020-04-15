@@ -1,5 +1,6 @@
 package com.videolibrary.zipcode.fullstackapp.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.videolibrary.zipcode.fullstackapp.models.Video;
 import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,9 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -33,7 +36,7 @@ public class TestVideoController {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName ( "GET /video/1 - Found" )
+    @DisplayName ( "GET /Video/1 - Found" )
     public void testGetVideoById() throws Exception {
         //setup Mock Service
         Video mockVideo = new Video ( 1L, "TestVideo1", "urlPath");
@@ -64,17 +67,29 @@ public class TestVideoController {
                 .andExpect ( status ().isNotFound ());
     }
 
-    @Test
-    @DisplayName ( "POST /Video/1 - Success" )
-    public void testCreateVideo() throws Exception {
-        //Set up mock video
-        Video postVideo = new Video("testVideo2", "urlPath2");
-        Video mockVideo = new Video ( 2L, "testVideo2", "urlPath2" );
-        doReturn ( mockVideo ).when ( mockVideoService ).create ( mockVideo );
-
-        //mockMvc.perform()
-
-    }
+//    @Test
+//    @DisplayName ( "POST /Video - Success" )
+//    public void testCreateVideo() throws Exception {
+//        //Set up mock video
+//        Video postVideo = new Video("testVideo2", "urlPath2");
+//        Video mockVideo = new Video ( 2L, "testVideo2", "urlPath2" );
+//        doReturn ( mockVideo ).when ( mockVideoService ).create ( any() );
+//
+//        mockMvc.perform ( post ( "/Video" )
+//                .contentType( MediaType.APPLICATION_JSON)
+//                .content(asJsonString( postVideo ) ))
+//
+//                .andExpect(status ().isCreated ())
+//                .andExpect(content ().contentType(MediaType.APPLICATION_JSON_VALUE))
+//
+//                .andExpect(header ().string( HttpHeaders.LOCATION, "/Video/1" ))
+//
+//                .andExpect ( jsonPath ( "$.id", is ( 2 ) ) )
+//                .andExpect ( jsonPath ( "$.thumbsUp", is ( 0 ) ) )
+//                .andExpect ( jsonPath ( "$.thumbsDown", is(0 ) ))
+//                .andExpect ( jsonPath ( "$.videoTitle", is ( "TestVideo2" ) ) )
+//                .andExpect ( jsonPath ( "$.videoPath", is("urlPath2")  ));
+//    }
 
     @Test
     public void getVideo() {
@@ -85,8 +100,47 @@ public class TestVideoController {
     }
 
     @Test
-    public void updateVideo() {
+    @DisplayName ( "PUT /Video/1" )
+    public void testUpdateVideoPass() throws Exception {
+        //Create mock video
+        Video putVideo = new Video("TestVideo3", "urlPath3");
+        Video mockVideo = new Video( 3L, "TestVideo3", "urlPath3");
+        doReturn ( Optional.of(mockVideo) ).when ( mockVideoService ).show(3L);
+        doReturn ( mockVideo ).when ( mockVideoService ).create ( any() );
+
+        mockMvc.perform ( put("/Video/{id}", 3)
+                .contentType(MediaType.APPLICATION_JSON)
+               // .header ( HttpHeaders.IF_MATCH, 3 )
+                .content(asJsonString (putVideo) ))
+
+                .andExpect(status ().isOk ())
+                .andExpect(content ().contentType ( MediaType.APPLICATION_JSON_VALUE ))
+
+               // .andExpect(header ().string ( HttpHeaders.LOCATION, "/Video/1" ))
+
+                .andExpect ( jsonPath ( "$.id", is ( 3 ) ) )
+                .andExpect ( jsonPath ( "$.thumbsUp", is ( 0 ) ) )
+                .andExpect ( jsonPath ( "$.thumbsDown", is(0 ) ))
+                .andExpect ( jsonPath ( "$.videoTitle", is ( "TestVideo3" ) ) )
+                .andExpect ( jsonPath ( "$.videoPath", is("urlPath3")  ));
     }
+
+    @Test
+    @DisplayName ( ("PUT /Video/1 - Not Found") )
+    public void testUpdateVideoFail() throws Exception {
+        //Create mock Video
+        Video putVideo = new Video ("testFailVideo", "urlPath4");
+        doReturn ( Optional.empty () ).when ( mockVideoService ).show(3L);
+
+        mockMvc.perform ( put("/Video/{id}", 3)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.IF_MATCH, 3)
+                .content(asJsonString ( putVideo )))
+
+                .andExpect(status ().isNotFound ());
+    }
+
+
 
     @Test
     @DisplayName ( ("DELETE /Video/1 - Success") )
@@ -101,5 +155,14 @@ public class TestVideoController {
         //Execute the delete request
         mockMvc.perform ( delete ( "/Video/{id}", 1 ) )
                 .andExpect ( status ().isOk () );
+    }
+
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper ().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
