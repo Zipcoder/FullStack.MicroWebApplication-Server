@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/Video/")
 public class VideoController {
@@ -46,8 +48,18 @@ public class VideoController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable long id) throws Exception {
-        return new ResponseEntity<>(service.delete(id), HttpStatus.GONE);
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        Optional<Video> currentVideo = service.show (id);
+        return  currentVideo
+        .map(video -> {
+            try {
+                service.delete ( video.getId () );
+            } catch (Exception e) {
+                e.printStackTrace ();
+            }
+            return ResponseEntity.ok ().build ();
+        })
+          .orElse ( (ResponseEntity.notFound ().build ()) );
     }
 
     @PostMapping("upload")

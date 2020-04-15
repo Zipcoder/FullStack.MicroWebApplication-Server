@@ -77,12 +77,28 @@ public class TestVideoServices {
         @Test
         @DisplayName ( "Test saveVideo" )
         public void testCreateVideo() {
+        // Set up mock video
         Video mockVideo = new Video (1L, "testVideo1", "urlPath");
         doReturn ( mockVideo ).when ( videoRepository ).save ( mockVideo );
 
+        // Make call to videoService
         Video testVideo = videoService.create ( mockVideo );
 
+        //Confirm creation of video
         Assertions.assertNotNull ( testVideo, "The video we saved should not return Null" );
+        }
+
+        @Test
+        @DisplayName ( "Test deleteVideo" )
+        public void testDeleteVideo() throws Exception {
+        //Set up mock video and "add" to mock database
+            Video mockVideo = new Video (1L, "testVideo1", "urlPath");
+            doReturn ( mockVideo ).when ( videoRepository ).save ( mockVideo );
+
+        // Call videoService to delete video
+            Boolean result = videoService.delete ( 1L );
+
+        Assertions.assertTrue(result);
         }
     }
 

@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -53,9 +54,26 @@ public class TestVideoController {
     @Test
     @DisplayName ( "GET /Video/1 - Not Found" )
    public void testVideoFoundById() throws Exception {
+        //Establish mocked service
         doReturn ( Optional.empty () ).when ( mockVideoService ).show ( 1L );
+
+        //Perform the GET request
         mockMvc.perform ( get ("/Video/{id}",2) )
+
+        //Confirm the car is not there
                 .andExpect ( status ().isNotFound ());
+    }
+
+    @Test
+    @DisplayName ( "POST /Video/1 - Success" )
+    public void testCreateVideo() throws Exception {
+        //Set up mock video
+        Video postVideo = new Video("testVideo2", "urlPath2");
+        Video mockVideo = new Video ( 2L, "testVideo2", "urlPath2" );
+        doReturn ( mockVideo ).when ( mockVideoService ).create ( mockVideo );
+
+        //mockMvc.perform()
+
     }
 
     @Test
@@ -70,8 +88,18 @@ public class TestVideoController {
     public void updateVideo() {
     }
 
-//    @Test
-//    public void deleteVideo() throws Exception {
-//        Video mockVideo = new Video ( 1, "TestVideo1", 5, 1 );
-//    }
+    @Test
+    @DisplayName ( ("DELETE /Video/1 - Success") )
+    public void deleteVideo() throws Exception {
+        //Create mock video
+        Video mockVideo = new Video ( 1L, "TestVideo1", "urlPath");
+
+        //Establish mocked Service
+        doReturn ( Optional.of ( mockVideo ) ).when ( mockVideoService ).show ( 1L );
+        doReturn ( true ).when ( mockVideoService ).delete ( 1L );
+
+        //Execute the delete request
+        mockMvc.perform ( delete ( "/Video/{id}", 1 ) )
+                .andExpect ( status ().isOk () );
+    }
 }
