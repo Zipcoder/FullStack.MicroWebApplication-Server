@@ -1,8 +1,7 @@
-package com.videolibrary.zipcode.fullstackapp.Services;
+package com.videolibrary.zipcode.fullstackapp.services;
 
 import com.videolibrary.zipcode.fullstackapp.models.Video;
 import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
-import com.videolibrary.zipcode.fullstackapp.services.VideoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
