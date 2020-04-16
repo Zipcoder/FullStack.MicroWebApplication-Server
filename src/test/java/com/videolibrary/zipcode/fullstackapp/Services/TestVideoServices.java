@@ -3,7 +3,6 @@ package com.videolibrary.zipcode.fullstackapp.Services;
 import com.videolibrary.zipcode.fullstackapp.models.Video;
 import com.videolibrary.zipcode.fullstackapp.repositories.VideoRepository;
 import com.videolibrary.zipcode.fullstackapp.services.VideoService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,7 +36,7 @@ public class TestVideoServices {
         Video mockVideo = new Video ( 1L, "testVideo", "urlPath" );
         doReturn ( Optional.of (mockVideo )).when ( videoRepository ).findById ( 1L ) ;
 
-        Optional<Video> testVideo = videoService.show ( 1L );
+        Optional<Video> testVideo = videoService.findById ( 1L );
        // String expected = testVideo.get ().getVideoTitle ();
 
       //  Assertions.assertEquals ( expected, "testVideo" );
@@ -52,7 +51,7 @@ public class TestVideoServices {
         //Sets up mock repository
         doReturn ( Optional.empty () ).when ( videoRepository ).findById ( 1L );
         //Makes the service call
-        Optional<Video> testVideo = videoService.show ( 1L );
+        Optional<Video> testVideo = videoService.findById ( 1L );
         //Checks to see if car is not found
         Assertions.assertFalse ( testVideo.isPresent (), "Video was found when it shouldn't have been" );
         }
@@ -87,19 +86,6 @@ public class TestVideoServices {
         //Confirm creation of video
         Assertions.assertNotNull ( testVideo, "The video we saved should not return Null" );
         }
-
-//        @Test
-//        @DisplayName ( "Test deleteVideo" )
-//        public void testDeleteVideo() throws Exception {
-//        //Set up mock video and "add" to mock database
-//            Video mockVideo = new Video (1L, "testVideo1", "urlPath");
-//            doReturn ( mockVideo ).when ( videoRepository ).save ( mockVideo );
-//
-//        // Call videoService to delete video
-//            Boolean result = videoService.delete ( 1L );
-//
-//        Assertions.assertTrue(result);
-//        }
     }
 
 

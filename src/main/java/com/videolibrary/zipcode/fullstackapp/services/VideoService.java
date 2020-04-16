@@ -39,7 +39,7 @@ public class VideoService {
         return videoRepository.save(v);
     }
 
-    public Optional<Video> show(Long id) {
+    public Optional<Video> findById(Long id) {
         return videoRepository.findById(id);
     }
 
@@ -47,9 +47,9 @@ public class VideoService {
         return videoRepository.findAll();
     }
 
-    public Video update(Long id, Video v) {
+    public Video update(Long id) {
         Video video = videoRepository.getVideoById(id);
-        video.setVideoTitle (v.getVideoTitle());
+        video.setVideoTitle (video.getVideoTitle());
         videoRepository.save(video);
         return video;
     }

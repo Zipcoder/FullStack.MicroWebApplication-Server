@@ -18,6 +18,8 @@ public class Video {
     public Video() {}
 
     public Video(String videoTitle, String videoPath) {
+        this.thumbsUp = 0;
+        this.thumbsDown = 0;
         this.videoTitle = videoTitle;
         this.videoPath = videoPath;
     }
