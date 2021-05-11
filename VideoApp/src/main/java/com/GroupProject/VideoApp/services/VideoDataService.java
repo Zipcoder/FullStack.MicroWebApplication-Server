@@ -4,7 +4,6 @@ import com.GroupProject.VideoApp.models.Comments;
 import com.GroupProject.VideoApp.models.Video;
 import com.GroupProject.VideoApp.repositories.VideoDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +19,14 @@ public class VideoDataService {
     @Autowired
     public VideoDataService(VideoDataRepository repository) {
         this.repository = repository;
+    }
+
+    public List<Long> getAllIds() {
+        List<Video> videos = new ArrayList<>();
+        return this.getAll()
+            .stream()
+            .map( (v) -> v.getVideoId() )
+            .collect(Collectors.toList());
     }
 
     public List<Video> getAll() {

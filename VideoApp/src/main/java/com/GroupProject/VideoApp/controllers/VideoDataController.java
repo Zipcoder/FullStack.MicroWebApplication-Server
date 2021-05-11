@@ -55,6 +55,12 @@ public class VideoDataController {
         return new ResponseEntity<>(service.getAll(),HttpStatus.OK);
     }
 
+    // get all video ids
+    @GetMapping("/video/allIds")
+    public ResponseEntity<Iterable<Long>> getAllVideoIds(){
+        return new ResponseEntity<>(service.getAllIds(),HttpStatus.OK);
+    }
+
     // get top 5 most watched videos
     @GetMapping("/video/trending")
     public ResponseEntity<Iterable<Video>> getTrendingVideos(){
